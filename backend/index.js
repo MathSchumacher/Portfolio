@@ -16,7 +16,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // Carrega credentials.json
-const credentials = JSON.parse(fs.readFileSync("./credentials.json"));
+const credentials = JSON.parse(process.env.GOOGLE_CREDENTIALS);
 
 // Função para gerar JWT e pegar access token
 async function getAccessToken() {
