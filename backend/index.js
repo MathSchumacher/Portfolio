@@ -1,4 +1,3 @@
-// backend/index.js
 const express = require("express");
 const cors = require("cors");
 const fs = require("fs");
@@ -6,16 +5,24 @@ const bodyParser = require("body-parser");
 const { KJUR } = require("jsrsasign");
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 // Substitua pelo seu email do calendário
 const TARGET_CALENDAR_EMAIL = "matheusmschumacher@gmail.com";
 
-// Middlewares
-app.use(cors());
+// =============================================
+// CORS CONFIG CORRETA PARA VERCEL + RENDER
+// =============================================
+app.use(cors({
+  origin: "https://matheus-schumacher.vercel.app",
+  methods: ["GET", "POST", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true
+}));
+
 app.use(bodyParser.json());
 
-// Carrega credentials.json
+// Carrega credentials.json via variável de ambiente
 const credentials = JSON.parse(process.env.GOOGLE_CREDENTIALS);
 
 // Função para gerar JWT e pegar access token
@@ -48,11 +55,14 @@ async function getAccessToken() {
   return tokenJson.access_token;
 }
 
+// =============================================
 // Rota para criar evento
+// =============================================
 app.post("/agendar", async (req, res) => {
+  console.log("📅 Requisição recebida em /agendar:", req.body);
+
   try {
     const { data, hora, mensagem } = req.body;
-
     if (!data || !hora) {
       return res.status(400).json({ error: "Data e hora são obrigatórios" });
     }
@@ -60,12 +70,11 @@ app.post("/agendar", async (req, res) => {
     const start = new Date(`${data}T${hora}:00`);
     const now = new Date();
 
-    // Impede datas retroativas
     if (start < now) {
       return res.status(400).json({ error: "Não é possível agendar para datas passadas" });
     }
 
-    const end = new Date(start.getTime() + 60 * 60 * 1000); // evento 1 hora
+    const end = new Date(start.getTime() + 60 * 60 * 1000);
     const evento = {
       summary: "Entrevista (Agendamento via Portfólio)",
       description: mensagem || "",
@@ -76,9 +85,7 @@ app.post("/agendar", async (req, res) => {
     const token = await getAccessToken();
 
     const eventoRes = await fetch(
-      `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(
-        TARGET_CALENDAR_EMAIL
-      )}/events`,
+      `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(TARGET_CALENDAR_EMAIL)}/events`,
       {
         method: "POST",
         headers: {
@@ -90,17 +97,15 @@ app.post("/agendar", async (req, res) => {
     );
 
     const json = await eventoRes.json();
-    if (!eventoRes.ok) {
-      return res.status(500).json({ error: json });
-    }
+    if (!eventoRes.ok) return res.status(500).json({ error: json });
 
     res.json({ success: true, evento: json });
   } catch (err) {
-    console.error(err);
+    console.error("❌ Erro em /agendar:", err);
     res.status(500).json({ error: err.message || "Erro desconhecido" });
   }
 });
 
 app.listen(PORT, () => {
-  console.log(`✅ Backend rodando em http://localhost:${PORT}`);
+  console.log(`✅ Backend rodando na porta ${PORT}`);
 });
