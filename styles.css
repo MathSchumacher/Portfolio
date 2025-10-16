@@ -1,0 +1,1887 @@
+/* ===== Reset mínimo ===== */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+html:focus-within {
+  scroll-behavior: smooth;
+}
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial;
+  line-height: 1.6;
+}
+img {
+  max-width: 100%;
+  height: auto;
+  width: auto;
+  display: block;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ===== Variáveis ===== */
+:root {
+  --bg: #0b0d10;
+  --text: #e6e9ee;
+  --muted: #a8b3cf;
+  --card: linear-gradient(135deg, rgb(0, 60, 255), black);
+  --border: #253047;
+  --accent: #0a25f0;
+  --accent-2: #52f49b;
+  --accent-3: #ffffff;
+  --shadow: 0 10px 30px rgba(0,0,0,.25);
+  --radius: 16px;
+  --maxw: 1100px;
+}
+/* Modo claro */
+.light {
+  --bg: #f7f9fc;
+  --text: #0b0d10;
+  --muted: #475569;
+  --card: #ffffff;
+  --border: #e5e7eb;
+  --accent: #2563eb;
+  --accent-2: #0ea5e9;
+  --shadow: 0 8px 24px rgba(2,6,23,.06);
+}
+
+body {
+  background: linear-gradient(
+    235deg, 
+    rgb(0, 35, 78), /* azul extremamente discreto */
+    #000000                  /* preto quase total */
+);
+  color: var(--text);
+  font-size: 1.4rem;
+}
+body.light {
+  /*background: linear-gradient(135deg, #c6ffdd, #fbd786, #f7797d) border-box;*/
+  background: linear-gradient(
+    90deg, 
+    rgba(198, 255, 221, 0.442), 
+    rgba(251, 216, 134, 0.446), 
+    rgba(247, 121, 125, 0.451)
+  );
+}
+
+/* ===== Layout ===== */
+.container {
+  width: min(100% - 2rem, var(--maxw));
+  margin-inline: auto;
+}
+.grid {
+  display: grid;
+  gap: 1.25rem;
+}
+
+/* ===== Header ===== */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 10000;
+  background: rgba(0,0,0,.25);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+}
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: .75rem 0;
+}
+.brand {
+  font-weight: 700;
+  letter-spacing: .4px;
+}
+/* ==========================
+   Seção #sobre
+   ========================== */
+/* ===== Seção #sobre ===== */
+#sobre {
+  margin: 2rem auto;
+  max-width: var(--maxw); /* Use a variável de max-width para consistência */
+  padding: 0 1rem;
+}
+
+/* Container geral do conteúdo na seção Sobre */
+.sobre-content {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-direction: column;
+}
+
+.profile {
+  display: block;
+  border-radius: 70%;
+  width: auto;            /* ou % do container */
+  height: 20rem;
+  min-height: 500px;
+  transition: transform 0.5s ease, filter 0.5s ease;
+  /* Glow fixo */
+  box-shadow: 0 0 10px #0ff, 0 0 20px #0ff, 0 0 30px #0ff;
+
+  /* Garante que o glow fique visível fora do elemento */
+  position: relative;
+}
+body:not(.light) .profile {
+animation: neonPulseDark 3s infinite alternate;
+}
+body.light .profile {
+  animation: neonPulseLight 3s infinite alternate;
+}
+/* Glow animado pulsante */
+@keyframes neonPulseDark {
+  0%   { filter: drop-shadow(0 0 10px #0ff) drop-shadow(0 0 20px #0ff); }
+  50%  { filter: drop-shadow(0 0 20px #0ff) drop-shadow(0 0 40px #0ff); }
+  100% { filter: drop-shadow(0 0 10px #0ff) drop-shadow(0 0 20px #0ff); }
+}
+@keyframes neonPulseLight {
+ 0%   { filter: drop-shadow(0 0 10px #111) drop-shadow(0 0 20px #111); }
+  50%  { filter: drop-shadow(0 0 20px #111) drop-shadow(0 0 40px #111); }
+  100% { filter: drop-shadow(0 0 10px #111) drop-shadow(0 0 20px #111); }
+}
+
+body.light .warning{
+  color: #ffffff;
+  margin-left: 8px;
+}
+.warning{
+  color: #000000;
+  margin-left: 8px;
+}
+/* Esconde a versão resumida quando o carrossel estiver visível */
+.trajetoria-resumida {
+  transition: opacity 0.4s ease;
+  margin-top: 1rem;
+}
+
+/* Container do carrossel */
+.carousel-container {
+  flex: 1; /* Faz com que o container do carrossel ocupe o espaço disponível */
+  width: 100%; /* Garante que ocupe a largura total disponível no seu flex container */
+  margin-top: 1rem; /* Espaçamento acima do carrossel */
+}
+
+/* Estilização do carrossel (Owl Carousel) */
+.owl-carousel .item {
+  padding: 1rem; /* Espaçamento interno para cada item do carrossel */
+  /* Ajuste na linha azul e bordas: */
+  border-left: none; /* Remove a borda esquerda padrão, caso haja */
+  text-align: justify;
+  line-height: 1.7;
+  color: var(--text);
+}
+
+/* Removemos a borda esquerda padrão dos itens do carrossel, que pode ser a causa da linha azul */
+.owl-carousel .item p {
+  margin-bottom: 1.2rem; /* Adiciona espaço entre os parágrafos dentro do item */
+}
+
+/* Esconde o último margin-bottom para evitar espaço extra no final */
+.owl-carousel .item p:last-child {
+  margin-bottom: 0;
+}
+
+/* Container dos pontos de navegação */
+.owl-theme .owl-dots {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+/* Estilo geral dos pontos (inativos) */
+.owl-theme .owl-dots .owl-dot span {
+  width: 12px;
+  height: 12px;
+  margin: 5px 7px;
+  background: rgba(255, 255, 255, 0.4); /* Ponto branco translúcido no modo escuro */
+  border-radius: 50%;
+  display: block;
+  transition: opacity 0.2s ease;
+}
+
+/* Estilo do ponto ativo */
+.owl-theme .owl-dots .owl-dot.active span {
+  background: #ffffff; /* Ponto branco sólido no modo escuro */
+}
+
+/* Estilos para o modo claro */
+body.light .owl-theme .owl-dots .owl-dot span {
+  background: rgba(0, 51, 58, 0.4); /* Ponto azul translúcido no modo claro */
+}
+
+body.light .owl-theme .owl-dots .owl-dot.active span {
+  background: #00333a; /* Ponto azul sólido no modo claro */
+}
+
+.owl-theme .owl-dots .owl-dot:hover span {
+  background: #ffffff; /* Cor de hover para modo escuro */
+}
+
+body.light .owl-theme .owl-dots .owl-dot:hover span {
+  background: #00333a; /* Cor de hover para modo claro */
+}
+
+/* Botão de alternar trajetória */
+button#toggle-trajetoria {
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  background-color: transparent;
+  border-radius: 5px;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+}
+
+/* Estilos do botão para light/dark mode continuam os mesmos */
+body.light button#toggle-trajetoria {
+  color: #00333a;
+  border: 2px solid #00333a;
+}
+body.light button#toggle-trajetoria:hover {
+  background-color: #00333a;
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+body:not(.light) button#toggle-trajetoria {
+  color: #ffffff;
+  border: 2px solid #ffffff;
+}
+body:not(.light) button#toggle-trajetoria:hover {
+  background-color: #ffffff;
+  color: #00333a;
+  transform: translateY(-2px);
+}
+.profile {
+  height: 17rem;
+  transition: transform 0.3s ease; /* deixa a animação suave */
+}
+
+.profile:hover {
+  transform: scale(1.2); /* aumenta a imagem */
+}
+.tts-player {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  padding: 6px 10px;
+  margin-top: 6px;
+}
+
+/* Botões principais: play, repeat e toggle */
+.tts-button,
+.tts-repeat,
+.tts-toggle {
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* Tema escuro */
+body:not(.light) .tts-button,
+body:not(.light) .tts-repeat,
+body:not(.light) .tts-toggle {
+  color: #f1f1f1;
+}
+body:not(.light) .tts-button:hover,
+body:not(.light) .tts-repeat:hover,
+body:not(.light) .tts-toggle:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #00c3ff;
+}
+
+/* Tema claro */
+body.light .tts-button,
+body.light .tts-repeat,
+body.light .tts-toggle {
+  color: #222;
+}
+body.light .tts-button:hover,
+body.light .tts-repeat:hover,
+body.light .tts-toggle:hover {
+  background: rgba(0, 0, 0, 0.08);
+  color: #0077ff;
+}
+
+/* Ícones dentro dos botões */
+.tts-button i,
+.tts-repeat i,
+.tts-toggle i {
+  pointer-events: none;
+  font-size: 1rem; /* mesmo tamanho do repeat */
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* Botão play/stop igual aos outros */
+.tts-play {
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* Tema escuro */
+body:not(.light) .tts-play {
+  color: #f1f1f1;
+}
+body:not(.light) .tts-play:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #00c3ff;
+}
+
+/* Tema claro */
+body.light .tts-play {
+  color: #222;
+}
+body.light .tts-play:hover {
+  background: rgba(0, 0, 0, 0.08);
+  color: #0077ff;
+}
+
+/* Ícone do play/stop */
+.tts-play i {
+  pointer-events: none;
+  font-size: 1rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Barra de progresso */
+.tts-progress {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.tts-seek {
+  width: 100%;
+  -webkit-appearance: none;
+  height: 4px;
+  border-radius: 4px;
+  background: #aaa; /* cor da barra vazia */
+  cursor: pointer;
+}
+
+.tts-seek::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #00c3ff; /* ponto do áudio */
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
+}
+
+body.light .tts-seek::-webkit-slider-thumb {
+  background: #0077ff;
+}
+
+/* Para Firefox */
+.tts-seek::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #00c3ff;
+  cursor: pointer;
+}
+body.light .tts-seek::-moz-range-thumb {
+  background: #0077ff;
+}
+
+
+.tts-time {
+  font-size: 0.8rem;
+  color: inherit;
+}
+
+
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .sobre-content {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .trajetoria-resumida { /* Ajuste para a versão resumida também */
+    font-size: 0.95rem;
+  }
+  button#toggle-trajetoria {
+    font-size: 0.95rem;
+    padding: 8px 16px;
+  }
+}
+.nav a {
+  padding: .5rem .75rem;
+  border-radius: 10px;
+}
+.nav a:hover {
+  background: var(--card);
+}
+.nav-actions {
+  display: flex;
+  align-items: center;   /* mantém itens alinhados verticalmente */
+  gap: .5rem;            /* espaçamento entre itens */
+  flex-wrap: nowrap;      /* evita quebra de linha */
+}
+.nav-actions .menu-icon,
+.nav-actions .dropdown a {
+  display: inline-flex;       /* mantém o <a> como inline, mas aplica flex interno */
+  align-items: center;        /* alinha verticalmente ícone e texto */
+  gap: 0.3rem;                /* espaço entre ícone e texto */
+}
+
+.nav-actions .dropdown {
+  position: relative; /* tracking do botão */
+  display: inline-block;
+}
+/* ===== Dropdown Contato com efeito suave ===== */
+.nav-actions .dropdown .dropdown-content {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: calc(100% + 0.5rem); /* leve espaçamento abaixo do link */
+  left: 0;
+  min-width: 180px;
+  width: max-content; /* largura ajusta ao conteúdo, mas respeita padding */
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  overflow: hidden;
+  background: #ffffff; /* dark mode */
+  border: 6px solid transparent; /* dark mode */
+  box-shadow: 0 0 0 0.3px #000; /* offset-x | offset-y | blur | espessura | cor */
+  background:
+    linear-gradient(#ffffff, #ffffff) padding-box,   /* fundo interno */
+    linear-gradient(45deg, rgb(255, 217, 0), rgb(195, 0, 255)) border-box; /* borda em gradiente */
+  opacity: 0;              /* inicial invisível */
+  transform: translateY(-10px); /* deslocado para cima */
+  pointer-events: none;    /* evita clique quando invisível */
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 100;
+}
+
+/* Mostrar dropdown com efeito */
+.nav-actions .dropdown .dropdown-content.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.dropdown-content .icon{
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+}
+/* Links dentro do dropdown */
+.nav-actions .dropdown .dropdown-content a {
+  padding: 0.75rem 1rem;
+  text-decoration: none;
+  align-items: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+  display: inline-flex;
+  color: #000000; /* dark mode */
+  text-shadow: 0 0 1px #ffffff; /* camada fina branca */
+  transition: background 0.2s, color 0.2s;
+}
+.nav-actions .dropdown .dropdown-content a:last-child {
+  border-bottom: none;
+}
+.skill-header span {
+  display: inline-flex;
+  align-items: center; /* centraliza ícone e texto na linha */
+  gap: 6px;           /* espaço entre ícone e texto */
+  
+}
+
+.skill-icon {
+  display: inline-block !important; /* força inline-block */
+  width: 35px;
+  height: 35px;
+  border-radius: 15%;
+  gap: 1.5rem;              /* sem espaçamento extra */
+  vertical-align: middle; /* alinha com o meio do texto */
+  max-width: none; 
+}
+.skill-title {
+  display: inline-flex;
+  align-items: center; /* alinha verticalmente o ícone com o texto */
+  gap: 1rem;              /* sem espaçamento extra */
+}
+h3 {
+  margin: 0;
+  padding: 0;
+}
+
+
+
+/* Hover suave e mais perceptível */
+
+/* Modo dark */
+body:not(.light) .nav-actions .dropdown .dropdown-content a:hover {
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.269), rgba(255, 103, 1, 0.275));
+  transition: all 0.3s ease-in-out;
+  border-radius: 12px;
+  transform: scale3d(1.03,1.03,1.01); /* escala o texto verticalmente */
+}
+/* Aplica o scale3d apenas no ícone */
+body:not(.light) .nav-actions .dropdown .dropdown-content a:hover .icon {
+  height: 36px!important;
+}
+/* Modo light */
+body.light .nav-actions .dropdown .dropdown-content a:hover {
+  background: linear-gradient(270deg, rgba(255, 183, 0, 0.587), rgba(0, 0, 0, 0.805));
+  transition: all 0.3s ease-in-out;
+  border-radius: 12px;
+  transform: scale3d(1.03,1.03,1.01); /* escala o texto verticalmente */
+}
+/* Aplica o scale3d apenas no ícone */
+body.light .nav-actions .dropdown .dropdown-content a:hover .icon {
+  height: 36px!important;
+}
+
+/* Modo light */
+body.light .nav-actions .dropdown .dropdown-content {
+  background: #000000;
+  border-radius: 12px;
+  border: 6px solid transparent;
+  box-shadow: 0 0 0 0.3px #000; /* offset-x | offset-y | blur | espessura | cor */
+  background:
+    linear-gradient(#000, #000) padding-box,   /* fundo interno */
+    linear-gradient(45deg, rgb(255, 217, 0), rgb(0, 174, 255)) border-box; /* borda em gradiente */
+}
+body.light .nav-actions .dropdown .dropdown-content a {
+  color: #ffffff;
+  text-shadow: 0 0 1px #000000; /* camada fina preta */
+}
+
+
+/* Skip link (acessibilidade) */
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.skip-link:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: .5rem .75rem; 
+  background: var(--accent);
+  color: #fff;
+  border-radius: 8px;
+}
+
+/* ===== Hero ===== */
+.hero {
+  padding: 4rem 0 2rem;
+}
+.hero h1 {
+  font-size: clamp(5.75rem, 5vw, 4rem);
+  line-height: 1.2;
+  margin: 0 0 .5rem;
+}
+
+/* 🌙 Modo escuro */
+body:not(.light) .start-title {
+  background: linear-gradient(0deg, #ffff00, #00ffb3);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+/* ☀️ Modo claro */
+body.light .start-title {
+  position: relative;
+  display: inline-block;
+
+  /* Texto com gradiente */
+  background: linear-gradient(1deg, #fff200, #ff7002);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+
+  /* Efeito de contorno preto */
+  -webkit-text-stroke: 1.5px #000;
+  text-stroke: 1.5px #000; /* fallback para navegadores compatíveis */
+}
+
+
+.hero p {
+  color: var(--muted);
+  margin: 0 0 1rem;
+}
+.hero .actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  margin-top: 1rem;
+}
+
+/* ===== Botões ===== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .65rem 1rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  box-shadow: var(--shadow);
+}
+/* Dark mode: botão de alternar tema sem hover */
+body:not(.light) #themeToggle.btn {
+  background: #000000;  /* fundo preto */
+  outline: 0.1px solid #ffffff; /* contorno branco */
+}
+/* Hover exclusivo do botão de alternar tema */
+body:not(.light) #themeToggle.btn:hover {
+  background: #ffffff;
+  color: #0b0d10;
+  outline:none;
+  transform: scale(1.1);
+  transition: all 0.3s ease;
+}
+body.light #themeToggle.btn:hover {
+  background: #0b0d10;
+  color: #ffffff;
+  transform: scale(1.1);
+  transition: all 0.3s ease;
+}
+
+.btn.primary {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #ffffff;
+  border: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-shadow: 0 0 4px rgba(0, 0, 0, 0.7);
+  transition: transform 0.3s ease, background 0.6s ease, box-shadow 0.3s ease;
+}
+
+.btn.primary .icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.btn.primary:hover {
+  transform: scale3d(1.2, 1.2, 1.2);
+  background: linear-gradient(135deg, var(--accent-2), var(--accent));
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 0 4px rgba(0, 0, 0, 0.7);
+  filter: brightness(1.2);
+}
+
+/* ===== Seções ===== */
+section {
+  padding: 2rem 0;
+  border-top: 1px dashed var(--border);
+}
+section h2 {
+  font-size: clamp(1.25rem, 2.2vw, 1.8rem);
+  margin: 0 0 1rem;
+}
+.muted {
+  color: var(--muted);
+}
+.spotify .fa-spotify {
+  display: block;
+  margin: 8.4vw;
+  text-align: center;
+  font-size: 4vw;
+}
+.spotify .fa-spotify:hover{
+  font-size: 4vw;
+  color: #3cbd00;
+}
+.spotify-player {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.85);
+  border-radius: 16px;
+  padding: 8px;
+  display: none;
+  z-index: 9999;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+  transform: translateY(20px);
+  opacity: 0;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.spotify-player.show {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.close-spotify {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background: #1DB954;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  font-size: 1rem;
+  line-height: 1;
+}
+.spotify-header-btn {
+  background: none;
+  border: none;
+  color: var(--text);
+  font-size: 2.5rem;
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.spotify-header-btn:hover {
+  color: #3cbd00;
+  transform: scale(1.1);
+}
+
+
+/* ===== Habilidades (chips) ===== */
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+}
+.chip {
+  border: 1px solid var(--border);
+  background: var(--card);
+  padding: .4rem .6rem;
+  border-radius: 999px;
+  font-size: .95rem;
+}
+/* ===== Habilidades (estilo gamer XP) ===== */
+.skills-container {
+  display: grid;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+body:not(.light) .skill {
+  background: linear-gradient(135deg, #fffff8f1, #166fff);
+  padding: 1rem 1.2rem;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgb(0, 255, 255);
+  border: 1px solid #0ff;
+}
+body.light .skill {
+  background: linear-gradient(135deg, #111, #1a1a1a);
+  padding: 1rem 1.2rem;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(0,0,0,0.7);
+  border: 1px solid #2c2c2c;
+}
+body.light .skill-header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #52f49b; /* verde neon gamer */
+}
+body:not(.light) .skill-header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #000000; /* verde neon gamer */
+}
+
+body:not(.light) .level {
+  color: #ffd04e;
+  text-shadow: 1px 3px 4px #000000; /* camada fina branca */
+}
+body.light .level {
+  color: #ffd341; /* dourado para “nível” */
+}
+
+.xp-bar {
+  width: 100%;
+  height: 12px;
+  background: #222;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: inset 0 0 6px rgba(0,0,0,0.7);
+}
+
+.xp-progress {
+  height: 100%;
+  background: linear-gradient(90deg, #0af, #52f49b, #f5d742);
+  border-radius: 6px;
+  box-shadow: 0 0 10px #0af, 0 0 20px #52f49b;
+  transition: width 0.6s ease-in-out;
+}
+
+.skill small {
+  display: block;
+  margin-top: 0.4rem;
+  font-size: 0.85rem;
+  color: #aaa;
+}
+/* Espaçamento entre o ícone e o texto */
+#habilidades h2 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Wrapper do ícone */
+.titulo-icone {
+  position: relative; /* necessário p/ posicionar tooltip */
+  display: inline-block;
+  cursor: pointer;
+}
+
+/* Ícone (modo light) */
+body.light .titulo-icone i {
+  color: #000; /* preto padrão */
+  font-size: 1.8rem;
+  transition: color 0.25s;
+}
+
+body.light .titulo-icone:hover i {
+  color: #007bff; /* azul no hover */
+}
+
+/* Ícone (modo dark = body:not(.light)) */
+body:not(.light) .titulo-icone i {
+  color: #fff; /* branco padrão */
+  font-size: 1.8rem;
+  transition: color 0.25s;
+}
+
+body:not(.light) .titulo-icone:hover i {
+  color: #66b2ff; /* azul claro no hover */
+}
+
+
+/* Tooltip centralizada */
+.tooltip {
+  visibility: hidden;
+  opacity: 0;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #333;
+  color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  max-height: 80vh;
+  overflow-y: auto;
+  z-index: 9999;
+  width: 90%;
+  max-width: 600px;
+  transition: opacity 0.25s;
+}
+
+.tooltip.show {
+  visibility: visible;
+  opacity: 1;
+}
+
+.tooltip-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  color: #fff;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* Listas */
+.tooltip ul {
+  padding-left: 1rem;
+  margin: 0.5rem 0 0 0;
+}
+
+.tooltip li {
+  margin-bottom: 0.25rem;
+  line-height: 1.2rem;
+  list-style-type: disc;
+}
+
+.tooltip li ul {
+  padding-left: 1.2rem;
+  list-style-type: circle;
+  margin-top: 0.25rem;
+}
+
+/* Triângulo da tooltip pode ser removido ou ignorado */
+.tooltip::after {
+  display: none;
+}
+
+/* ===== Projetos ===== */
+#projetos {
+  position: relative; /* necessário para o pseudo-elemento se posicionar relativo a ele */
+  color: white;       /* mantém o texto branco */
+  overflow: visible;
+  /* qualquer outra estilização do container que você já tenha */
+}
+
+/* Fundo principal (imagem) */
+#projetos::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 99.4vw;
+  height: 100%;
+  background: url('img/backmeground2.png') center/cover no-repeat;
+  z-index: -2; /* abaixo das linhas neon */
+}
+
+#projetos::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+
+  /* largura responsiva com limites */
+  width: calc(
+    100vw + 2vw /* 102vw base */
+  );
+
+  max-width: 2540px; /* limite máximo */
+  min-width: 480px;  /* limite mínimo */
+
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+
+  /* Linhas topo e base */
+  background:
+    linear-gradient(#0ff, #0ff) top/100% 5px no-repeat,
+    linear-gradient(#0ff, #0ff) bottom/100% 5px no-repeat;
+
+  animation: neonStroke 3s infinite alternate;
+}
+
+
+
+/* Neon pulsante */
+@keyframes neonStroke {
+  0% {
+    filter: drop-shadow(0 0 5px #0ff) drop-shadow(0 0 10px #0ff) drop-shadow(0 0 15px #0ff);
+    opacity: 0.7;
+  }
+  50% {
+    filter: drop-shadow(0 0 10px #0ff) drop-shadow(0 0 20px #0ff) drop-shadow(0 0 30px #0ff);
+    opacity: 1;
+  }
+  100% {
+    filter: drop-shadow(0 0 5px #0ff) drop-shadow(0 0 10px #0ff) drop-shadow(0 0 15px #0ff);
+    opacity: 0.7;
+  }
+}
+
+/* ===== Para light mode (opcional, contraste) ===== */
+body.light #projetos::after {
+  animation: neonStrokeLight 3s infinite alternate;
+}
+
+@keyframes neonStrokeLight {
+  0% {
+    filter: drop-shadow(0 0 5px #111) drop-shadow(0 0 10px #111) drop-shadow(0 0 15px #111);
+    opacity: 0.7;
+  }
+  50% {
+    filter: drop-shadow(0 0 10px #111) drop-shadow(0 0 20px #111) drop-shadow(0 0 30px #111);
+    opacity: 1;
+  }
+  100% {
+    filter: drop-shadow(0 0 5px #111) drop-shadow(0 0 10px #111) drop-shadow(0 0 15px #111);
+    opacity: 0.7;
+  }
+}
+
+
+
+
+/* Pulsação neon */
+@keyframes neonLine {
+  0% { opacity: 0.7; }
+  50% { opacity: 1; }
+  100% { opacity: 0.7; }
+}
+
+.projects {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+}
+#projetos, 
+#projetos * {
+  user-select: none; /* impede seleção de texto */
+  -webkit-user-select: none; /* compatibilidade com Safari/Chrome */
+  -moz-user-select: none;    /* compatibilidade com Firefox */
+  -ms-user-select: none;     /* compatibilidade com IE/Edge */
+}
+
+.projeto-card {
+  display: inline-block;
+  margin: 20px;
+  cursor: pointer;
+  position: relative; /* necessário para overlay */
+  overflow: hidden;   /* esconde texto fora da imagem */
+  border-radius: 1rem;
+}
+
+.projeto-img {
+  width: 30rem;
+  height: auto;
+  border-radius: 1rem;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+  display: block;
+  filter: blur(1.5px);
+}
+
+/* Hover moderno: zoom e blur reduzido */
+.projeto-img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 15px 25px rgba(0,0,0,0.3);
+  filter: blur(0);
+}
+
+/* Overlay de texto elegante */
+.projeto-overlay {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  transform: translateY(-50%) translateX(-100%); /* inicia fora à esquerda */
+  transition: transform 0.4s ease, opacity 0.4s ease;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0;
+}
+
+.projeto-overlay h3 {
+  font-family: 'Helvetica Now', sans-serif;
+  font-weight: 700;
+  font-size: 2rem;
+  color: #fffb00;
+  margin: 0;
+
+  /* efeito 3D invertido (sombra para o lado esquerdo) */
+  text-shadow:
+    -1px 1px 0 #000,
+    -2px 2px 0 #000,
+    -3px 3px 0 #000,
+    -4px 4px 0 #000,
+    -5px 5px 0 #000;
+}
+
+/* Hover: texto desliza para o centro */
+.projeto-card:hover .projeto-overlay {
+  transform: translateY(-50%) translateX(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+
+/* Mantém sua animação shakeZoomImpact */
+@keyframes shakeZoomImpact {
+  0%   { transform: scale(1) translate(0, 0); }
+  10%  { transform: scale(1.2) translate(-5px, 5px); }
+  20%  { transform: scale(1.2) translate(5px, -5px); }
+  30%  { transform: scale(1.2) translate(-5px, 5px); }
+  40%  { transform: scale(1.2) translate(5px, -5px); }
+  50%  { transform: scale(1.2) translate(-5px, 5px); }
+  60%  { transform: scale(1.2) translate(5px, -5px); }
+  70%  { transform: scale(1.2) translate(-5px, 5px); }
+  80%  { transform: scale(1.2) translate(5px, -5px); }
+  90%  { transform: scale(1.2) translate(-5px, 5px); }
+  100% { transform: scale(1) translate(0, 0); }
+}
+/*Experiência*/
+/* Container */
+/* Experiência */
+.card {
+  min-width: 382px;
+  min-height: 672px;
+  perspective: 1000px;
+  cursor: pointer;
+  transition: min-height 0.35s ease;
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.card:hover .card-inner {
+  transform: rotateY(180deg);
+}
+
+.cards-container {
+  overflow: hidden;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 1rem;
+}
+
+/* Frente e verso ocupam todo o card */
+.card-front, .card-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-height: auto;
+  min-width: 70%;
+  backface-visibility: hidden;
+  border-radius: var(--radius); /* borda arredondada do card e do verso */
+  overflow: hidden;   /* evita que conteúdo escape da borda */
+}
+
+/* Imagem da frente */
+.card-front img.frente {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  justify-content: center;
+  align-items: center;
+  display: block;
+  border-radius: 2%; /* garante que a imagem siga a borda arredondada */
+}
+
+/* Conteúdo da frente */
+.card-front .card-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  z-index: 2;
+}
+.frente{
+  border-radius: 15%;
+}
+.logo {
+  width: 80px;
+  height: 80px;
+  border-radius: var(--radius);
+  object-fit: contain;
+}
+
+.empresa {
+  font-weight: bold;
+  font-size: 1.3rem;
+  text-align: left;
+}
+
+/* Verso */
+.card-back {
+  transform: rotateY(180deg);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.card-back-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;       /* faz preencher igual à frente */
+  background-position: center;  /* centraliza */
+  background-repeat: no-repeat; /* evita repetição */
+  z-index: 0;
+}
+
+/* Conteúdo do verso */
+.card-back-content {
+  position: relative; /* mantém o conteúdo dentro do card */
+  padding: 1.5rem;
+  max-height: 100%;
+  overflow: hidden; /* evita que passe do container */
+  box-sizing: border-box;
+  text-align: left;
+}
+
+/* Texto do verso invertido para dark/light */
+body.light .card-back-content { color: #fff; }
+body:not(.light) .card-back-content { color: #000; }
+
+/* Dark / Light imagens (sem background-color) */
+body.light .card-front img.frente { content: url("img/frente-light.png"); }
+body:not(.light) .card-front img.frente { content: url("img/frente-dark.png"); }
+
+body.light .card-back-bg { 
+  background-image: url("img/verso-light.png"); 
+  /* Removido background-color: #fff; – agora imagem pura */
+}
+body:not(.light) .card-back-bg { 
+  background-image: url("img/verso-dark.png"); 
+  /* Removido background-color: #000; – agora imagem pura */
+}
+
+body.light .empresa { color: #fff; }
+body:not(.light) .empresa { color: #000; }
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .card {
+    min-width: 300px;
+    min-height: 500px;
+  }
+}
+
+/* Owl Carousel para Cards */
+.cards-container.owl-carousel {
+  overflow: hidden;
+}
+
+.cards-container.owl-carousel .owl-nav button.owl-prev,
+.cards-container.owl-carousel .owl-nav button.owl-next {
+  position: absolute;
+  top: 45%;
+  background: rgba(0,0,0,0.5);
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.cards-container.owl-carousel .owl-nav button.owl-prev { left: -2rem; }
+.cards-container.owl-carousel .owl-nav button.owl-next { right: -2rem; }
+
+/* Dots limpos (sem duplicatas) - sinalizador */
+.cards-container.owl-carousel .owl-dots {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.cards-container.owl-carousel .owl-dots .owl-dot span {
+  width: 12px;
+  height: 12px;
+  margin: 5px 7px;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  display: block;
+  transition: opacity 0.2s ease;
+}
+
+.cards-container.owl-carousel .owl-dots .owl-dot.active span {
+  background: #ffffff;
+}
+
+body.light .cards-container.owl-carousel .owl-dots .owl-dot span {
+  background: rgba(0, 0, 0, 0.4);
+}
+
+body.light .cards-container.owl-carousel .owl-dots .owl-dot.active span {
+  background: #000000;
+}
+
+.cards-container.owl-carousel .owl-dots .owl-dot:hover span {
+  background: #ffffff;
+}
+
+body.light .cards-container.owl-carousel .owl-dots .owl-dot:hover span {
+  background: #000000;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem;
+}
+.tag {
+  font-size: .8rem;
+  background: rgba(255,255,255,.05);
+  border: 1px dashed var(--border);
+  padding: .2rem .5rem;
+  border-radius: 6px;
+}
+
+/* ===== Timeline ===== */
+.timeline {
+  display: grid;
+  gap: .75rem;
+}
+.item {
+  border-left: 2px solid var(--accent);
+  padding-left: .75rem;
+}
+.item small {
+  color: var(--muted);
+}
+
+/* ===== Footer ===== */
+footer {
+  padding: 2rem 0;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+}
+
+/* ===== Formulário ===== */
+#contactForm input,
+#contactForm textarea {
+  width: 100%;
+  padding: .8rem;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+}
+#contactForm textarea {
+  resize: vertical;
+}
+.fa-solid .fa-circle-info:hover{
+  color: #0af;
+}
+#mouse-glow {
+  position: fixed;
+  width: 1.5rem;
+  height: 1.5rem;
+  background: radial-gradient(circle, rgb(13, 98, 255), transparent); /* Usa --accent do dark */
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1; /* Baixo para não sobrepor */
+  filter: blur(0.5rem);
+  transition: all 0.05s ease-out;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  will-change: transform;
+}
+#mouse-glow.visible {
+  opacity: 1;
+}
+body.light #mouse-glow {
+  background: radial-gradient(circle, rgb(124, 131, 131), transparent); /* Light theme */
+}
+.section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image:
+    linear-gradient(rgba(10, 37, 240, 0.523) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(10, 37, 240, 0.476) 1px, transparent 1px);
+  background-size: 50px 50px;
+  z-index: -1; /* Atrás de tudo */
+  pointer-events: none;
+}
+body.light .section::before {
+  background-image:
+    linear-gradient(rgb(37, 100, 235) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(37, 100, 235) 1px, transparent 1px);
+}
+.section {
+  position: relative; /* Essencial para blobs absolutos ficarem dentro da seção */
+  overflow: visible; /* Evita cortar blobs em carousels como Owl */
+}
+
+/* Container de blobs (mantido) */
+.background-blobs {
+  position: absolute;
+  inset: 0;
+  z-index: -2; /* Atrás do grid (::before = -1) e conteúdo */
+  pointer-events: none;
+  overflow: visible; /* Não corta em carousels */
+}
+
+/* Blob base (suas cores exatas mantidas) */
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(246, 246, 247, 0.2), transparent 70%);
+  filter: blur(2rem);
+  will-change: transform, opacity;
+  opacity: 0.8; /* Suave, sem poluir */
+}
+
+/* Blob 1: Superior esquerdo, pulse básico */
+.blob-1 { 
+  top: 15%; left: 8%; 
+  width: 8rem; height: 8rem; 
+  animation: pulse 4s ease-in-out infinite; 
+  animation-delay: 0s; 
+}
+
+/* Blob 2: Meio direito, bounce rotacionado (sua cor branca) */
+.blob-2 { 
+  top: 35%; right: 18%; 
+  width: 6rem; height: 6rem; 
+  background: rgba(255, 255, 255, 0.15); /* Sua cor exata */
+  border-radius: 20%;
+  transform: rotate(45deg);
+  animation: bounce 3s ease-in-out infinite;
+  animation-delay: -0.5s; /* Offset leve para variação */
+}
+
+/* Blob 3: Baixo esquerdo, ping expandindo */
+.blob-3 { 
+  bottom: 25%; left: 22%; 
+  width: 4rem; height: 4rem; 
+  animation: ping 2s ease-in-out infinite;
+  animation-delay: 1.5s; /* Delay para "sequência" */
+}
+
+/* Blob 4: Inferior direito, float rotacionado */
+.blob-4 { 
+  bottom: 15%; right: 12%; 
+  width: 5rem; height: 5rem; 
+  background: radial-gradient(circle at 30% 30%, rgba(246, 246, 247, 0.15), transparent 70%); /* Variação da sua cor base */
+  border-radius: 20%;
+  transform: rotate(12deg);
+  animation: float 6s ease-in-out infinite;
+  animation-delay: -1s;
+}
+
+/* Blob 5 (opcional): Central, pulse lento + rotate */
+.blob-5 { 
+  top: 55%; left: 45%; 
+  width: 7rem; height: 7rem; 
+  background: rgba(255, 255, 255, 0.1); /* Variação branca translúcida */
+  animation: pulse-slow 5s ease-in-out infinite, rotate-slow 20s linear infinite;
+  animation-delay: 0.8s;
+}
+
+/* Keyframes (mantidos, com suas animações exatas) */
+@keyframes pulse { 
+  0%, 100% { opacity: 0.5; transform: scale(1); } 
+  50% { opacity: 1; transform: scale(1.1); } 
+}
+@keyframes bounce { 
+  0%, 100% { transform: translateY(0) rotate(45deg); } 
+  50% { transform: translateY(-20px) rotate(45deg); } 
+}
+@keyframes ping { 
+  0% { transform: scale(0); opacity: 1; } 
+  75%, 100% { transform: scale(2); opacity: 0; } 
+}
+@keyframes float { 
+  0%, 100% { transform: translateY(0px) rotate(12deg); } 
+  50% { transform: translateY(-20px) rotate(12deg); } 
+}
+@keyframes pulse-slow { 
+  0%, 100% { opacity: 0.3; transform: scale(0.9); } 
+  50% { opacity: 0.8; transform: scale(1.2); } 
+}
+@keyframes rotate-slow { 
+  from { transform: rotate(0deg); } 
+  to { transform: rotate(360deg); } 
+}
+
+/* Variação por seção (para evitar repetição exata – adicione class="varied-blobs" no HTML da seção se quiser mais custom) */
+.varied-blobs .blob-1 { top: 5%; left: 75%; } /* Ex: Habilidades – vira superior direito */
+.varied-blobs .blob-2 { top: 60%; right: 5%; } /* Baixo direito */
+.varied-blobs .blob-3 { bottom: 40%; left: 60%; } /* Meio baixo direito */
+.varied-blobs .blob-4 { top: 70%; left: 15%; } /* Meio esquerdo */
+
+/* Light mode (sua cor exata: rgb(94, 92, 96)) */
+body.light .blob { 
+  background: radial-gradient(circle at 30% 30%, rgb(94, 92, 96), transparent 70%); 
+  opacity: 0.6; /* Mais sutil no light colorido */
+}
+body.light .blob-2 { 
+  background: rgba(94, 92, 96, 0.15); /* Ajuste na branca para cinza no light */
+}
+
+/* Responsivo: Esconde em mobile para performance */
+@media (max-width: 768px) {
+  .blob { 
+    width: 3rem !important; 
+    height: 3rem !important; 
+    filter: blur(1rem); /* Menos blur em telas pequenas */
+  }
+}
+body.light .skill-icon-black {
+  background-color: white;
+  border-radius: 5px;
+}
+.skill-icon-transparent {
+  background-color: rgb(255, 255, 255);
+  padding: 4px;
+  border-radius: 4px;
+}
+body.light .skill-icon-transparent {
+  background-color: rgb(0, 0, 0);
+  padding: 4px;
+  border-radius: 4px;
+}
+body:not(.light) .skill-icon-white{
+  background-color: rgb(0, 0, 0);
+  border-radius: 4px;
+}
+#experiencia{
+  background-size: no-repeat;
+}
+/* Efeito hover para cada skill */
+.skill {
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  border-radius: 8px; /* leve arredondamento */
+  background-color: #f8f8f8; /* cor base, opcional */
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.skill:hover {
+  transform: translateY(-5px) scale(1.03); /* leve elevação e zoom */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* sombra suave */
+  background-color: #ffffff; /* opcional: destaque no fundo */
+}
+
+/* Efeito no header da skill (texto e ícone) */
+.skill:hover .skill-header span:first-child {
+  color: #0077ff; /* muda cor do texto/ícone ao passar o mouse */
+}
+
+/* Efeito na barra de XP */
+.skill:hover .xp-progress {
+  background-color: #0077ff; /* muda cor da barra ao hover */
+  transition: background-color 0.3s ease;
+}
+/* Container do input deve ser relativo para a sugestão posicionar corretamente */
+.skills-filter-container {
+  position: relative; /* referência para a sugestão */
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  z-index: 2; /* base, menor que a sugestão */
+}
+
+/* Input de pesquisa */
+#skills-search {
+  padding: 0.6rem 1rem;
+  border-radius: 9999px;
+  border: 1px solid var(--border);
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.2s;
+  background-color: var(--input-bg);
+  color: var(--text);
+  width: 100%;
+}
+
+#skills-search::placeholder {
+  color: var(--text-secondary);
+}
+
+#skills-search:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 8px rgba(0, 119, 255, 0.2);
+}
+
+/* Caixa de sugestões */
+.suggestions {
+  position: absolute;
+  top: 100%; /* logo abaixo do input */
+  left: 0;
+  right: 0;
+  margin-top: 4px; /* espaçamento do input */
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 999; /* garante que fique acima de tudo */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  background-color: #fff; /* força fundo branco sólido no light mode */
+}
+/* Dark mode */
+body:not(.light) .suggestions {
+  background-color: #222; /* fundo escuro sólido */
+  border-color: #555;
+  color: #eee;
+}
+
+/* Itens da lista */
+.suggestion-item {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  white-space: nowrap; /* evita quebrar linha */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+/* Hover nos itens */
+body.light .suggestion-item:hover {
+  background-color: #007bff4a;
+  color: #000000;
+}
+body:not(.light) .suggestion-item:hover{
+  background-color: #01f7ff41;
+  color: hsl(0, 0%, 100%);
+}
+
+/* Scrollbar customizada */
+.suggestions::-webkit-scrollbar {
+  width: 8px;
+}
+
+.suggestions::-webkit-scrollbar-thumb {
+  background-color: rgba(0,0,0,0.2);
+  border-radius: 4px;
+}
+
+.suggestions::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Container dos filtros ativos */
+.active-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+/* Botão de filtro ativo */
+.filter-btn {
+  display: flex;
+  align-items: center;
+  padding: 0.4rem 0.8rem;
+  border-radius: 9999px; /* arredondado estilo pill */
+  background-color: var(--accent);
+  color: #fff;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.filter-btn:hover {
+  background-color: #005ecc; /* escurece no hover */
+  transform: scale(1.05);
+}
+
+/* X para remover filtro */
+.filter-btn span.remove {
+  margin-left: 0.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+}
+.hidden-carousel {
+  display: none !important;
+}
+/* ===== Botão de Tradução (Sem Mudanças, Seu Design Original) ===== */
+.translate-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(145deg, rgba(40, 40, 40, 0.7), rgba(20, 20, 20, 0.9));
+  backdrop-filter: blur(6px);
+  color: var(--text);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
+  position: relative;  /* Âncora pro dropdown */
+  margin-left: auto;  /* Encaixa à direita */
+  margin-right: 10px;
+}
+
+.translate-btn .material-symbols-outlined.notranslate {
+  font-size: 26px;
+  line-height: 1;
+  pointer-events: none;
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  color: inherit;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+/* Hover e Ativo (sem mudanças) */
+.translate-btn:hover {
+  transform: translateY(-2px) scale(1.05);
+  border-color: transparent;
+  background: linear-gradient(135deg, #0084ff, #00d0ff);
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(0, 150, 255, 0.45), 0 0 12px rgba(0, 150, 255, 0.35);
+}
+
+.translate-btn:active {
+  transform: scale(0.97);
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+body.light .translate-btn {
+  background: linear-gradient(145deg, #f5f5f5, #e7e7e7);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  color: #1c1c1c;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+body.light .translate-btn:hover {
+  background: linear-gradient(135deg, #007bff, #00c3ff);
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 4px 10px rgba(0, 120, 255, 0.4), 0 0 12px rgba(0, 120, 255, 0.3);
+}
+
+/* ===== Dropdown: Overrides Específicos e Aninhados (Foco na Imagem) ===== */
+/* Container Principal (força posicionamento sob o botão) */
+#google_translate_element {
+  position: absolute !important;
+  top: calc(100% + 4px) !important;  /* Abaixo do botão + espaço */
+  right: 0 !important;  /* Alinhado à direita do botão */
+  z-index: 1000 !important;
+  display: none !important;
+  background: linear-gradient(0deg, #ffffff, #009dff) !important;
+
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius) !important;
+  padding: 8px !important;
+  box-shadow: var(--shadow) !important;
+  min-width: 180px !important;
+  max-height: 300px !important;
+  overflow-y: auto !important;  /* Scroll pros idiomas */
+  margin: 0 !important;
+  white-space: normal !important;  /* Quebra nowrap do Google */
+}
+body.light #google_translate_element{
+  background: #000000 !important;  /* Fundo temático */
+}
+
+#google_translate_element.show {
+  display: block !important;
+}
+
+/* Seletor Simples (alvo #0targetlanguage) */
+#google_translate_element .goog-te-gadget-simple {
+  display: inline-flex !important;
+  justify-content: center;
+  flex-direction: column !important;  /* Força vertical pro menu */
+  white-space: normal !important;
+  border-radius: var(--radius);
+  background: linear-gradient(0deg, #ffff00, #00ffb3) !important;
+  border: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+  color: var(--text) !important;
+}
+
+body.light #google_translate_element .goog-te-gadget-simple{
+  background: linear-gradient(0deg, #ffff00, #ffaa00) !important;
+}
+
+
+
+/* Link/Combo do Menu (alvo <a aria-haspopup>) */
+#google_translate_element a[aria-haspopup="true"] {
+  display: block !important;
+  background: transparent !important;
+  color: #000 !important;
+  border: none !important;
+  border-radius: var(--radius) !important;
+  padding: 8px 12px !important;
+  margin: 2px 0 !important;
+  text-decoration: none !important;
+  width: 100% !important;
+  text-align: left !important;
+  font-size: 1.2rem !important;
+  cursor: pointer !important;
+  white-space: nowrap !important;  /* Mantém nome do idioma em linha */
+}
+
+body:not(.light)#google_translate_element a[aria-haspopup="true"]:hover,
+body:not(.light)#google_translate_element a[aria-haspopup="true"]:focus {
+  background: rgba(0, 0, 0, 0.1) !important;
+  color: #000 !important;
+}
+
+body.light #google_translate_element a[aria-haspopup="true"]:hover,
+body.light #google_translate_element a[aria-haspopup="true"]:focus {
+  background: rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Spans e Imgs Vazios (limpa ruído da imagem) */
+#google_translate_element span[style*="ZeroWidthSpace"],
+#google_translate_element img[src*="cleardot.gif"] {
+  display: none !important;  /* Remove spans e imgs invisíveis */
+  visibility: hidden !important;
+  width: 0 !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+body {
+  top: 0 !important;
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+header {
+  top: 0 !important;
+  z-index: 10 !important;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  #google_translate_element {
+    right: auto !important;
+    left: 0 !important;
+    min-width: 150px !important;
+  }
+  .translate-btn {
+    width: 40px !important;
+    height: 40px !important;
+  }
+}

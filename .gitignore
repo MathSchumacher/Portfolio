@@ -1,0 +1,4 @@
+node_modules/
+backend/credentials.json
+.env
+dist/
