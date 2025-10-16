@@ -475,47 +475,43 @@ $(window).on('resize', function() {
     document.getElementById("form-agendamento").style.display = "block";
   });
 
- // Fluxo ao clicar em "Confirmar"
-document.getElementById("enviar-agendamento").addEventListener("click", async (e) => {
-  e.preventDefault();
+  // Fluxo ao clicar em "Confirmar"
+  document.getElementById("enviar-agendamento").addEventListener("click", async (e) => {
+    e.preventDefault();
 
-  const data = document.getElementById("data").value;
-  const hora = document.getElementById("hora").value;
-  const mensagem = document.getElementById("mensagem")?.value || ""; // opcional
-  const status = document.getElementById("status");
+    const data = document.getElementById("data").value;
+    const hora = document.getElementById("hora").value;
+    const mensagem = document.getElementById("mensagem")?.value || ""; // opcional
+    const status = document.getElementById("status");
 
-  status.innerText = "⏳ Processando...";
+    status.innerText = "Processando...";
 
-  if (!data || !hora) {
-    status.innerText = "⚠️ Preencha data e hora.";
-    return;
-  }
-
-  try {
-    const res = await fetch("https://portfolio-1-344x.onrender.com/agendar", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ data, hora, mensagem })
-    });
-
-    const json = await res.json();
-
-    if (res.ok) {
-      status.innerText = "✅ Evento criado com sucesso!";
-      document.getElementById("form-agendamento").style.display = "none";
-
-      // 🟩 AQUI — nova linha opcional para exibir sucesso visual temporário
-      alert("✅ Evento criado com sucesso no Google Calendar!");
-    } else {
-      status.innerText = "❌ Erro: " + (json.error || JSON.stringify(json));
-      console.error("Erro no backend:", json);
+    if (!data || !hora) {
+      status.innerText = "⚠️ Preencha data e hora.";
+      return;
     }
-  } catch (err) {
-    console.error(err);
-    status.innerText = "❌ " + (err.message || "Erro desconhecido");
-  }
-});
 
+    try {
+      const res = await fetch("https://portfolio-1-344x.onrender.com/agendar", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ data, hora, mensagem })
+      });
+
+      const json = await res.json();
+
+      if (res.ok) {
+        status.innerText = "✅ Evento criado com sucesso!";
+        document.getElementById("form-agendamento").style.display = "none";
+      } else {
+        status.innerText = "❌ Erro: " + (json.error || JSON.stringify(json));
+        console.error("Erro no backend:", json);
+      }
+    } catch (err) {
+      console.error(err);
+      status.innerText = "❌ " + (err.message || "Erro desconhecido");
+    }
+  });
 
 // ==========================
 // Player Spotify flutuante
