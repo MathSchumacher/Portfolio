@@ -475,7 +475,7 @@ $(window).on('resize', function() {
     document.getElementById("form-agendamento").style.display = "block";
   });
 
-  // Fluxo ao clicar em "Confirmar"
+ // Fluxo ao clicar em "Confirmar"
 document.getElementById("enviar-agendamento").addEventListener("click", async (e) => {
   e.preventDefault();
 
@@ -506,16 +506,19 @@ document.getElementById("enviar-agendamento").addEventListener("click", async (e
     }
 
     if (res.ok) {
+      // Mostra mensagem de sucesso
       status.innerText = "✅ Evento criado com sucesso!";
-      document.getElementById("form-agendamento").style.display = "none";
 
-      // opcional: limpa os campos
+      // Mantém a mensagem por 2 segundos antes de fechar o formulário
+      setTimeout(() => {
+        document.getElementById("form-agendamento").style.display = "none";
+        status.innerText = ""; // limpa a mensagem
+      }, 2000);
+
+      // opcional: limpa os campos imediatamente
       document.getElementById("data").value = "";
       document.getElementById("hora").value = "";
       if (document.getElementById("mensagem")) document.getElementById("mensagem").value = "";
-
-      // esconde a mensagem de sucesso após 3 segundos
-      setTimeout(() => { status.innerText = ""; }, 3000);
 
     } else {
       status.innerText = "❌ Erro: " + (json.error || JSON.stringify(json));
@@ -527,6 +530,7 @@ document.getElementById("enviar-agendamento").addEventListener("click", async (e
     status.innerText = "❌ " + (err.message || "Erro desconhecido");
   }
 });
+
 
 
 // ==========================
