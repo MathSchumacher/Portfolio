@@ -2,11 +2,6 @@
 // Função para inicializar o Google Translate
 // =============================================
 function googleTranslateElementInit() {
-  if (typeof google === "undefined" || !google.translate) {
-    console.warn("⚠️ Google Translate não pôde ser carregado.");
-    return;
-  }
-
   new google.translate.TranslateElement({
     pageLanguage: 'pt-br',
     layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
@@ -480,7 +475,7 @@ $(window).on('resize', function() {
     document.getElementById("form-agendamento").style.display = "block";
   });
 
-  // Fluxo ao clicar em "Confirmar"
+ // Fluxo ao clicar em "Confirmar"
 document.getElementById("enviar-agendamento").addEventListener("click", async (e) => {
   e.preventDefault();
 
@@ -489,58 +484,38 @@ document.getElementById("enviar-agendamento").addEventListener("click", async (e
   const mensagem = document.getElementById("mensagem")?.value || ""; // opcional
   const status = document.getElementById("status");
 
-  // Mensagem inicial
-  status.innerText = "⏳ Processando agendamento...";
+  status.innerText = "⏳ Processando...";
 
-  // Validação simples
   if (!data || !hora) {
-    status.innerText = "⚠️ Por favor, preencha data e hora antes de enviar.";
+    status.innerText = "⚠️ Preencha data e hora.";
     return;
   }
 
   try {
-    const response = await fetch("https://portfolio-1-344x.onrender.com/agendar", {
+    const res = await fetch("https://portfolio-1-344x.onrender.com/agendar", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ data, hora, mensagem }),
+      body: JSON.stringify({ data, hora, mensagem })
     });
 
-    // tenta converter resposta em JSON
-    let resultText = "";
-    let json = null;
-    try {
-      json = await response.json();
-    } catch {
-      resultText = await response.text();
-    }
+    const json = await res.json();
 
-    if (!response.ok) {
-      console.error("❌ Erro do servidor:", json || resultText);
-      const msg =
-        json?.error ||
-        resultText ||
-        "Ocorreu um erro no servidor. Tente novamente em instantes.";
-      status.innerText = `❌ Falha ao criar evento: ${msg}`;
-      return;
-    }
+    if (res.ok) {
+      status.innerText = "✅ Evento criado com sucesso!";
+      document.getElementById("form-agendamento").style.display = "none";
 
-    // Caso sucesso:
-    console.log("✅ Evento criado:", json);
-    status.innerText = "✅ Evento marcado com sucesso!";
-
-    // Limpa e oculta o formulário
-    document.getElementById("form-agendamento").reset();
-    document.getElementById("form-agendamento").style.display = "none";
-  } catch (err) {
-    console.error("🚨 Erro de rede:", err);
-    if (err.name === "TypeError" && err.message.includes("fetch")) {
-      status.innerText =
-        "⚠️ Não foi possível conectar ao servidor. Verifique sua internet ou tente novamente.";
+      // 🟩 AQUI — nova linha opcional para exibir sucesso visual temporário
+      alert("✅ Evento criado com sucesso no Google Calendar!");
     } else {
-      status.innerText = `❌ Erro inesperado: ${err.message}`;
+      status.innerText = "❌ Erro: " + (json.error || JSON.stringify(json));
+      console.error("Erro no backend:", json);
     }
+  } catch (err) {
+    console.error(err);
+    status.innerText = "❌ " + (err.message || "Erro desconhecido");
   }
 });
+
 
 // ==========================
 // Player Spotify flutuante
