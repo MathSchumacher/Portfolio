@@ -2,6 +2,11 @@
 // Função para inicializar o Google Translate
 // =============================================
 function googleTranslateElementInit() {
+  if (typeof google === "undefined" || !google.translate) {
+    console.warn("⚠️ Google Translate não pôde ser carregado.");
+    return;
+  }
+
   new google.translate.TranslateElement({
     pageLanguage: 'pt-br',
     layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
