@@ -109,3 +109,9 @@ app.post("/agendar", async (req, res) => {
 app.listen(PORT, () => {
   console.log(`✅ Backend rodando na porta ${PORT}`);
 });
+app.options("/agendar", cors({
+  origin: "https://matheus-schumacher.vercel.app",
+  methods: ["GET", "POST", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true
+}));
