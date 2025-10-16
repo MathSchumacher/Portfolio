@@ -1,6 +1,5 @@
 const express = require("express");
 const cors = require("cors");
-const fs = require("fs");
 const bodyParser = require("body-parser");
 const { KJUR } = require("jsrsasign");
 
@@ -11,21 +10,38 @@ const PORT = process.env.PORT || 3000;
 const TARGET_CALENDAR_EMAIL = "matheusmschumacher@gmail.com";
 
 // =============================================
-// CORS CONFIG CORRETA PARA VERCEL + RENDER
+// CONFIGURAÇÃO CORS GLOBAL (Render + Vercel)
 // =============================================
-app.use(cors({
-  origin: "https://matheus-schumacher.vercel.app",
+const corsOptions = {
+  origin: "https://matheus-schumacher.vercel.app", // Frontend Vercel
   methods: ["GET", "POST", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true
-}));
+};
 
+// Preflight global antes de qualquer middleware
+app.options("*", cors(corsOptions));
+
+// Middleware CORS global
+app.use(cors(corsOptions));
+
+// Body parser
 app.use(bodyParser.json());
 
+// =============================================
 // Carrega credentials.json via variável de ambiente
-const credentials = JSON.parse(process.env.GOOGLE_CREDENTIALS);
+// =============================================
+let credentials;
+try {
+  credentials = JSON.parse(process.env.GOOGLE_CREDENTIALS);
+} catch (err) {
+  console.error("❌ GOOGLE_CREDENTIALS não definido ou inválido!", err);
+  process.exit(1); // encerra o server se não houver credenciais
+}
 
+// =============================================
 // Função para gerar JWT e pegar access token
+// =============================================
 async function getAccessToken() {
   const now = Math.floor(Date.now() / 1000);
   const header = { alg: "RS256", typ: "JWT" };
@@ -56,7 +72,7 @@ async function getAccessToken() {
 }
 
 // =============================================
-// Rota para criar evento
+// Rota para criar evento no Google Calendar
 // =============================================
 app.post("/agendar", async (req, res) => {
   console.log("📅 Requisição recebida em /agendar:", req.body);
@@ -74,7 +90,7 @@ app.post("/agendar", async (req, res) => {
       return res.status(400).json({ error: "Não é possível agendar para datas passadas" });
     }
 
-    const end = new Date(start.getTime() + 60 * 60 * 1000);
+    const end = new Date(start.getTime() + 60 * 60 * 1000); // +1h
     const evento = {
       summary: "Entrevista (Agendamento via Portfólio)",
       description: mensagem || "",
@@ -100,18 +116,16 @@ app.post("/agendar", async (req, res) => {
     if (!eventoRes.ok) return res.status(500).json({ error: json });
 
     res.json({ success: true, evento: json });
+
   } catch (err) {
     console.error("❌ Erro em /agendar:", err);
     res.status(500).json({ error: err.message || "Erro desconhecido" });
   }
 });
 
+// =============================================
+// Inicialização do servidor
+// =============================================
 app.listen(PORT, () => {
   console.log(`✅ Backend rodando na porta ${PORT}`);
 });
-app.options("/agendar", cors({
-  origin: "https://matheus-schumacher.vercel.app",
-  methods: ["GET", "POST", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"],
-  credentials: true
-}));
