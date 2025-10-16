@@ -492,7 +492,7 @@ $(window).on('resize', function() {
     }
 
     try {
-      const res = await fetch("https://portfolio-1-344x.onrender.com/agendar", {
+      const res = await fetch("https://portfolio-1-344x.onrender.com", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ data, hora, mensagem })
