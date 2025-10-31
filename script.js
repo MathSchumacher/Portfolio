@@ -1,5 +1,5 @@
 // =============================================
-// Função para inicializar o Google Translate
+// Function to initialize Google Translate
 // =============================================
 function googleTranslateElementInit() {
   new google.translate.TranslateElement({
@@ -10,7 +10,7 @@ function googleTranslateElementInit() {
 }
 
 // =============================================
-// Toggle do botão e controle de exibição
+// Toggle button and display control
 // =============================================
 document.addEventListener('DOMContentLoaded', () => {
   const translateToggle = document.getElementById('translate-toggle');
@@ -20,21 +20,21 @@ document.addEventListener('DOMContentLoaded', () => {
     translateToggle.addEventListener('click', (e) => {
       e.stopPropagation();
       
-      // Encontra o link que abre o menu de idiomas
+      // Find the link that opens the language menu
       const googleLink = translateElement.querySelector('a.goog-te-menu-value');
       
       if (googleLink) {
-        // Clica automaticamente no botão do Google
+        // Automatically click the Google button
         googleLink.click();
       } else {
-        // Fallback: mostra o container normal
+        // Fallback: show the normal container
         const isExpanded = translateToggle.getAttribute('aria-expanded') === 'true';
         translateElement.classList.toggle('show', !isExpanded);
         translateToggle.setAttribute('aria-expanded', !isExpanded);
       }
     });
 
-    // Fecha ao clicar fora (detecta o iframe do menu)
+    // Close when clicking outside (detects the language menu iframe)
     document.addEventListener('click', (e) => {
       const iframe = document.querySelector('iframe.goog-te-menu-frame');
       if (!translateToggle.contains(e.target) && 
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // Detecta mudança de idioma e "fecha" o menu
+    // Detect language change and "close" the menu
     const observer = new MutationObserver(() => {
       const combo = translateElement.querySelector('.goog-te-combo');
       if (combo && combo.value !== '' && combo.value !== 'pt') {
@@ -60,13 +60,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   // ==========================
-  // Ano dinâmico (INALTERADO)
+  // Dynamic year (UNCHANGED)
   // ==========================
   const year = document.getElementById('year');
   if (year) year.textContent = new Date().getFullYear();
 
   // ==========================
-  // Tema claro/escuro (INALTERADO)
+  // Light/dark theme (UNCHANGED)
   // ==========================
   const toggle = document.getElementById('themeToggle');
   if (toggle) {
@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
       setPressed();
     });
   }
-  //Dropdowntoogle-contatos
+  //Dropdown toggle-contacts
 const dropdownToggle = document.querySelector('.dropdown a');
 const dropdownContent = document.querySelector('.dropdown-content');
 
@@ -100,7 +100,7 @@ if (dropdownToggle && dropdownContent) {
     dropdownContent.classList.toggle('show');
   });
 
-  // Fechar ao clicar fora (opcional, melhora a UX)
+  // Close when clicking outside (optional, improves UX)
   document.addEventListener('click', (e) => {
     if (!dropdownToggle.contains(e.target) && !dropdownContent.contains(e.target)) {
       dropdownContent.classList.remove('show');
@@ -109,7 +109,7 @@ if (dropdownToggle && dropdownContent) {
 }
 
   // ==========================
-  // Formulário (simulação) (INALTERADO)
+  // Form (simulation) (UNCHANGED)
   // ==========================
   const form = document.getElementById('contactForm');
   const formStatus = document.getElementById('formStatus');
@@ -117,16 +117,16 @@ if (dropdownToggle && dropdownContent) {
   if (form && formStatus) {
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      formStatus.textContent = 'Enviando…';
+      formStatus.textContent = 'Sending…';
       await new Promise((r) => setTimeout(r, 900));
       form.reset();
-      formStatus.textContent = 'Mensagem enviada!';
+      formStatus.textContent = 'Message sent!';
       setTimeout(() => (formStatus.textContent = ''), 3000);
     });
   }
 
   // =============================================
-  // Owl Carousel: Trajetória, Habilidades e Experiência
+  // Owl Carousel: Trajectory, Skills and Experience
   // =============================================
   if (window.jQuery) {
     $('#trajetoria-carousel').owlCarousel({
@@ -149,7 +149,7 @@ if (dropdownToggle && dropdownContent) {
       }
     });
 
-    // Inicialização do carrossel de Experiência
+    // Experience carousel initialization
     $('.cards-container').owlCarousel({
       loop: false,
       margin: 30,
@@ -169,20 +169,20 @@ if (dropdownToggle && dropdownContent) {
             const backBg = card.find('.card-back-bg');
             const frontImg = card.find('.card-front img.frente');
 
-            // função que sempre retorna a altura real da frente (inclui padding/border)
+            // function that always returns the real front height (includes padding/border)
             function getFrontHeight() {
-              // usa outerHeight(true) para considerar padding; fallback 672
+              // uses outerHeight(true) to consider padding; fallback 672
               return card.find('.card-front').outerHeight(true) || 672;
             }
 
-            // sincroniza min-height do card e altura do backBg com a frente
+            // syncs card min-height and backBg height with front
             function syncToFront() {
               const fh = getFrontHeight();
               card.css('min-height', fh + 'px');
               if (backBg.length) backBg.css('height', fh + 'px');
             }
 
-            // garante estilo visual do background do verso (opcional mas recomendado)
+            // ensures visual style of back background (optional but recommended)
             if (backBg.length) {
               backBg.css({
                 'background-size': 'cover',
@@ -192,16 +192,16 @@ if (dropdownToggle && dropdownContent) {
               });
             }
 
-            // sincroniza inicialmente quando a imagem da frente carregar (ou já estiver carregada)
+            // syncs initially when front image loads (or is already loaded)
             if (frontImg.length) {
               frontImg.on('load', syncToFront);
               if (frontImg[0].complete) syncToFront();
             } else {
-              // se não houver img, aplica sincronização imediata
+              // if no img, apply immediate sync
               syncToFront();
             }
 
-            // abre o verso: calcula dinamicamente conforme conteúdo
+            // open back: dynamically calculates according to content
             function openBack() {
               card.addClass('flipped');
               requestAnimationFrame(() => {
@@ -213,7 +213,7 @@ if (dropdownToggle && dropdownContent) {
               });
             }
 
-            // fecha o verso: volta pra altura da frente (medida no momento do fechamento)
+            // close back: returns to front height (measured at closing time)
             function closeBack() {
               card.removeClass('flipped');
               requestAnimationFrame(() => {
@@ -223,13 +223,13 @@ if (dropdownToggle && dropdownContent) {
               });
             }
 
-            // handlers - hover com mouseenter/mouseleave para melhor controle
+            // handlers - hover with mouseenter/mouseleave for better control
             card.on('mouseenter', function() {
               openBack();
             });
             
             card.on('mouseleave', function() {
-              // Só fecha se não estiver "travado" por clique
+              // Only close if not "locked" by click
               if (!card.hasClass('clicked')) {
                 closeBack();
               }
@@ -246,7 +246,7 @@ if (dropdownToggle && dropdownContent) {
               }
             });
 
-            // evita flip durante drag — agora usa getFrontHeight() em vez de uma initialHeight fixa
+            // prevents flip during drag — now uses getFrontHeight() instead of a fixed initialHeight
             card.closest('.owl-carousel').on('drag.owl.carousel', function() {
               card.removeClass('flipped');
               const fh = getFrontHeight();
@@ -254,10 +254,10 @@ if (dropdownToggle && dropdownContent) {
               if (backBg.length) backBg.css('height', fh + 'px');
             });
           });
-        }, 100); // pequeno delay para renderização
+        }, 100); // small delay for rendering
       });
-    // Single resize handler (fora do loop)
-    // handler de resize — use este no lugar do existente
+    // Single resize handler (outside the loop)
+    // resize handler — use this instead of the existing one
 $(window).on('resize', function() {
   $('.card').each(function() {
     const card = $(this);
@@ -266,14 +266,14 @@ $(window).on('resize', function() {
     const backBg = card.find('.card-back-bg');
 
     if (card.hasClass('flipped')) {
-      // se estiver aberto, recalcula conforme conteúdo e frente
+      // if open, recalculates according to content and front
       const contentH = backContent.length ? backContent[0].scrollHeight : 0;
       const reservedBottom = 220;
       const needed = Math.max(frontH, contentH + reservedBottom + 40);
       card.css('min-height', needed + 'px');
       if (backBg.length) backBg.css('height', needed + 'px');
     } else {
-      // fechado: voltar exatamente para a altura da frente
+      // closed: return exactly to front height
       card.css('min-height', frontH + 'px');
       if (backBg.length) backBg.css('height', frontH + 'px');
     }
@@ -283,7 +283,7 @@ $(window).on('resize', function() {
   }
 
   // ====================================================
-  // ALTERADO: Botão "Minha Trajetória Completa"
+  // CHANGED: "My Complete Trajectory" Button
   // ====================================================
   const botao = document.getElementById("toggle-trajetoria");
   const carouselContainer = document.querySelector(".carousel-container");
@@ -294,17 +294,17 @@ $(window).on('resize', function() {
       if (carouselContainer.style.display === "none") {
         carouselContainer.style.display = "block";
         resumida.style.display = "none";
-        botao.textContent = "Mostrar Versão Resumida";
+        botao.textContent = "Show Summary Version";
       } else {
         carouselContainer.style.display = "none";
         resumida.style.display = "block";
-        botao.textContent = "Mais Detalhes";
+        botao.textContent = "More Details";
       }
     });
   }
 
   // ====================================================
-  // Tooltip Habilidades - hover / clique / X (somente JS)
+  // Skills Tooltip - hover / click / X (JS only)
   // ====================================================
   const icon = document.getElementById('habilidades-icone');
   const tooltip = document.getElementById('habilidades-tooltip');
@@ -313,7 +313,7 @@ $(window).on('resize', function() {
   let isPermanent = false;
 
   if (icon && tooltip && closeBtn) {
-    // Hover temporário
+    // Temporary hover
     icon.addEventListener('mouseenter', () => {
       if (!isPermanent) tooltip.classList.add('show');
     });
@@ -322,7 +322,7 @@ $(window).on('resize', function() {
       if (!isPermanent) tooltip.classList.remove('show');
     });
 
-    // Clique no ícone alterna modo permanente
+    // Click on icon toggles permanent mode
     icon.addEventListener('click', (e) => {
       e.stopPropagation();
       if (isPermanent) {
@@ -334,7 +334,7 @@ $(window).on('resize', function() {
       }
     });
 
-    // Clique no X fecha e volta o hover
+    // Click on X closes and returns to hover
     closeBtn.addEventListener('click', (e) => {
       e.stopPropagation();
       isPermanent = false;
@@ -361,16 +361,16 @@ $(window).on('resize', function() {
       const audioFile = btn.getAttribute('data-audio');
       const icon = btn.querySelector('i');
 
-      // Se ainda não existe player, cria e dá play inicial
+      // If player doesn't exist yet, create and initial play
       if (!currentPlayer || currentToggle !== btn) {
-        // Fecha player anterior se existir
+        // Close previous player if exists
         if (currentPlayer) currentPlayer.remove();
         if (currentAudio) currentAudio.pause();
 
         currentAudio = new Audio(audioFile);
         currentToggle = btn;
 
-        // Cria player
+        // Create player
         currentPlayer = document.createElement("div");
         currentPlayer.className = "tts-player";
         currentPlayer.innerHTML = `
@@ -391,22 +391,22 @@ $(window).on('resize', function() {
         const currentTimeEl = currentPlayer.querySelector(".tts-current");
         const durationEl = currentPlayer.querySelector(".tts-duration");
 
-        // Play inicial
+        // Initial play
         currentAudio.play();
         currentAudio.addEventListener("loadedmetadata", () => {
           durationEl.textContent = formatTime(currentAudio.duration);
         });
 
-        // Atualizar barra
+        // Update bar
         currentAudio.addEventListener("timeupdate", () => {
           const percent = (currentAudio.currentTime / currentAudio.duration) * 100;
           seek.value = percent;
           currentTimeEl.textContent = formatTime(currentAudio.currentTime);
 
-          // Preenche a barra antes do ponto
+          // Fills the bar before the point
           seek.style.background = `linear-gradient(to right, #00c3ff 0%, #00c3ff ${percent}%, #aaa ${percent}%, #aaa 100%)`;
 
-          // Para tema claro
+          // For light theme
           if(document.body.classList.contains('light')) {
             seek.style.background = `linear-gradient(to right, #0077ff 0%, #0077ff ${percent}%, #ccc ${percent}%, #ccc 100%)`;
           }
@@ -417,7 +417,7 @@ $(window).on('resize', function() {
           currentAudio.currentTime = (seek.value / 100) * currentAudio.duration;
         });
 
-        // Botão play/stop
+        // Play/stop button
         playBtn.addEventListener("click", () => {
           if (currentAudio.paused) {
             currentAudio.play();
@@ -428,22 +428,22 @@ $(window).on('resize', function() {
           }
         });
 
-        // Botão repeat
+        // Repeat button
         repeatBtn.addEventListener("click", () => {
           currentAudio.currentTime = 0;
           currentAudio.play();
         });
 
-        // Ao terminar
+        // When finished
         currentAudio.addEventListener("ended", () => {
           playBtn.querySelector("i").className = "fa-solid fa-play";
         });
 
-        // Muda o toggle para caret-down
+        // Changes toggle to caret-down
         icon.className = "fa-solid fa-caret-down";
       }
       else {
-        // Já existe player para este botão → toggle mostrar/ocultar
+        // Player already exists for this button → toggle show/hide
         if (currentPlayer.style.display === "none") {
           currentPlayer.style.display = "flex";
           icon.className = "fa-solid fa-caret-down";
@@ -456,7 +456,7 @@ $(window).on('resize', function() {
   });
   let canPlayHover = false;
 
-  // Habilita hover após o primeiro clique
+  // Enable hover after first click
   document.addEventListener('click', () => {
     canPlayHover = true;
   }, { once: true });
@@ -470,24 +470,24 @@ $(window).on('resize', function() {
       hoverSound.play().catch(err => console.log(err));
     });
   });
-  // Mostrar formulário ao clicar no botão
+  // Show form when clicking the button
   document.getElementById("agendar-btn").addEventListener("click", () => {
     document.getElementById("form-agendamento").style.display = "block";
   });
 
- // Fluxo ao clicar em "Confirmar"
+ // Flow when clicking "Confirm"
 document.getElementById("enviar-agendamento").addEventListener("click", async (e) => {
   e.preventDefault();
 
   const data = document.getElementById("data").value;
   const hora = document.getElementById("hora").value;
-  const mensagem = document.getElementById("mensagem")?.value || ""; // opcional
+  const mensagem = document.getElementById("mensagem")?.value || ""; // optional
   const status = document.getElementById("status");
 
-  status.innerText = "Processando...";
+  status.innerText = "Processing...";
 
   if (!data || !hora) {
-    status.innerText = "⚠️ Preencha data e hora.";
+    status.innerText = "⚠️ Fill in date and time.";
     return;
   }
 
@@ -502,39 +502,39 @@ document.getElementById("enviar-agendamento").addEventListener("click", async (e
     try {
       json = await res.json();
     } catch {
-      json = {}; // fallback se não vier JSON válido
+      json = {}; // fallback if no valid JSON
     }
 
     if (res.ok) {
-      // Mostra mensagem de sucesso
-      status.innerText = "✅ Evento criado com sucesso!";
+      // Show success message
+      status.innerText = "✅ Event created successfully!";
 
-      // Mantém a mensagem por 2 segundos antes de fechar o formulário
+      // Keep the message for 2 seconds before closing the form
       setTimeout(() => {
         document.getElementById("form-agendamento").style.display = "none";
-        status.innerText = ""; // limpa a mensagem
+        status.innerText = ""; // clear the message
       }, 2000);
 
-      // opcional: limpa os campos imediatamente
+      // optional: clear fields immediately
       document.getElementById("data").value = "";
       document.getElementById("hora").value = "";
       if (document.getElementById("mensagem")) document.getElementById("mensagem").value = "";
 
     } else {
-      status.innerText = "❌ Erro: " + (json.error || JSON.stringify(json));
-      console.error("Erro no backend:", json);
+      status.innerText = "❌ Error: " + (json.error || JSON.stringify(json));
+      console.error("Backend error:", json);
     }
 
   } catch (err) {
     console.error(err);
-    status.innerText = "❌ " + (err.message || "Erro desconhecido");
+    status.innerText = "❌ " + (err.message || "Unknown error");
   }
 });
 
 
 
 // ==========================
-// Player Spotify flutuante
+// Floating Spotify Player
 // ==========================
 const spotifyLinks = document.querySelectorAll('a.spotify');
 const spotifyPlayer = document.getElementById('spotify-player');
@@ -553,7 +553,7 @@ if (spotifyLinks && spotifyPlayer && spotifyClose) {
   });
 }
 // ==========================
-// Mostrar botão Spotify no header após 1º clique
+// Show Spotify button in header after 1st click
 // ==========================
 const spotifyHeaderBtn = document.getElementById('spotify-header-btn');
 
@@ -563,10 +563,10 @@ if (spotifyLinks && spotifyPlayer && spotifyClose && spotifyHeaderBtn) {
     link.addEventListener('click', (e) => {
       e.preventDefault();
 
-      // 1️⃣ Abrir o player (como já fazia)
+      // 1️⃣ Open the player (as before)
       spotifyPlayer.classList.add('show');
 
-      // 2️⃣ Mostrar botão no header (só na primeira vez)
+      // 2️⃣ Show button in header (only first time)
       if (spotifyHeaderBtn.style.display === 'none') {
         spotifyHeaderBtn.style.display = 'inline-block';
       }
@@ -577,12 +577,12 @@ if (spotifyLinks && spotifyPlayer && spotifyClose && spotifyHeaderBtn) {
     spotifyPlayer.classList.remove('show');
   });
 
-  // botão do header abre/fecha o player também
+  // header button also opens/closes the player
   spotifyHeaderBtn.addEventListener('click', () => {
     spotifyPlayer.classList.toggle('show');
   });
 }
-//FILTRO HABILIDADES
+//SKILLS FILTER
 (function() {
   const searchInput = document.getElementById('skills-search');
   const activeFiltersContainer = document.getElementById('active-filters');
@@ -591,11 +591,11 @@ if (spotifyLinks && spotifyPlayer && spotifyClose && spotifyHeaderBtn) {
   searchInput.parentNode.appendChild(suggestionBox);
 
   let activeFilters = [];
-  let originalCards = []; // Cards originais salvos
+  let originalCards = []; // Original cards saved
 
-  // Aguarda o carousel estar pronto
+  // Wait for the carousel to be ready
   setTimeout(function() {
-    // Salva os cards originais APÓS o carousel estar inicializado
+    // Save original cards AFTER carousel is initialized
     const carousel = $('#habilidades-carousel');
     if (carousel.hasClass('owl-loaded')) {
       carousel.find('.owl-item:not(.cloned) .habilidade-card').each(function() {
@@ -604,16 +604,16 @@ if (spotifyLinks && spotifyPlayer && spotifyClose && spotifyHeaderBtn) {
           element: $(this).clone(true)
         });
       });
-      console.log('✅ Backup criado:', originalCards.length, 'cards');
+      console.log('✅ Backup created:', originalCards.length, 'cards');
     }
   }, 500);
 
-  // Normaliza texto
+  // Normalize text
   function normalizeText(text) {
     return text.toLowerCase().replace(/[^a-z0-9]/g, '');
   }
 
-  // Mapa normalized → texto original
+  // Map normalized → original text
   const allOptionsOriginal = {};
   document.querySelectorAll('.habilidade-card').forEach(card => {
     const title = card.querySelector('.skill-title').textContent;
@@ -627,7 +627,7 @@ if (spotifyLinks && spotifyPlayer && spotifyClose && spotifyHeaderBtn) {
 
   const allOptions = Object.keys(allOptionsOriginal);
 
-  // Cria botão de filtro
+  // Create filter button
   function createFilterBtn(text) {
     const btn = document.createElement('div');
     btn.classList.add('filter-btn');
@@ -647,13 +647,13 @@ if (spotifyLinks && spotifyPlayer && spotifyClose && spotifyHeaderBtn) {
     filterSkills();
   }
 
-  // Função principal de filtragem
+  // Main filtering function
   function filterSkills() {
     const carousel = $('#habilidades-carousel');
     
-    console.log('🔍 Filtrando... Filtros ativos:', activeFilters);
+    console.log('🔍 Filtering... Active filters:', activeFilters);
 
-    // Limpa o carousel completamente
+    // Completely clear the carousel
     if (carousel.hasClass('owl-loaded')) {
       carousel.trigger('destroy.owl.carousel');
     }
@@ -661,24 +661,24 @@ if (spotifyLinks && spotifyPlayer && spotifyClose && spotifyHeaderBtn) {
     carousel.empty();
     carousel.addClass('owl-carousel');
 
-    // Sem filtros = restaura original
+    // No filters = restore original
     if (activeFilters.length === 0) {
-      console.log('🔄 Restaurando estado original');
+      console.log('🔄 Restoring original state');
       
       if (originalCards.length === 0) {
-        console.warn('⚠️ Backup vazio!');
+        console.warn('⚠️ Empty backup!');
         return;
       }
 
-      // Restaura cards originais
+      // Restore original cards
       originalCards.forEach(card => {
         const $clonedCard = card.element.clone(true);
-        // Garante que todas as skills estejam visíveis
+        // Ensure all skills are visible
         $clonedCard.find('.skill').show();
         carousel.append($clonedCard);
       });
 
-      // Reinicializa
+      // Reinitialize
       carousel.owlCarousel({
         items: 1,
         loop: true,
@@ -692,16 +692,16 @@ if (spotifyLinks && spotifyPlayer && spotifyClose && spotifyHeaderBtn) {
         }
       });
 
-      // Refresh para garantir layout
+      // Refresh to ensure layout
       setTimeout(() => {
         carousel.trigger('refresh.owl.carousel');
       }, 100);
 
-      console.log('✅ Restaurado com sucesso');
+      console.log('✅ Restored successfully');
       return;
     }
 
-    // COM FILTROS: filtra e reconstrói
+    // WITH FILTERS: filter and rebuild
     const visibleCards = [];
 
     originalCards.forEach(cardData => {
@@ -730,15 +730,15 @@ if (spotifyLinks && spotifyPlayer && spotifyClose && spotifyHeaderBtn) {
       }
     });
 
-    console.log('📊 Cards visíveis:', visibleCards.length);
+    console.log('📊 Visible cards:', visibleCards.length);
 
     if (visibleCards.length > 0) {
-      // Adiciona cards filtrados
+      // Add filtered cards
       visibleCards.forEach($card => {
         carousel.append($card);
       });
 
-      // Reinicializa carousel
+      // Reinitialize carousel
       carousel.owlCarousel({
         items: 1,
         loop: visibleCards.length > 1,
@@ -752,15 +752,15 @@ if (spotifyLinks && spotifyPlayer && spotifyClose && spotifyHeaderBtn) {
         }
       });
 
-      // Refresh para garantir layout
+      // Refresh to ensure layout
       setTimeout(() => {
         carousel.trigger('refresh.owl.carousel');
       }, 100);
 
-      console.log('✅ Carousel reconstruído');
+      console.log('✅ Carousel rebuilt');
     } else {
-      carousel.html('<div style="text-align:center; padding:2rem; color:var(--muted);">Nenhuma habilidade encontrada.</div>');
-      console.log('⚠️ Nenhum card corresponde ao filtro');
+      carousel.html('<div style="text-align:center; padding:2rem; color:var(--muted);">No skills found.</div>');
+      console.log('⚠️ No card matches the filter');
     }
   }
 
@@ -792,7 +792,7 @@ if (spotifyLinks && spotifyPlayer && spotifyClose && spotifyHeaderBtn) {
     });
   });
 
-  // Enter para adicionar filtro
+  // Enter to add filter
   searchInput.addEventListener('keydown', e => {
     if (e.key === 'Enter') {
       const value = normalizeText(searchInput.value.trim());
