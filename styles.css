@@ -1888,3 +1888,9 @@ header {
     height: 40px !important;
   }
 }
+p {
+    text-indent: 1.25cm;
+    text-align: justify;
+    line-height: 1.5;
+    margin: 0;
+  }
