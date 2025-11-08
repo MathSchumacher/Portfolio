@@ -716,12 +716,12 @@ section h2 {
 }
 .spotify .fa-spotify {
   display: block;
-  margin: 8.4vw;
+  margin: none;
   text-align: center;
-  font-size: 4vw;
+  font-size: 2vw;
 }
 .spotify .fa-spotify:hover{
-  font-size: 4vw;
+  font-size: 2.1vw;
   color: #3cbd00;
 }
 .spotify-player {
