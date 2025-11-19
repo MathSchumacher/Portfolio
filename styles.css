@@ -1117,6 +1117,21 @@ body.light #projetos::after {
     -4px 4px 0 #000,
     -5px 5px 0 #000;
 }
+.projeto-overlay h4 {
+  font-family: 'Helvetica Now', sans-serif;
+  font-weight: 700;
+  font-size: 1.7rem;
+  color: #fffb00;
+  margin: 0;
+
+  /* efeito 3D invertido (sombra para o lado esquerdo) */
+  text-shadow:
+    -1px 1px 0 #000,
+    -2px 2px 0 #000,
+    -3px 3px 0 #000,
+    -4px 4px 0 #000,
+    -5px 5px 0 #000;
+}
 
 /* Hover: texto desliza para o centro */
 .projeto-card:hover .projeto-overlay {
