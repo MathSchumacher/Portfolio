@@ -6,7 +6,6 @@
   <title>Matheus Schumacher — Portfolio</title>
   <meta name="description" content="Developer Portfolio: projects, skills and contact." />
 
-  <!-- SEO/Open Graph -->
   <meta property="og:title" content="Matheus Schumacher — Portfolio" />
   <meta property="og:description" content="Developer Portfolio: projects, skills and contact." />
   <meta property="og:type" content="website" />
@@ -15,38 +14,32 @@
 
   <link rel="icon" href="/assets/favicon.ico" />
 
-  </script>
-
   <link rel="stylesheet" href="styles.css" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
-    <!-- Bootstrap CSS -->
-
-  <!-- Bootstrap JS (necessário para dropdown funcionar) -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=translate" />
-  </head>
 </head>
 <body>
   <div id="mouse-glow"></div>
-  <a class="skip-link" href="#conteudo">Skip to content</a>
+  <a class="skip-link" href="#conteudo" data-i18n="nav.skip">Skip to content</a>
 
   <header>
     <div class="container nav" role="navigation" aria-label="Principal">
       <div class="brand">Matheus Muccillo Schumacher</div>
       <nav class="nav-actions" aria-label="Sections">
-        <a href="#sobre">About</a>
-        <a href="#habilidades">Skills</a>
-        <a href="#projetos">Projects</a>
-        <a href="#experiencia">Experience</a>
-        <a href="#Weneedtotalk">We Need to Talk</a>
+        <a href="#sobre" data-i18n="nav.about">About</a>
+        <a href="#habilidades" data-i18n="nav.skills">Skills</a>
+        <a href="#projetos" data-i18n="nav.projects">Projects</a>
+        <a href="#experiencia" data-i18n="nav.experience">Experience</a>
+        <a href="#Weneedtotalk" data-i18n="nav.talk">We Need to Talk</a>
+        
         <div class="dropdown">
-          <a><span class="menu-icon"><i class="fa-solid fa-bars"></i></span> Contact</a>
+          <a><span class="menu-icon"><i class="fa-solid fa-bars"></i></span> <span data-i18n="nav.contact">Contact</span></a>
           <div class="dropdown-content">
             <a href="mailto:matheusmschumacher@gmail.com" target="_blank"><img src="img/message.png" alt="Email" class="icon">Email: Matheusmschumacher@gmail.com</a>
             <a href="https://wa.me/5551981381793" target="_blank"><img src="img/whatsapp.png" alt="WhatsApp" class="icon">WhatsApp: +55 51 981381793</a>
@@ -54,15 +47,18 @@
             <a href="https://discord.com/users/262745192195424256" target="_blank">
               <img src="img/discord.png" alt="Discord" class="icon">Discord: mathschumacher
             </a>
-            <p class="warning">Conventional calls will not be answered,<br>contacts by Whatsapp are preferred.</p>
-
+            <p class="warning" data-i18n="nav.contact_warning">Conventional calls will not be answered,<br>contacts by Whatsapp are preferred.</p>
           </div>
         </div>
-        <!-- Botão custom com ícone Material Symbols -->
-        <button id="translate-toggle" class="translate-btn" aria-label="Select language" aria-expanded="false">
-          <span class="material-symbols-outlined notranslate">translate</span>
-        </button>
-        <div id="google_translate_element" class="language-menu"></div>
+
+        <div class="dropdown language-selector">
+          <a class="translate-btn"href="#" onclick="return false;" aria-label="Select language">
+             <span class="menu-icon"><span class="material-symbols-outlined">translate</span></span>
+          </a>
+          <div class="dropdown-content" id="language-options">
+             </div>
+        </div>
+
         <button id="spotify-header-btn" class="spotify-header-btn" style="display:none;"><i class="fa-brands fa-spotify"></i></button>
         <button id="themeToggle" class="btn" aria-pressed="false" aria-label="Toggle theme">🌓</button>
       </nav>
@@ -70,217 +66,209 @@
   </header>
 
   <main id="conteudo" class="container">
-    <!-- Hero -->
     <section class="hero" id="home"><div class="background-blobs">
   <div class="blob blob-1"></div>
   <div class="blob blob-2"></div>
   <div class="blob blob-3"></div>
 </div>
-      <h1 class="start-title">Full Stack Developer</h1>
-      <p class="muted">Full Stack Dev. | DevOps | AI & DeepLearning | IoT | Microcontrollers/Industrial Automation</p>
+      <h1 class="start-title" data-i18n="hero.title">Full Stack Developer</h1>
+      <p class="muted" data-i18n="hero.subtitle">Full Stack Dev. | DevOps | AI & DeepLearning | IoT | Microcontrollers/Industrial Automation</p>
       <div class="actions">
-        <a class="btn primary" href="#projetos">View projects</a>
-        <a class="btn primary" href="https://docs.google.com/document/d/12yNVqZ0a0em9PJxFvBTWx2lnKz7W7JGh2V57BGeP6OU/edit?usp=sharing" target="_blank" rel="noopener">Resume</a>
+        <a class="btn primary" href="#projetos" data-i18n="hero.btn_projects">View projects</a>
+        <a class="btn primary" href="https://docs.google.com/document/d/12yNVqZ0a0em9PJxFvBTWx2lnKz7W7JGh2V57BGeP6OU/edit?usp=sharing" target="_blank" rel="noopener" data-i18n="hero.btn_resume">Resume</a>
         <a class="btn primary" href="https://github.com/MathSchumacher" target="_blank" rel="noopener">
            GitHub
            <img src="img/github.png" alt="GitHub" class="icon">
         </a>
         <a class="btn primary" href="https://www.linkedin.com/in/matheus-schumacher-76b779294/" target="_blank" rel="noopener">
-            LinkedIn
-            <img src="img/linkedin.png" alt="LinkedIn" class="icon">
+           LinkedIn
+           <img src="img/linkedin.png" alt="LinkedIn" class="icon">
         </a> 
       </div>
     </section>
 
 <section id="sobre">
-  <h2>About</h2>
+  <h2 data-i18n="about.title">About</h2>
   <div class="sobre-content">
     <div class="profile-wrapper">
     <img src="img/backmeground.png" alt="Profile" class="profile"></div>
-    <p class="trajetoria-resumida">
+    <p class="trajetoria-resumida" data-i18n="about.summary">
       Full Stack Developer with practical experience in Backend, Frontend, and Artificial Intelligence projects. I work on all stages of development — from conception to delivery — creating complete, scalable, and high-performance applications. Passionate about innovation and continuous learning, I seek to combine a broad view of the technological ecosystem with a focus on efficiency, quality, and creative solutions that generate real impact.
     </p>
 
     <div class="carousel-container" style="display: none;">
       <div id="trajetoria-carousel" class="owl-carousel owl-theme">
         <div class="item">
-          <h3>My Story  <button class="tts-toggle" data-audio="audio/minhahistoriaptbr.mp3">
+          <h3><span data-i18n="about.story_title">My Story</span> <button class="tts-toggle" data-audio="audio/minhahistoriaptbr.mp3">
       <i class="fa-solid fa-volume-high"></i>
     </button></h3>
-          <p>
+          <p data-i18n="about.story_p1">
             My journey began at my family's metallurgical company, where I learned early on the value of work, responsibility, and innovation. My interest in technology emerged young, during robotics classes, and solidified when I enrolled in the Technical Electronics course at Fundação Liberato, where I engaged in practical projects and led study groups that boosted collective performance.
           </p>
 
-          <p>
+          <p data-i18n="about.story_p2">
             While studying, I worked as a waiter in the summers and selling snacks on the street during the year, experiences that reinforced my resilience, discipline, and communication skills. Due to the pandemic, the course completion was delayed, but I finished my training in 2022, right after the return of in-person classes.
           </p>
 
-          <p>
+          <p data-i18n="about.story_p3">
             During this period, I interned at Pramel Equipamentos Eletrônicos, working on embedded firmware development and circuit and electronic board projects, always delivering results above expectations for quality and speed in deliveries.
           </p>
 
-          <p>
+          <p data-i18n="about.story_p4">
             After the internship, I returned to the family company, this time leading production and creating new products, applying my technical knowledge to optimize processes and add value to the business. In parallel, I worked as a freelancer, developing web applications and custom solutions for small businesses, in addition to participating in bootcamps in Backend, Frontend, and Artificial Intelligence.
           </p>
 
-          <p>
+          <p data-i18n="about.story_p5">
             In 2024, I joined Integrum Inteligência Industrial ERP, where I started in technical support and quickly evolved to junior programmer. Even with little time learning Delphi, I began to actively contribute to system maintenance and improvement, fixing bugs, proposing solutions, and developing new features with direct impact on the company's performance.
           </p>
 
-          <p>
+          <p data-i18n="about.story_p6">
             Currently, I continue to improve as a full stack developer, focusing on creating efficient, scalable, and results-oriented solutions. I am a Computer Science student (in progress, expected completion in 2028) and maintain a self-taught posture, learning continuously and applying knowledge directly to my projects and professional practice.
           </p>
 
         </div>
         <div class="item">
-          <h3>My Personality   <button class="tts-toggle" data-audio="audio/minhapersonalidadeen.mp3">
+          <h3><span data-i18n="about.personality_title">My Personality</span> <button class="tts-toggle" data-audio="audio/minhapersonalidadeen.mp3">
       <i class="fa-solid fa-volume-high"></i></h3>
-<p>
+<p data-i18n="about.personality_p1">
   I have an <strong>INTJ-A</strong> profile, characterized by being introverted, intuitive, analytical, planning, and assertive. In the professional environment, I apply rationality and organization as main guides, always seeking concrete results with efficiency and quality. I remain calm in the face of challenges and value innovative solutions that bring real impact.
 </p>
-<p>
+<p data-i18n="about.personality_p2">
   Outside of work, I balance this rational side with traits of empathy and sensitivity. I am attentive to people, concerned with listening and understanding different perspectives, which strengthens teamwork. I feel more engaged when everyone is aligned, dreaming of the best for the project, dedicated, and willing to give their all. I value brainstorming moments, where each idea is collectively improved, making projects more solid and innovative.
 </p>
-<p>
+<p data-i18n="about.personality_p3">
   I have as constant motivation <em>automating tasks, creating striking designs, and delivering results I can be proud of</em>. Dedication, innovation, healthy perfectionism, and ambition are among my main marks. My tendency to imagine future scenarios allows me to <strong>anticipate risks, identify improvement points, and prepare solutions before problems arise</strong>, turning planning into a differential.
 </p>
-
-
-
         </div>
+      
         <div class="item">
-          <h3>My Hobbies   <button class="tts-toggle" data-audio="audio/meushobbiesen.mp3">
+          <h3><span data-i18n="about.hobbies_title">My Hobbies</span> <button class="tts-toggle" data-audio="audio/meushobbiesen.mp3">
       <i class="fa-solid fa-volume-high"></i></h3>
-<p>
+<p data-i18n="about.hobbies_p1">
   I am passionate about reading, exploring from science and science fiction to fantasy, suspense, and romance. Some of my favorite books include <em>Eu, Robô</em> by Isaac Asimov, the <em>Millennium</em> trilogy by Stieg Larsson, <em>O Hobbit</em>, <em>O Oceano no Fim do Caminho</em> by Neil Gaiman, <em>Todo Dia</em> by David Levithan, and <em>Jogador Nº1</em>. I also like comics, such as <em>Watchmen</em>, <em>Sandman</em>, <em>Preacher</em>, in addition to Marvel and DC classics, like <em>Batman</em> and <em>Homem-Aranha</em>. I am also a fan of manhwas, with some of my favorites being <em>Return of the Mount Hua Sect</em>, <em>Solo Leveling</em>, <em>The Eternal Supreme</em>, <em>Omniscient Reader's Viewpoint</em>, <em>Magic Emperor</em>, <em>Overgeared</em>, and <em>Tower of God</em>.
 </p>
-<p>
+<p data-i18n="about.hobbies_p2">
   I am a gaming enthusiast, with a preference for titles that challenge strategy and reasoning, such as <em>Dark Souls</em>, <em>Elden Ring</em>, <em>Sekiro</em>, <em>Satisfactory</em>, <em>Clair Obscure Expedition 33</em>, <em>Devil May Cry 5</em>, <em>Detroit: Become Human</em>, <em>Horizon Forbidden West</em>, and <em>The Witcher 3</em>. I also follow animes that combine engaging stories and captivating characters, such as <em>Steins;Gate</em>, <em>Death Note</em>, <em>Guilty Crown</em>, <em>Bakuman</em>, <em>No Game No Life</em>, <em>Haikyuu!!</em>, <em>Boku dake ga Inai Machi</em>, and <em>Jojo’s Bizarre Adventure</em>.
 </p>
-<p>
+<p data-i18n="about.hobbies_p3">
   I love movies of different styles, from dramas and romances to thrillers and fiction, with highlights for <em>Mr. Nobody</em>, <em>Weathering With You</em>, <em>Before Sunrise</em>, <em>The Wolf of Wall Street</em>, <em>Everything Everywhere All at Once</em>, <em>Django Livre</em>, and <em>The Shawshank Redemption</em>.
 </p>
-<p>
+<p data-i18n="about.hobbies_p4">
   Outside the universe of reading, movies, and games, I like to cook and experiment with new dishes, improving recipes and creating my own versions. This passion for cooking combines creativity, patience, and attention to details — qualities that I also apply in software development and design projects.
 </p>
 <p>
-  I have a versatile musical style and like to explore different genres. To make it easier, you can check my playlist on Spotify: 
+  <span data-i18n="about.hobbies_p5">I have a versatile musical style and like to explore different genres. To make it easier, you can check my playlist on Spotify:</span> 
   <a href="https://open.spotify.com/playlist/2JOIjqFF4YfSw5Wg8eLDjK?si=0919a95fd9564bd2" target="_blank" rel="noopener noreferrer" id="spotify-header-btn" class="spotify">
     <i class="fa-brands fa-spotify"></i>
   </a>
 </p>
 
-
         </div>
         </div>
     </div>
 
-    <button id="toggle-trajetoria">More Details</button>
+    <button id="toggle-trajetoria" data-i18n="about.btn_more">More Details</button>
   </div>
 </section>
 
 
-    <!-- Habilidades -->
-<section id="habilidades">
+    <section id="habilidades">
    <h2>
     <span class="titulo-icone" id="habilidades-icone">
       <i class="fa-solid fa-circle-info"></i>
        <span class="tooltip" id="habilidades-tooltip">
-  <button class="tooltip-close" id="tooltip-close">&times;</button>
-  📊 Level Guide
+  <button class="tooltip-close" id="tooltip-close">×</button>
+  <span data-i18n="skills.guide_title">📊 Level Guide</span>
   <ul>
     <li>
-      <strong>Lv.1 – Beginner</strong>
+      <strong data-i18n="skills.lvl1">Lv.1 – Beginner</strong>
       <ul>
-        <li>Knows basic concepts and theoretical fundamentals.</li>
-        <li>Needs guidance and guided examples.</li>
+        <li data-i18n="skills.lvl1_d1">Knows basic concepts and theoretical fundamentals.</li>
+        <li data-i18n="skills.lvl1_d2">Needs guidance and guided examples.</li>
       </ul>
     </li>
     <li>
-      <strong>Lv.2 – Apprentice</strong>
+      <strong data-i18n="skills.lvl2">Lv.2 – Apprentice</strong>
       <ul>
-        <li>Implements simple exercises and small projects with supervision.</li>
-        <li>Understands basic logic and simple structures.</li>
+        <li data-i18n="skills.lvl2_d1">Implements simple exercises and small projects with supervision.</li>
+        <li data-i18n="skills.lvl2_d2">Understands basic logic and simple structures.</li>
       </ul>
     </li>
     <li>
-      <strong>Lv.3 – Junior Initial</strong>
+      <strong data-i18n="skills.lvl3">Lv.3 – Junior Initial</strong>
       <ul>
-        <li>Develops simple projects autonomously.</li>
-        <li>Uses support tools and basic debugging.</li>
+        <li data-i18n="skills.lvl3_d1">Develops simple projects autonomously.</li>
+        <li data-i18n="skills.lvl3_d2">Uses support tools and basic debugging.</li>
       </ul>
     </li>
     <li>
-      <strong>Lv.4 – Junior</strong>
+      <strong data-i18n="skills.lvl4">Lv.4 – Junior</strong>
       <ul>
-        <li>Plans and executes small projects with understanding of basic architecture.</li>
-        <li>Needs supervision in complex design choices or code patterns.</li>
+        <li data-i18n="skills.lvl4_d1">Plans and executes small projects with understanding of basic architecture.</li>
+        <li data-i18n="skills.lvl4_d2">Needs supervision in complex design choices or code patterns.</li>
       </ul>
     </li>
     <li>
-      <strong>Lv.5 – Mid-Level Initial</strong>
+      <strong data-i18n="skills.lvl5">Lv.5 – Mid-Level Initial</strong>
       <ul>
-        <li>Applies best practices and refactors code.</li>
-        <li>Delivers simple to intermediate projects with minimal supervision.</li>
+        <li data-i18n="skills.lvl5_d1">Applies best practices and refactors code.</li>
+        <li data-i18n="skills.lvl5_d2">Delivers simple to intermediate projects with minimal supervision.</li>
       </ul>
     </li>
     <li>
-      <strong>Lv.6 – Mid-Level</strong>
+      <strong data-i18n="skills.lvl6">Lv.6 – Mid-Level</strong>
       <ul>
-        <li>Completes intermediate projects consistently.</li>
-        <li>Organizes code, modularizes, and applies basic patterns.</li>
-        <li>Resolves problems confidently, seeking help only in complex cases.</li>
+        <li data-i18n="skills.lvl6_d1">Completes intermediate projects consistently.</li>
+        <li data-i18n="skills.lvl6_d2">Organizes code, modularizes, and applies basic patterns.</li>
+        <li data-i18n="skills.lvl6_d3">Resolves problems confidently, seeking help only in complex cases.</li>
       </ul>
     </li>
     <li>
-      <strong>Lv.7 – Senior</strong>
+      <strong data-i18n="skills.lvl7">Lv.7 – Senior</strong>
       <ul>
-        <li>Resolves complex challenges reliably.</li>
-        <li>Chooses appropriate tools, libraries, and frameworks.</li>
-        <li>Contributes to system architecture and design decisions.</li>
+        <li data-i18n="skills.lvl7_d1">Resolves complex challenges reliably.</li>
+        <li data-i18n="skills.lvl7_d2">Chooses appropriate tools, libraries, and frameworks.</li>
+        <li data-i18n="skills.lvl7_d3">Contributes to system architecture and design decisions.</li>
       </ul>
     </li>
     <li>
-      <strong>Lv.8 – Advanced</strong>
+      <strong data-i18n="skills.lvl8">Lv.8 – Advanced</strong>
       <ul>
-        <li>Masters frameworks, tools, and advanced best practices.</li>
-        <li>Optimizes existing solutions and acts as a mentor to juniors and mid-levels.</li>
-        <li>Improves system performance, scalability, and maintenance.</li>
+        <li data-i18n="skills.lvl8_d1">Masters frameworks, tools, and advanced best practices.</li>
+        <li data-i18n="skills.lvl8_d2">Optimizes existing solutions and acts as a mentor to juniors and mid-levels.</li>
+        <li data-i18n="skills.lvl8_d3">Improves system performance, scalability, and maintenance.</li>
       </ul>
     </li>
     <li>
-      <strong>Lv.9 – Specialist</strong>
+      <strong data-i18n="skills.lvl9">Lv.9 – Specialist</strong>
       <ul>
-        <li>Creates complex, robust, and innovative solutions consistently.</li>
-        <li>Leads critical projects and high-impact technical decisions.</li>
-        <li>Is a technical reference in the field.</li>
+        <li data-i18n="skills.lvl9_d1">Creates complex, robust, and innovative solutions consistently.</li>
+        <li data-i18n="skills.lvl9_d2">Leads critical projects and high-impact technical decisions.</li>
+        <li data-i18n="skills.lvl9_d3">Is a technical reference in the field.</li>
       </ul>
     </li>
     <li>
-      <strong>Lv.10 – Technical Leader / Master</strong>
+      <strong data-i18n="skills.lvl10">Lv.10 – Technical Leader / Master</strong>
       <ul>
-        <li>Defines technical standards and guidelines for the team or organization.</li>
-        <li>Combines deep technical expertise with strategic business vision.</li>
-        <li>Teaches, forms teams, and influences strategic and technical decisions.</li>
+        <li data-i18n="skills.lvl10_d1">Defines technical standards and guidelines for the team or organization.</li>
+        <li data-i18n="skills.lvl10_d2">Combines deep technical expertise with strategic business vision.</li>
+        <li data-i18n="skills.lvl10_d3">Teaches, forms teams, and influences strategic and technical decisions.</li>
       </ul>
     </li>
   </ul>
 </span>
 
 
-    </span>Skills
+    </span><span data-i18n="skills.title">Skills</span>
   </h2>
-  <!-- Filtro de skills -->
-<div class="skills-filter-container">
-  <input type="text" id="skills-search" placeholder="Filter skills..." />
+  <div class="skills-filter-container">
+  <input type="text" id="skills-search" placeholder="Filter skills..." data-i18n-placeholder="skills.filter_placeholder" />
   <div id="active-filters" class="active-filters"></div>
 </div>
-  <!-- Carrossel -->
   <div id="habilidades-carousel" class="owl-carousel owl-theme">
 
-    <!-- Desenvolvimento -->
     <div class="habilidade-card">
-      <h3 class="skill-title"><i class="fa-solid fa-code"></i> Languages</h3>
+      <h3 class="skill-title"><i class="fa-solid fa-code"></i> <span data-i18n="skills.cat_languages">Languages</span></h3>
       <div class="skills-container">
         <div class="skill"><div class="skill-header"><span><img src="img/c.svg" alt="icone" class="skill-icon">C</span><span class="level">Lvl 6</span></div><div class="xp-bar"><div class="xp-progress" style="width:60%"></div></div></div>
         <div class="skill"><div class="skill-header"><span><img src="img/csharp.svg" alt="icone" class="skill-icon">C#/.NET</span><span class="level">Lvl 7</span></div><div class="xp-bar"><div class="xp-progress" style="width:70%"></div></div></div>
@@ -300,9 +288,8 @@
       </div>
     </div>
 
-<!-- Engenharia de Software -->
-    <div class="habilidade-card">
-      <h3 class="skill-title"><i class="fa-solid fa-cubes"></i>Frameworks</h3>
+<div class="habilidade-card">
+      <h3 class="skill-title"><i class="fa-solid fa-cubes"></i><span data-i18n="skills.cat_frameworks">Frameworks</span></h3>
       <div class="skills-container">
         <div class="skill"><div class="skill-header"><span><img src="img/react.svg" alt="icone" class="skill-icon">React</span><span class="level">Lvl 7</span></div><div class="xp-bar"><div class="xp-progress" style="width:70%"></div></div></div>
         <div class="skill"><div class="skill-header"><span><img src="img/angular.svg" alt="icone" class="skill-icon">Angular</span><span class="level">Lvl 5</span></div><div class="xp-bar"><div class="xp-progress" style="width:50%"></div></div></div>
@@ -326,7 +313,7 @@
     </div>
    
     <div class="habilidade-card">
-      <h3 class="skill-title"><i class="fa-solid fa-network-wired"></i>APIs</h3>
+      <h3 class="skill-title"><i class="fa-solid fa-network-wired"></i><span data-i18n="skills.cat_apis">APIs</span></h3>
       <div class="skills-container">
         <div class="skill"><div class="skill-header"><span><img src="img/google-cloud-1.svg" alt="icone" class="skill-icon" style="width: 35px;height: 35px;">Google Cloud</span><span class="level">Lvl 6</span></div><div class="xp-bar"><div class="xp-progress" style="width:60%"></div></div></div>
         <div class="skill"><div class="skill-header"><span><img src="img/aws-2.svg" alt="icone" class="skill-icon skill-icon-black" style="width: 35px;height: 35px;">AWS Cloud</span><span class="level">Lvl 6</span></div><div class="xp-bar"><div class="xp-progress" style="width:60%"></div></div></div>
@@ -344,7 +331,7 @@
       </div>
     </div>
     <div class="habilidade-card">
-      <h3 class="skill-title"><i class="fa-solid fa-toolbox"></i>Tools</h3>
+      <h3 class="skill-title"><i class="fa-solid fa-toolbox"></i><span data-i18n="skills.cat_tools">Tools</span></h3>
       <div class="skills-container">
         <div class="skill"><div class="skill-header"><span><img src="img/github-icon-2.svg" alt="icone" class="skill-icon">GitHub</span><span class="level">Lvl 7</span></div><div class="xp-bar"><div class="xp-progress" style="width:70%"></div></div></div>
         <div class="skill"><div class="skill-header"><span><img src="img/antigravity.webp" alt="icone" class="skill-icon">Antigravity</span><span class="level">Lvl 8</span></div><div class="xp-bar"><div class="xp-progress" style="width:80%"></div></div></div>
@@ -370,9 +357,8 @@
       </div>
     </div>
 
-    <!-- Engenharia de Software -->
     <div class="habilidade-card">
-      <h3 class="skill-title"><i class="fa-solid fa-database"></i> Databases</h3>
+      <h3 class="skill-title"><i class="fa-solid fa-database"></i><span data-i18n="skills.cat_databases">Databases</span></h3>
       <div class="skills-container">
         <div class="skill"><div class="skill-header"><span><img src="img/postgresql.svg" alt="icone" class="skill-icon">Postgre</span><span class="level">Lvl 6</span></div><div class="xp-bar"><div class="xp-progress" style="width:60%"></div></div></div>
         <div class="skill"><div class="skill-header"><span><img src="img/microsoftsqlserver-svgrepo-com.svg" alt="icone" class="skill-icon skill-icon-black" style="width: 35px;height: 35px;">Microsoft SQL Server</span><span class="level">Lvl 6</span></div><div class="xp-bar"><div class="xp-progress" style="width:60%"></div></div></div>
@@ -383,9 +369,8 @@
       </div>
     </div>
 
-    <!-- Eletrônica -->
     <div class="habilidade-card">
-      <h3 class="skill-title"><i class="fa-solid fa-shield-halved"></i> Security & Integrity</h3>
+      <h3 class="skill-title"><i class="fa-solid fa-shield-halved"></i><span data-i18n="skills.cat_security">Security & Integrity</span></h3>
       <div class="skills-container">
         <div class="skill"><div class="skill-header"><span><img src="img/jwt-3.svg" alt="icone" class="skill-icon">JWT</span><span class="level">Lvl 6</span></div><div class="xp-bar"><div class="xp-progress" style="width:60%"></div></div></div>
         <div class="skill"><div class="skill-header"><span><i class="fa-solid fa-hashtag"></i>CRC32</span><span class="level">Lvl 9</span></div><div class="xp-bar"><div class="xp-progress" style="width:90%"></div></div></div>
@@ -395,9 +380,8 @@
       </div>
     </div>
 
-    <!-- Engenharia de Software -->
     <div class="habilidade-card">
-      <h3 class="skill-title"><i class="fa-solid fa-brain"></i>AI & DeepLearning</h3>
+      <h3 class="skill-title"><i class="fa-solid fa-brain"></i><span data-i18n="skills.cat_ai">AI & DeepLearning</span></h3>
       <div class="skills-container">
         <div class="skill"><div class="skill-header"><span><img src="img/huggingface-2.svg" alt="icone" class="skill-icon">HuggingFace</span><span class="level">Lvl 8</span></div><div class="xp-bar"><div class="xp-progress" style="width:80%"></div></div></div>
         <div class="skill"><div class="skill-header"><span><img src="img/colab.webp" alt="icone" class="skill-icon">Colab</span><span class="level">Lvl 5</span></div><div class="xp-bar"><div class="xp-progress" style="width:50%"></div></div></div>
@@ -418,68 +402,66 @@
         <div class="skill"><div class="skill-header"><span><img src="img/perplexity-color.svg" alt="icone" class="skill-icon">Perplexity</span><span class="level">Lvl 8</span></div><div class="xp-bar"><div class="xp-progress" style="width:80%"></div></div></div>
       </div>
     </div>
-<!-- Engenharia de Software -->
+    
     <div class="habilidade-card">
-      <h3 class="skill-title"><i class="fa-solid fa-microchip"></i> Electronics</h3>
+      <h3 class="skill-title"><i class="fa-solid fa-microchip"></i><span data-i18n="skills.cat_electronics">Electronics</span></h3>
       <div class="skills-container">
-        <div class="skill"><div class="skill-header"><span><img src="img/microcontroller.svg" alt="icone" class="skill-icon skill-icon-white">Microcontrollers</span><span class="level">Lvl 8</span></div><div class="xp-bar"><div class="xp-progress" style="width:80%"></div></div></div>
-        <div class="skill"><div class="skill-header"><span><img src="img/component.svg" alt="icone" class="skill-icon skill-icon-white" style="width: 35px;height: 35px;">Resistor, Capacitor, Diode</span><span class="level">Lvl 10</span></div><div class="xp-bar"><div class="xp-progress" style="width:100%"></div></div></div>
-        <div class="skill"><div class="skill-header"><span><img src="img/xfce-sensors-svgrepo-com.svg" alt="icone" class="skill-icon skill-icon-black" style="width: 35px;height: 35px;">Sensors {light, temperature, pressure, humidity, distance, ...}</span><span class="level">Lvl 10</span></div><div class="xp-bar"><div class="xp-progress" style="width:100%"></div></div></div>
-        <div class="skill"><div class="skill-header"><span><i class="fa-solid fa-gears"></i>Actuators {open valve, turn motor, activate load}</span><span class="level">Lvl 8</span></div><div class="xp-bar"><div class="xp-progress" style="width:80%"></div></div></div>
-        <div class="skill"><div class="skill-header"><span><img src="img/Transistor.svg" alt="icone" class="skill-icon skill-icon-black">Transistor</span><span class="level">Lvl 8</span></div><div class="xp-bar"><div class="xp-progress" style="width:80%"></div></div></div>
-        <div class="skill"><div class="skill-header"><span><img src="img/integrated-circuit-svgrepo-com.svg" alt="icone" class="skill-icon skill-icon-black" style="width: 35px;height: 35px;">Integrated Circuits</span><span class="level">Lvl 8</span></div><div class="xp-bar"><div class="xp-progress" style="width:80%"></div></div></div>
-        <div class="skill"><div class="skill-header"><span><img src="img/Three_PWM_types.svg.png" alt="icone" class="skill-icon skill-icon-black">PWM/PPM Signal Modulation</span><span class="level">Lvl 8</span></div><div class="xp-bar"><div class="xp-progress" style="width:80%"></div></div></div>
-        <div class="skill"><div class="skill-header"><span><img src="img/amplifier-svgrepo-com.svg" alt="icone" class="skill-icon skill-icon-black">Amplifier</span><span class="level">Lvl 6</span></div><div class="xp-bar"><div class="xp-progress" style="width:60%"></div></div></div>
-        <div class="skill"><div class="skill-header"><span><img src="img/Current_Source.svg" alt="icone" class="skill-icon skill-icon-black" style="width: 35px;height: 35px;">Current/Voltage Sources</span><span class="level">Lvl 6</span></div><div class="xp-bar"><div class="xp-progress" style="width:60%"></div></div></div>
-        <div class="skill"><div class="skill-header"><span><img src="img/logic-gate-xor-svgrepo-com.svg" alt="icone" class="skill-icon skill-icon-black" style="width: 35px;height: 35px;">Logic Gates {AND, OR, NOT...}</span><span class="level">Lvl 9</span></div><div class="xp-bar"><div class="xp-progress" style="width:90%"></div></div></div>
-        <div class="skill"><div class="skill-header"><span><img src="img/combinationalsystems.svg" alt="icone" class="skill-icon skill-icon-black" style="width: 35px;height: 35px;">Combinational Systems {Adder, Mux, Decoder, Encoder, ...}</span><span class="level">Lvl 8</span></div><div class="xp-bar"><div class="xp-progress" style="width:80%"></div></div></div>
-        <div class="skill"><div class="skill-header"><span><i class="fa-solid fa-diagram-next skill-icon"></i>Sequential Systems {Flip-Flops, Registers, Counters, ...}</span><span class="level">Lvl 9</span></div><div class="xp-bar"><div class="xp-progress" style="width:90%"></div></div></div>
-        <div class="skill"><div class="skill-header"><span><i class="fa-solid fa-sliders skill-icon"></i>PID Control</span><span class="level">Lvl 5</span></div><div class="xp-bar"><div class="xp-progress" style="width:50%"></div></div></div>
-        <div class="skill"><div class="skill-header"><span><i class="fa-solid fa-bolt skill-icon"></i>Power Drivers {SCR, TRIAC, DIAC, Optocouplers}</span><span class="level">Lvl 10</span></div><div class="xp-bar"><div class="xp-progress" style="width:100%"></div></div></div>
-        <div class="skill"><div class="skill-header"><span><img src="img/transformer-svgrepo-com.svg" alt="icone" class="skill-icon skill-icon-black" style="width: 35px;height: 35px;">Transformers</span><span class="level">Lvl 4</span></div><div class="xp-bar"><div class="xp-progress" style="width:40%"></div></div></div>
-        <div class="skill"><div class="skill-header"><span><img src="img/fuzzy.png" alt="icone" class="skill-icon" style="width: 35px;height: 35px;">Fuzzy Logic</span><span class="level">Lvl 8</span></div><div class="xp-bar"><div class="xp-progress" style="width:80%"></div></div></div>
-        <div class="skill"><div class="skill-header"><span><img src="img/internet-of-things.png" alt="icone" class="skill-icon skill-icon-black" style="width: 35px;height: 35px;">IoT</span><span class="level">Lvl 7</span></div><div class="xp-bar"><div class="xp-progress" style="width:70%"></div></div></div>
+        <div class="skill"><div class="skill-header"><span><img src="img/microcontroller.svg" alt="icone" class="skill-icon skill-icon-white"> <span data-i18n="skills.elec_micro">Microcontrollers</span></span><span class="level">Lvl 8</span></div><div class="xp-bar"><div class="xp-progress" style="width:80%"></div></div></div>
+        <div class="skill"><div class="skill-header"><span><img src="img/component.svg" alt="icone" class="skill-icon skill-icon-white" style="width: 35px;height: 35px;"> <span data-i18n="skills.elec_components">Resistor, Capacitor, Diode</span></span><span class="level">Lvl 10</span></div><div class="xp-bar"><div class="xp-progress" style="width:100%"></div></div></div>
+        <div class="skill"><div class="skill-header"><span><img src="img/xfce-sensors-svgrepo-com.svg" alt="icone" class="skill-icon skill-icon-black" style="width: 35px;height: 35px;"> <span data-i18n="skills.elec_sensors">Sensors {light, temperature, pressure, humidity, distance, ...}</span></span><span class="level">Lvl 10</span></div><div class="xp-bar"><div class="xp-progress" style="width:100%"></div></div></div>
+        <div class="skill"><div class="skill-header"><span><i class="fa-solid fa-gears"></i> <span data-i18n="skills.elec_actuators">Actuators {open valve, turn motor, activate load}</span></span><span class="level">Lvl 8</span></div><div class="xp-bar"><div class="xp-progress" style="width:80%"></div></div></div>
+        <div class="skill"><div class="skill-header"><span><img src="img/Transistor.svg" alt="icone" class="skill-icon skill-icon-black"> <span data-i18n="skills.elec_transistor">Transistor</span></span><span class="level">Lvl 8</span></div><div class="xp-bar"><div class="xp-progress" style="width:80%"></div></div></div>
+        <div class="skill"><div class="skill-header"><span><img src="img/integrated-circuit-svgrepo-com.svg" alt="icone" class="skill-icon skill-icon-black" style="width: 35px;height: 35px;"> <span data-i18n="skills.elec_ic">Integrated Circuits</span></span><span class="level">Lvl 8</span></div><div class="xp-bar"><div class="xp-progress" style="width:80%"></div></div></div>
+        <div class="skill"><div class="skill-header"><span><img src="img/Three_PWM_types.svg.png" alt="icone" class="skill-icon skill-icon-black"> <span data-i18n="skills.elec_pwm">PWM/PPM Signal Modulation</span></span><span class="level">Lvl 8</span></div><div class="xp-bar"><div class="xp-progress" style="width:80%"></div></div></div>
+        <div class="skill"><div class="skill-header"><span><img src="img/amplifier-svgrepo-com.svg" alt="icone" class="skill-icon skill-icon-black"> <span data-i18n="skills.elec_amp">Amplifier</span></span><span class="level">Lvl 6</span></div><div class="xp-bar"><div class="xp-progress" style="width:60%"></div></div></div>
+        <div class="skill"><div class="skill-header"><span><img src="img/Current_Source.svg" alt="icone" class="skill-icon skill-icon-black" style="width: 35px;height: 35px;"> <span data-i18n="skills.elec_sources">Current/Voltage Sources</span></span><span class="level">Lvl 6</span></div><div class="xp-bar"><div class="xp-progress" style="width:60%"></div></div></div>
+        <div class="skill"><div class="skill-header"><span><img src="img/logic-gate-xor-svgrepo-com.svg" alt="icone" class="skill-icon skill-icon-black" style="width: 35px;height: 35px;"> <span data-i18n="skills.elec_logic">Logic Gates {AND, OR, NOT...}</span></span><span class="level">Lvl 9</span></div><div class="xp-bar"><div class="xp-progress" style="width:90%"></div></div></div>
+        <div class="skill"><div class="skill-header"><span><img src="img/combinationalsystems.svg" alt="icone" class="skill-icon skill-icon-black" style="width: 35px;height: 35px;"> <span data-i18n="skills.elec_comb">Combinational Systems {Adder, Mux, Decoder, Encoder, ...}</span></span><span class="level">Lvl 8</span></div><div class="xp-bar"><div class="xp-progress" style="width:80%"></div></div></div>
+        <div class="skill"><div class="skill-header"><span><i class="fa-solid fa-diagram-next skill-icon"></i> <span data-i18n="skills.elec_seq">Sequential Systems {Flip-Flops, Registers, Counters, ...}</span></span><span class="level">Lvl 9</span></div><div class="xp-bar"><div class="xp-progress" style="width:90%"></div></div></div>
+        <div class="skill"><div class="skill-header"><span><i class="fa-solid fa-sliders skill-icon"></i> <span data-i18n="skills.elec_pid">PID Control</span></span><span class="level">Lvl 5</span></div><div class="xp-bar"><div class="xp-progress" style="width:50%"></div></div></div>
+        <div class="skill"><div class="skill-header"><span><i class="fa-solid fa-bolt skill-icon"></i> <span data-i18n="skills.elec_power">Power Drivers {SCR, TRIAC, DIAC, Optocouplers}</span></span><span class="level">Lvl 10</span></div><div class="xp-bar"><div class="xp-progress" style="width:100%"></div></div></div>
+        <div class="skill"><div class="skill-header"><span><img src="img/transformer-svgrepo-com.svg" alt="icone" class="skill-icon skill-icon-black" style="width: 35px;height: 35px;"> <span data-i18n="skills.elec_trafo">Transformers</span></span><span class="level">Lvl 4</span></div><div class="xp-bar"><div class="xp-progress" style="width:40%"></div></div></div>
+        <div class="skill"><div class="skill-header"><span><img src="img/fuzzy.png" alt="icone" class="skill-icon" style="width: 35px;height: 35px;"> <span data-i18n="skills.elec_fuzzy">Fuzzy Logic</span></span><span class="level">Lvl 8</span></div><div class="xp-bar"><div class="xp-progress" style="width:80%"></div></div></div>
+        <div class="skill"><div class="skill-header"><span><img src="img/internet-of-things.png" alt="icone" class="skill-icon skill-icon-black" style="width: 35px;height: 35px;"> <span data-i18n="skills.elec_iot">IoT</span></span><span class="level">Lvl 7</span></div><div class="xp-bar"><div class="xp-progress" style="width:70%"></div></div></div>
       </div>
     </div>
 
     <div class="habilidade-card">
-      <h3 class="skill-title"><i class="fa-solid fa-users skill-icon"></i>Softskills</h3>
+      <h3 class="skill-title"><i class="fa-solid fa-users skill-icon"></i><span data-i18n="skills.cat_softskills">Softskills</span></h3>
       <div class="skills-container">
-        <div class="skill"><div class="skill-header"><span><i class="fa-solid fa-comments skill-icon"></i>Communication</span><span class="level">Lvl 8</span></div><div class="xp-bar"><div class="xp-progress" style="width:80%"></div></div></div>
-        <div class="skill"><div class="skill-header"><span><i class="fa-solid fa-users skill-icon"></i>Teamwork</span><span class="level">Lvl 7</span></div><div class="xp-bar"><div class="xp-progress" style="width:70%"></div></div></div>
-        <div class="skill"><div class="skill-header"><span><i class="fa-solid fa-brain skill-icon"></i>Logical Reasoning</span><span class="level">Lvl 10</span></div><div class="xp-bar"><div class="xp-progress" style="width:100%"></div></div></div>
-        <div class="skill"><div class="skill-header"><span><i class="fa-solid fa-gears skill-icon"></i>Attention to details</span><span class="level">Lvl 8</span></div><div class="xp-bar"><div class="xp-progress" style="width:80%"></div></div></div>
-        <div class="skill"><div class="skill-header"><span><i class="fa-solid fa-book-open skill-icon"></i>Continuous Learning</span><span class="level">Lvl 8</span></div><div class="xp-bar"><div class="xp-progress" style="width:80%"></div></div></div>
-        <div class="skill"><div class="skill-header"><span><i class="fa-solid fa-heart-pulse skill-icon"></i>Resilience / dealing with pressure</span><span class="level">Lvl 9</span></div><div class="xp-bar"><div class="xp-progress" style="width:90%"></div></div></div>
-        <div class="skill"><div class="skill-header"><span><i class="fa-solid fa-bolt skill-icon"></i>Proactivity/Autonomy</span><span class="level">Lvl 10</span></div><div class="xp-bar"><div class="xp-progress" style="width:100%"></div></div></div>
-        <div class="skill"><div class="skill-header"><span><i class="fa-solid fa-forward-fast skill-icon"></i>Agility and efficiency</span><span class="level">Lvl 8</span></div><div class="xp-bar"><div class="xp-progress" style="width:80%"></div></div></div>
-        <div class="skill"><div class="skill-header"><span><i class="fa-solid fa-lightbulb skill-icon"></i>Creative thinking/process innovation</span><span class="level">Lvl 10</span></div><div class="xp-bar"><div class="xp-progress" style="width:100%"></div></div></div>
-        <div class="skill"><div class="skill-header"><span><i class="fa-solid fa-list-check skill-icon"></i>Planning and Organization</span><span class="level">Lvl 8</span></div><div class="xp-bar"><div class="xp-progress" style="width:80%"></div></div></div>
-        <div class="skill"><div class="skill-header"><span><i class="fa-solid fa-star skill-icon"></i>Search for excellence</span><span class="level">Lvl 10</span></div><div class="xp-bar"><div class="xp-progress" style="width:100%"></div></div></div>
-        <div class="skill"><div class="skill-header"><span><i class="fa-solid fa-diagram-next skill-icon"></i>Critical thinking</span><span class="level">Lvl 9</span></div><div class="xp-bar"><div class="xp-progress" style="width:90%"></div></div></div>
-        <div class="skill"><div class="skill-header"><span><i class="fa-solid fa-comments skill-icon"></i>Active listening</span><span class="level">Lvl 6</span></div><div class="xp-bar"><div class="xp-progress" style="width:60%"></div></div></div>
-        <div class="skill"><div class="skill-header"><span><i class="fa-solid fa-handshake skill-icon"></i>Empathy</span><span class="level">Lvl 9</span></div><div class="xp-bar"><div class="xp-progress" style="width:90%"></div></div></div>
-        <div class="skill"><div class="skill-header"><span><i class="fa-solid fa-user-pen skill-icon"></i>Self-criticism</span><span class="level">Lvl 10</span></div><div class="xp-bar"><div class="xp-progress" style="width:100%"></div></div></div>
-        <div class="skill"><div class="skill-header"><span><i class="fa-solid fa-circle-check skill-icon"></i>Open to feedback and constructive criticism</span><span class="level">Lvl 10</span></div><div class="xp-bar"><div class="xp-progress" style="width:100%"></div></div></div>
-        <div class="skill"><div class="skill-header"><span><i class="fa-solid fa-gears skill-icon"></i>Search for optimization</span><span class="level">Lvl 9</span></div><div class="xp-bar"><div class="xp-progress" style="width:90%"></div></div></div>
+        <div class="skill"><div class="skill-header"><span><i class="fa-solid fa-comments skill-icon"></i> <span data-i18n="skills.soft_comm">Communication</span></span><span class="level">Lvl 8</span></div><div class="xp-bar"><div class="xp-progress" style="width:80%"></div></div></div>
+        <div class="skill"><div class="skill-header"><span><i class="fa-solid fa-users skill-icon"></i> <span data-i18n="skills.soft_team">Teamwork</span></span><span class="level">Lvl 7</span></div><div class="xp-bar"><div class="xp-progress" style="width:70%"></div></div></div>
+        <div class="skill"><div class="skill-header"><span><i class="fa-solid fa-brain skill-icon"></i> <span data-i18n="skills.soft_logic">Logical Reasoning</span></span><span class="level">Lvl 10</span></div><div class="xp-bar"><div class="xp-progress" style="width:100%"></div></div></div>
+        <div class="skill"><div class="skill-header"><span><i class="fa-solid fa-gears skill-icon"></i> <span data-i18n="skills.soft_detail">Attention to details</span></span><span class="level">Lvl 8</span></div><div class="xp-bar"><div class="xp-progress" style="width:80%"></div></div></div>
+        <div class="skill"><div class="skill-header"><span><i class="fa-solid fa-book-open skill-icon"></i> <span data-i18n="skills.soft_learn">Continuous Learning</span></span><span class="level">Lvl 8</span></div><div class="xp-bar"><div class="xp-progress" style="width:80%"></div></div></div>
+        <div class="skill"><div class="skill-header"><span><i class="fa-solid fa-heart-pulse skill-icon"></i> <span data-i18n="skills.soft_resilience">Resilience / dealing with pressure</span></span><span class="level">Lvl 9</span></div><div class="xp-bar"><div class="xp-progress" style="width:90%"></div></div></div>
+        <div class="skill"><div class="skill-header"><span><i class="fa-solid fa-bolt skill-icon"></i> <span data-i18n="skills.soft_proactivity">Proactivity/Autonomy</span></span><span class="level">Lvl 10</span></div><div class="xp-bar"><div class="xp-progress" style="width:100%"></div></div></div>
+        <div class="skill"><div class="skill-header"><span><i class="fa-solid fa-forward-fast skill-icon"></i> <span data-i18n="skills.soft_agility">Agility and efficiency</span></span><span class="level">Lvl 8</span></div><div class="xp-bar"><div class="xp-progress" style="width:80%"></div></div></div>
+        <div class="skill"><div class="skill-header"><span><i class="fa-solid fa-lightbulb skill-icon"></i> <span data-i18n="skills.soft_creative">Creative thinking/process innovation</span></span><span class="level">Lvl 10</span></div><div class="xp-bar"><div class="xp-progress" style="width:100%"></div></div></div>
+        <div class="skill"><div class="skill-header"><span><i class="fa-solid fa-list-check skill-icon"></i> <span data-i18n="skills.soft_planning">Planning and Organization</span></span><span class="level">Lvl 8</span></div><div class="xp-bar"><div class="xp-progress" style="width:80%"></div></div></div>
+        <div class="skill"><div class="skill-header"><span><i class="fa-solid fa-star skill-icon"></i> <span data-i18n="skills.soft_excellence">Search for excellence</span></span><span class="level">Lvl 10</span></div><div class="xp-bar"><div class="xp-progress" style="width:100%"></div></div></div>
+        <div class="skill"><div class="skill-header"><span><i class="fa-solid fa-diagram-next skill-icon"></i> <span data-i18n="skills.soft_critical">Critical thinking</span></span><span class="level">Lvl 9</span></div><div class="xp-bar"><div class="xp-progress" style="width:90%"></div></div></div>
+        <div class="skill"><div class="skill-header"><span><i class="fa-solid fa-comments skill-icon"></i> <span data-i18n="skills.soft_listening">Active listening</span></span><span class="level">Lvl 6</span></div><div class="xp-bar"><div class="xp-progress" style="width:60%"></div></div></div>
+        <div class="skill"><div class="skill-header"><span><i class="fa-solid fa-handshake skill-icon"></i> <span data-i18n="skills.soft_empathy">Empathy</span></span><span class="level">Lvl 9</span></div><div class="xp-bar"><div class="xp-progress" style="width:90%"></div></div></div>
+        <div class="skill"><div class="skill-header"><span><i class="fa-solid fa-user-pen skill-icon"></i> <span data-i18n="skills.soft_self">Self-criticism</span></span><span class="level">Lvl 10</span></div><div class="xp-bar"><div class="xp-progress" style="width:100%"></div></div></div>
+        <div class="skill"><div class="skill-header"><span><i class="fa-solid fa-circle-check skill-icon"></i> <span data-i18n="skills.soft_feedback">Open to feedback and constructive criticism</span></span><span class="level">Lvl 10</span></div><div class="xp-bar"><div class="xp-progress" style="width:100%"></div></div></div>
+        <div class="skill"><div class="skill-header"><span><i class="fa-solid fa-gears skill-icon"></i> <span data-i18n="skills.soft_opt">Search for optimization</span></span><span class="level">Lvl 9</span></div><div class="xp-bar"><div class="xp-progress" style="width:90%"></div></div></div>
       </div>
     </div>
 
   </div>
 </section>
 
-    <!-- Projetos -->
-  <section id="projetos" class="projetos-conteudo">
-  <h2>Projects</h2>
-  <p>Explore my projects and discover how I apply my skills in each of them.</p>
-  <!-- Áudio para hover dos projetos -->
+    <section id="projetos" class="projetos-conteudo">
+  <h2 data-i18n="projects.title">Projects</h2>
+  <p data-i18n="projects.subtitle">Explore my projects and discover how I apply my skills in each of them.</p>
   <audio id="hover-sound" src="audio/hoverprojetos.wav" preload="auto"></audio>
   <div class="projeto-card">
   <a href="https://docs.google.com/document/d/1VHP_fiuv8FyKaw4MvzUzE-ajXloyYxX6bDrlC456yps/edit?usp=sharing" target="_blank">
     <img src="img/smarttraffic.png" alt="Smart Traffic" class="projeto-img">
   </a>
   <div class="projeto-overlay">
-    <h3>Smart Traffic</h3>
+    <h3 data-i18n="projects.smart_traffic">Smart Traffic</h3>
   </div>
 </div>
 
@@ -489,19 +471,19 @@
     <img src="img/Transmissaoeletricasemfio.png" alt="Eletric Transmission" class="projeto-img">
   </a>
   <div class="projeto-overlay">
-    <h3>Wireless Electricity Transmission</h3>
+    <h3 data-i18n="projects.wireless_transmission">Wireless Electricity Transmission</h3>
   </div>
 </div>
 
 
   <div class="projeto-card">
     <img src="img/solartracker.png" alt="Solar Tracker" class="projeto-img">
-    <div class="projeto-overlay"><h3>Solar Tracker</h3></div>
+    <div class="projeto-overlay"><h3 data-i18n="projects.solar_tracker">Solar Tracker</h3></div>
   </div>
 
   <div class="projeto-card">
     <img src="img/recrutamentointeligente.png" alt="Recrutamento Inteligente" class="projeto-img">
-    <div class="projeto-overlay"><h3>Intelligent Recruitment</h3></div>
+    <div class="projeto-overlay"><h3 data-i18n="projects.intelligent_recruitment">Intelligent Recruitment</h3></div>
   </div>
 
   <div class="projeto-card">
@@ -509,7 +491,7 @@
     <img src="img/softstarter.png" alt="Softstarter" class="projeto-img">
   </a>
   <div class="projeto-overlay">
-    <h3>Three-Phase Softstarter</h3>
+    <h3 data-i18n="projects.softstarter">Three-Phase Softstarter</h3>
   </div>
 </div>
 
@@ -519,17 +501,17 @@
     <img src="img/podcastia.png" alt="Podcastia" class="projeto-img">
   </a>
   <div class="projeto-overlay">
-    <h3>A.I. Podcast</h3>
+    <h3 data-i18n="projects.ai_podcast">A.I. Podcast</h3>
   </div>
 </div>
 
   <div class="projeto-card">
     <img src="img/pulsar.png" alt="Solar Tracker" class="projeto-img">
-    <div class="projeto-overlay"><h3>Pulsar: Document Everything</h3></div>
+    <div class="projeto-overlay"><h3 data-i18n="projects.pulsar">Pulsar: Document Everything</h3></div>
   </div>
   <div class="projeto-card">
     <img src="img/AI-AGENT.webp" alt="Solar Tracker" class="projeto-img">
-    <div class="projeto-overlay"><h3>AI Agent-Database-WhatsAPI-Integrated</h3></div>
+    <div class="projeto-overlay"><h3 data-i18n="projects.ai_agent">AI Agent-Database-WhatsAPI-Integrated</h3></div>
   </div>
 
   <div class="projeto-card">
@@ -537,7 +519,7 @@
     <img src="img/Discord-Account-Deleter.webp" alt="Discord-Account-Deleter" class="projeto-img">
   </a>
   <div class="projeto-overlay">
-    <h3>Discord-Account-Deleter</h3>
+    <h3 data-i18n="projects.discord_deleter">Discord-Account-Deleter</h3>
   </div>
 </div>
 
@@ -546,7 +528,7 @@
     <img src="img/Discord-Message-Deleter.webp" alt="Discord Message Deleter" class="projeto-img">
   </a>
   <div class="projeto-overlay">
-    <h3>Discord Message Deleter</h3>
+    <h3 data-i18n="projects.discord_msg_deleter">Discord Message Deleter</h3>
   </div>
 </div>
 
@@ -555,7 +537,7 @@
     <img src="img/Announce_Bot.webp" alt="Announce_Bot" class="projeto-img">
   </a>
   <div class="projeto-overlay">
-    <h3>Announce Bot</h3>
+    <h3 data-i18n="projects.announce_bot">Announce Bot</h3>
   </div>
 </div>
 
@@ -564,19 +546,15 @@
     <img src="img/Discord_Username_SearchByID.webp" alt="Discord_Username_SearchByID" class="projeto-img">
   </a>
   <div class="projeto-overlay">
-    <h4>Discord_Username_SearchByID</h4>
+    <h4 data-i18n="projects.discord_search">Discord_Username_SearchByID</h4>
   </div>
 </div>
 
 </section>
 
-  <!-- Experiência -->
-<section id="experiencia">
-  <h2>Experience</h2>
-  <div class="cards-container owl-carousel owl-theme"> <!-- aqui adicionamos owl-carousel -->
-
-    <!-- Card 1 - Pramel -->
-<div class="card">
+  <section id="experiencia">
+  <h2 data-i18n="experience.title">Experience</h2>
+  <div class="cards-container owl-carousel owl-theme"> <div class="card">
   <div class="card-inner">
     <div class="card-front">
       <img src="img/frente-light.png" alt="Frente" class="frente">
@@ -588,9 +566,9 @@
     <div class="card-back">
       <div class="card-back-bg"></div>
       <div class="card-back-content">
-        <h3>Internship – Firmware Developer</h3>
-        <p>Duration: January/2022 to August/2022</p>
-        <p>Worked on firmware development and programming of <strong>PIC, ESP32, and ARM</strong> microcontrollers, creation of electronic board layouts, and technical support in industrial projects. I was responsible for developing complete solutions, from current meters to machine automation systems, receiving recognition for delivering complex projects with quality and speed.</p>
+        <h3 data-i18n="experience.pramel.role">Internship – Firmware Developer</h3>
+        <p data-i18n="experience.pramel.duration">Duration: January/2022 to August/2022</p>
+        <p data-i18n="experience.pramel.desc">Worked on firmware development and programming of <strong>PIC, ESP32, and ARM</strong> microcontrollers, creation of electronic board layouts, and technical support in industrial projects. I was responsible for developing complete solutions, from current meters to machine automation systems, receiving recognition for delivering complex projects with quality and speed.</p>
       </div>
     </div>
   </div>
@@ -598,7 +576,6 @@
 
 
 
-    <!-- Card 2 - Scher -->
     <div class="card">
       <div class="card-inner">
         <div class="card-front">
@@ -611,16 +588,15 @@
         <div class="card-back">
           <div class="card-back-bg"></div>
           <div class="card-back-content">
-            <h3>Production of Electronic Products</h3>
-            <p>Duration: August/2022 to September/2024</p>
-            <p>Worked on the production line and testing of electronic products.</p>
-            <p>Development of new products</p>
+            <h3 data-i18n="experience.scher.role">Production of Electronic Products</h3>
+            <p data-i18n="experience.scher.duration">Duration: August/2022 to September/2024</p>
+            <p data-i18n="experience.scher.desc_1">Worked on the production line and testing of electronic products.</p>
+            <p data-i18n="experience.scher.desc_2">Development of new products</p>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Card 3 - Integrum -->
     <div class="card">
       <div class="card-inner">
         <div class="card-front">
@@ -633,14 +609,16 @@
         <div class="card-back">
           <div class="card-back-bg"></div>
           <div class="card-back-content">
-            <h3>Support / IT / Junior Programmer</h3>
-            <p>Duration: September/2024 until May/2025</p>
+            <h3 data-i18n="experience.integrum.role">Support / IT / Junior Programmer</h3>
+            <p data-i18n="experience.integrum.duration">Duration: September/2024 until May/2025</p>
+            <div data-i18n="experience.integrum.desc">
             <p>Responsible for IT support, development of internal solutions, and system maintenance.</p>
             <p>Consists of attending to client demands, automating company support, creating, developing, and applying improvements to the ERP system</p>
             <p>Technologies used: Delphi Language, Firebird Database, CICD Deploy with Jenkins, PasDoc, DUnitX (unit tests) + TestComplete (E2E)</p>
             <p>Creation of LLM chatbot with OpenAI API trained with the documentation;</p>
             <p>Creation of a site for posting guides and manuals for client access with react/javascript/node.js;</p>
             <p>Automation of documentation with Pasdoc/Jenkins, and manual generation with HelpNDoc;</p>
+            </div>
           </div>
         </div>
       </div>
@@ -650,50 +628,47 @@
 </section>
 
 
-<!-- We Need to Talk -->
 <section id="Weneedtotalk">
-  <h2>We Need to Talk</h2>
+  <h2 data-i18n="talk.title">We Need to Talk</h2>
 
-  <p>
+  <p data-i18n="talk.p1">
     Often, I see companies rejecting great professionals simply due to a lack of “formal experience,” as if years of signed employment were the only measure of competence. This frustrates me — because I know, and have seen in practice, people with many years in the market delivering less, dedicating little, and working carelessly, while others, determined and committed, are left out just for not fitting this superficial mold.
   </p>
 
-  <p>
+  <p data-i18n="talk.p2">
     I am not someone who settles for doing just the minimum. Before delivering any code, I review, learn, improve, and polish, until I am sure it is solid, clean, and sustainable. I do not see this as empty perfectionism, but as respect: respect for the client, the team, and my own work. 
   </p>
 
-  <p>
+  <p data-i18n="talk.p3">
     I have been rejected in interviews for being too honest, for admitting that I still have a lot to learn. But I say without fear: we all do. No one knows everything, and those who think they have reached the top have just stopped evolving. I, on the contrary, live in search of learning. This is my incessant flame. My dreamy passion for technology makes me want not just to write code, but to expand the limits of what it can do, take technology to new levels, transform ideas into intelligent and useful realities.
   </p>
 
-  <p>
+  <p data-i18n="talk.p4">
     If you are looking for someone who will not just “meet the deadline,” but who will fight to deliver quality, intelligence, and evolution in every project, then we need to talk.
   </p>
-  <p>
+  <p data-i18n="talk.p5">
     The button below will schedule the interview on my Google Calendar and I will be notified.
   </p>
 
-  <!-- Botão principal -->
   <a id="agendar-btn" 
-     class="btn primary" 
-     style="display: block; width: fit-content; margin: 2rem auto; text-align: center;">
-     Schedule an Interview Time Here
+      class="btn primary" 
+      style="display: block; width: fit-content; margin: 2rem auto; text-align: center;"
+      data-i18n="talk.btn_schedule">
+      Schedule an Interview Time Here
   </a>
 
-  <!-- Formulário de agendamento (escondido inicialmente) -->
   <div id="form-agendamento" style="display:none; margin-top:2rem; text-align:center;">
-    <label for="data">Choose the date:</label><br>
+    <label for="data" data-i18n="talk.form.date">Choose the date:</label><br>
     <input type="date" id="data" required><br><br>
 
-    <label for="hora">Choose the time:</label><br>
+    <label for="hora" data-i18n="talk.form.time">Choose the time:</label><br>
     <input type="time" id="hora" required><br><br>
 
-    <label for="mensagem">Message (optional):</label><br>
-    <textarea id="mensagem" rows="3" placeholder="Leave a message..."></textarea><br><br>
+    <label for="mensagem" data-i18n="talk.form.message">Message (optional):</label><br>
+    <textarea id="mensagem" rows="3" placeholder="Leave a message..." data-i18n-placeholder="talk.form.message_placeholder"></textarea><br><br>
 
-    <button id="enviar-agendamento" class="btn primary">Confirm</button>
+    <button id="enviar-agendamento" class="btn primary" data-i18n="talk.form.confirm">Confirm</button>
 
-    <!-- Status da operação -->
     <p id="status" style="margin-top:1rem; font-weight:bold;"></p>
   </div>
 </section>
@@ -702,13 +677,10 @@
 
   <footer>
     <div class="container">
-      <p>&copy; 2025 Matheus Schumacher. All rights reserved.</p>
+      <p data-i18n="footer.rights">© 2025 Matheus Schumacher. All rights reserved.</p>
     </div>
   </footer>
 
-  <!-- Script -->
-   <!-- Google API -->
-   <!-- Biblioteca para assinar JWT -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jsrsasign/10.5.27/jsrsasign-all-min.js"></script>
   <script src="https://apis.google.com/js/api.js"></script>
   <script src="script.js"></script>
