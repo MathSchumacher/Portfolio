@@ -1909,3 +1909,25 @@ p {
     line-height: 1.5;
     margin: 0;
   }
+
+/* ===== Scroll Animations ===== */
+.hidden-section {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.hidden-section.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== Enhanced Hover Effects (Projects) ===== */
+.projeto-card {
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.27), box-shadow 0.4s ease;
+}
+
+.projeto-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}

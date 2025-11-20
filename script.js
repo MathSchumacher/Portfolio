@@ -839,3 +839,27 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.1 });
 sections.forEach(s => observer.observe(s));
+
+// ==========================
+// Scroll Reveal Logic (Re-applied)
+// ==========================
+document.addEventListener('DOMContentLoaded', () => {
+  const observerOptions = {
+    threshold: 0.15,
+    rootMargin: "0px 0px -50px 0px"
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('show');
+        observer.unobserve(entry.target); // Only animate once
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('section').forEach(section => {
+    section.classList.add('hidden-section');
+    observer.observe(section);
+  });
+});
