@@ -1809,11 +1809,11 @@ header {
   .translate-btn {
     width: 40px !important;
     height: 40px !important;
-  margin-bottom: 1.5rem;
-  z-index: 2; /* base, menor que a sugestão */
+  }
 }
-
-/* Input de pesquisa */
+p {
+    text-indent: 1.25cm;
+    text-align: justify;
 #skills-search {
   padding: 0.6rem 1rem;
   border-radius: 9999px;
