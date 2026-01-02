@@ -136,7 +136,10 @@
         "discord_deleter": "Eliminador de Cuentas Discord",
         "discord_msg_deleter": "Eliminador de Mensajes Discord",
         "announce_bot": "Bot de Anuncios",
-        "discord_search": "Búsqueda de Usuario Discord por ID"
+        "discord_search": "Búsqueda de Usuario Discord por ID",
+        "ativarecargas": "ativarecargas.com",
+        "unitplay": "UniT Play",
+        "axio": "AXIO"
     },
     "experience": {
         "title": "Experiencia",

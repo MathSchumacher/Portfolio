@@ -136,7 +136,10 @@
         "discord_deleter": "Discord-Account-Deleter",
         "discord_msg_deleter": "Discord Message Deleter",
         "announce_bot": "Announce Bot",
-        "discord_search": "Discord_Username_SearchByID"
+        "discord_search": "Discord_Username_SearchByID",
+        "ativarecargas": "ativarecargas.com",
+        "unitplay": "UniT Play",
+        "axio": "AXIO"
     },
     "experience": {
         "title": "Experience",
