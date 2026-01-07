@@ -3110,7 +3110,14 @@ p {
 }
 
 /* ===== Dropdown & Language Menu Hover Fixes ===== */
-.dropdown-content a {
+.dropdown-content, 
+header .nav-actions .dropdown .dropdown-content {
+  pointer-events: auto !important;
+  z-index: 100001 !important; /* Force above header */
+}
+
+.dropdown-content a, 
+header .nav-actions .dropdown .dropdown-content a {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -3119,6 +3126,43 @@ p {
   transition: all 0.2s ease;
   border-radius: 8px;
   text-decoration: none;
+  cursor: pointer !important;
+  position: relative;
+  z-index: 100002 !important;
+}
+
+/* Fix "Line" bug on header buttons */
+header .nav-actions a,
+header .translate-btn,
+header #themeToggle,
+.dropdown-content a {
+  text-decoration: none !important;
+  border: none !important;
+  outline: none !important;
+}
+
+/* Ensure no pseudo-element lines */
+header .translate-btn::after,
+header #themeToggle::after,
+.nav-actions::after,
+.nav-actions::before {
+  content: none !important;
+  display: none !important;
+}
+
+/* NUCLEAR RESET FOR STRAY HEADER LINES */
+header a, 
+header button,
+header .dropdown,
+.nav-actions {
+  text-decoration: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Re-assert dropdown interactivity */
+.dropdown-content {
+  pointer-events: auto !important;
 }
 
 .dropdown-content a:hover {

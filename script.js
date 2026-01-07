@@ -87,13 +87,14 @@ document.addEventListener('DOMContentLoaded', () => {
         // Add flag icon if desired, e.g.: <img src="img/${langCode}.png" class="icon">
         link.innerHTML = supportedLanguages[langCode]; 
         
-        link.addEventListener('click', (e) => {
+        // Nuclear option: Direct onclick to avoid listener conflicts
+        link.onclick = (e) => {
           e.preventDefault();
+          e.stopPropagation();
           updateLanguage(langCode);
-          
-          // Close dropdown after selection
           optionsContainer.classList.remove('show');
-        });
+          return false;
+        };
 
         optionsContainer.appendChild(link);
       }
@@ -186,6 +187,15 @@ document.addEventListener('DOMContentLoaded', () => {
   // Owl Carousel: Trajectory, Skills and Experience
   // =============================================
   if (window.jQuery) {
+    // Capture skill cards globally before Owl Carousel modifies DOM
+    window.allSkillCards = [];
+    $('#habilidades-carousel .habilidade-card').each(function() {
+      window.allSkillCards.push({
+        html: $(this).prop('outerHTML'),
+        element: $(this).clone(true)
+      });
+    });
+
     $('#trajetoria-carousel').owlCarousel({
       items: 1,
       loop: true,
@@ -612,17 +622,22 @@ document.addEventListener('DOMContentLoaded', () => {
     let activeFilters = [];
     let originalCards = []; 
 
-    setTimeout(function() {
-      const carousel = $('#habilidades-carousel');
-      if (carousel.hasClass('owl-loaded')) {
-        carousel.find('.owl-item:not(.cloned) .habilidade-card').each(function() {
-          originalCards.push({
-            html: $(this).prop('outerHTML'),
-            element: $(this).clone(true)
+    // Initialize originalCards from global capture
+    if (window.allSkillCards && window.allSkillCards.length > 0) {
+      originalCards = window.allSkillCards;
+    } else {
+      setTimeout(function() {
+        const carousel = $('#habilidades-carousel');
+        if (carousel.hasClass('owl-loaded')) {
+          carousel.find('.owl-item:not(.cloned) .habilidade-card').each(function() {
+            originalCards.push({
+              html: $(this).prop('outerHTML'),
+              element: $(this).clone(true)
+            });
           });
-        });
-      }
-    }, 500);
+        }
+      }, 500);
+    }
 
     function normalizeText(text) {
       return text.toLowerCase().replace(/[^a-z0-9]/g, '');
