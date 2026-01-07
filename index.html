@@ -14,6 +14,11 @@
 
   <link rel="icon" href="/assets/favicon.ico" />
 
+  <!-- Google Fonts: Modern Premium Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="styles.css" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -25,6 +30,11 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=translate" />
 </head>
 <body>
+  <!-- Animated Background Orbs -->
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+  
   <div id="mouse-glow"></div>
   <a class="skip-link" href="#conteudo" data-i18n="nav.skip">Skip to content</a>
 
@@ -72,7 +82,82 @@
   <div class="blob blob-3"></div>
 </div>
       <h1 class="start-title" data-i18n="hero.title">Full Stack Developer</h1>
-      <p class="muted" data-i18n="hero.subtitle">Full Stack Dev. | DevOps | AI & DeepLearning | IoT | Microcontrollers/Industrial Automation</p>
+      <div class="hero-tags">
+        <div class="hero-tag-wrapper">
+          <span class="hero-tag" data-i18n="hero.tag1">Full Stack Dev</span>
+          <div class="hero-tag-tooltip">
+            <h4 data-i18n="hero.tag1_title">Full Stack Development</h4>
+            <ul>
+              <li data-i18n="hero.tag1_item1">🌐 Websites & Landing Pages</li>
+              <li data-i18n="hero.tag1_item2">☁️ SaaS Platforms</li>
+              <li data-i18n="hero.tag1_item3">📱 Android & iOS Apps</li>
+              <li data-i18n="hero.tag1_item4">🖥️ Desktop Applications</li>
+              <li data-i18n="hero.tag1_item5">🔌 REST & GraphQL APIs</li>
+              <li data-i18n="hero.tag1_item6">🛒 E-commerce Solutions</li>
+            </ul>
+          </div>
+        </div>
+        <span class="hero-tag-divider">•</span>
+        <div class="hero-tag-wrapper">
+          <span class="hero-tag" data-i18n="hero.tag2">DevOps</span>
+          <div class="hero-tag-tooltip">
+            <h4 data-i18n="hero.tag2_title">DevOps Engineering</h4>
+            <ul>
+              <li data-i18n="hero.tag2_item1">🔄 CI/CD Pipelines</li>
+              <li data-i18n="hero.tag2_item2">🐳 Docker & Kubernetes</li>
+              <li data-i18n="hero.tag2_item3">☁️ Cloud Infrastructure (AWS, GCP, Azure)</li>
+              <li data-i18n="hero.tag2_item4">🧪 Automated Testing</li>
+              <li data-i18n="hero.tag2_item5">📊 Monitoring & Logging</li>
+              <li data-i18n="hero.tag2_item6">🔒 Security & Compliance</li>
+            </ul>
+          </div>
+        </div>
+        <span class="hero-tag-divider">•</span>
+        <div class="hero-tag-wrapper">
+          <span class="hero-tag" data-i18n="hero.tag3">AI Engineer</span>
+          <div class="hero-tag-tooltip">
+            <h4 data-i18n="hero.tag3_title">AI Engineering</h4>
+            <ul>
+              <li data-i18n="hero.tag3_item1">🤖 AI Agents & Assistants</li>
+              <li data-i18n="hero.tag3_item2">🧠 Model Training & Fine-tuning</li>
+              <li data-i18n="hero.tag3_item3">💬 LLM Integration & RAG</li>
+              <li data-i18n="hero.tag3_item4">👁️ Computer Vision</li>
+              <li data-i18n="hero.tag3_item5">🗣️ NLP & Speech Processing</li>
+              <li data-i18n="hero.tag3_item6">📈 ML Pipelines & MLOps</li>
+            </ul>
+          </div>
+        </div>
+        <span class="hero-tag-divider">•</span>
+        <div class="hero-tag-wrapper">
+          <span class="hero-tag" data-i18n="hero.tag4">IoT</span>
+          <div class="hero-tag-tooltip">
+            <h4 data-i18n="hero.tag4_title">Internet of Things</h4>
+            <ul>
+              <li data-i18n="hero.tag4_item1">📡 Sensor Networks</li>
+              <li data-i18n="hero.tag4_item2">🏠 Smart Home Systems</li>
+              <li data-i18n="hero.tag4_item3">📲 MQTT & WebSocket Protocols</li>
+              <li data-i18n="hero.tag4_item4">⚡ ESP32 & Arduino</li>
+              <li data-i18n="hero.tag4_item5">📊 Real-time Dashboards</li>
+              <li data-i18n="hero.tag4_item6">🔗 Edge Computing</li>
+            </ul>
+          </div>
+        </div>
+        <span class="hero-tag-divider">•</span>
+        <div class="hero-tag-wrapper">
+          <span class="hero-tag" data-i18n="hero.tag5">Industrial Automation</span>
+          <div class="hero-tag-tooltip">
+            <h4 data-i18n="hero.tag5_title">Industrial Automation</h4>
+            <ul>
+              <li data-i18n="hero.tag5_item1">🏭 PLC Programming</li>
+              <li data-i18n="hero.tag5_item2">🔧 SCADA Systems</li>
+              <li data-i18n="hero.tag5_item3">🤖 Robotics Integration</li>
+              <li data-i18n="hero.tag5_item4">📋 HMI Design</li>
+              <li data-i18n="hero.tag5_item5">⚙️ Process Optimization</li>
+              <li data-i18n="hero.tag5_item6">🔌 Embedded Firmware</li>
+            </ul>
+          </div>
+        </div>
+      </div>
       <div class="actions">
         <a class="btn primary" href="#projetos" data-i18n="hero.btn_projects">View projects</a>
         <a class="btn primary" href="https://docs.google.com/document/d/12yNVqZ0a0em9PJxFvBTWx2lnKz7W7JGh2V57BGeP6OU/edit?usp=sharing" target="_blank" rel="noopener" data-i18n="hero.btn_resume">Resume</a>
@@ -483,136 +568,168 @@
   <h2 data-i18n="projects.title">Projects</h2>
   <p data-i18n="projects.subtitle">Explore my projects and discover how I apply my skills in each of them.</p>
   <audio id="hover-sound" src="audio/hoverprojetos.wav" preload="auto"></audio>
-  <div class="projeto-card">
-  <a href="https://docs.google.com/document/d/1VHP_fiuv8FyKaw4MvzUzE-ajXloyYxX6bDrlC456yps/edit?usp=sharing" target="_blank">
-    <img src="img/smarttraffic.png" alt="Smart Traffic" class="projeto-img">
-  </a>
-  <div class="projeto-overlay">
-    <h3 data-i18n="projects.smart_traffic">Smart Traffic</h3>
+  
+  <div class="projects-grid" id="projects-grid">
+    <!-- Project 1: Arcade Lunar (Most Recent - 2026) -->
+    <div class="projeto-card">
+      <a href="https://github.com/MathSchumacher/Arcade_Lunar" target="_blank">
+        <img src="img/arcadelunar.png" alt="Arcade Lunar" class="projeto-img">
+      </a>
+      <div class="projeto-overlay">
+        <h3 data-i18n="projects.arcadelunar">Arcade Lunar</h3>
+      </div>
+    </div>
+
+    <!-- Project 2: AXIO -->
+    <div class="projeto-card">
+      <a href="#" target="_blank">
+        <img src="img/axio.png" alt="AXIO" class="projeto-img">
+      </a>
+      <div class="projeto-overlay">
+        <h3 data-i18n="projects.axio">AXIO</h3>
+      </div>
+    </div>
+
+    <!-- Project 3: UniT Play -->
+    <div class="projeto-card">
+      <a href="#" target="_blank">
+        <img src="img/UniTPlay.png" alt="UniT Play" class="projeto-img">
+      </a>
+      <div class="projeto-overlay">
+        <h3 data-i18n="projects.unitplay">UniT Play</h3>
+      </div>
+    </div>
+
+    <!-- Project 4: ativarecargas.com -->
+    <div class="projeto-card">
+      <a href="https://ativarecargas.com/" target="_blank">
+        <img src="img/ativarecargas.png" alt="Ativar Recargas" class="projeto-img">
+      </a>
+      <div class="projeto-overlay">
+        <h3 data-i18n="projects.ativarecargas">ativarecargas.com</h3>
+      </div>
+    </div>
+
+    <!-- Project 5: Discord Username SearchByID -->
+    <div class="projeto-card">
+      <a href="https://mathschumacher-discord-username-searchbyid-app-xlmg9n.streamlit.app/" target="_blank">
+        <img src="img/Discord_Username_SearchByID.webp" alt="Discord_Username_SearchByID" class="projeto-img">
+      </a>
+      <div class="projeto-overlay">
+        <h3 data-i18n="projects.discord_search">Discord Username SearchByID</h3>
+      </div>
+    </div>
+
+    <!-- Project 6: Announce Bot -->
+    <div class="projeto-card">
+      <a href="https://github.com/MathSchumacher/Announce-Discord-Bot" target="_blank">
+        <img src="img/Announce_Bot.webp" alt="Announce_Bot" class="projeto-img">
+      </a>
+      <div class="projeto-overlay">
+        <h3 data-i18n="projects.announce_bot">Announce Bot</h3>
+      </div>
+    </div>
+
+    <!-- Hidden projects (shown on "See More") -->
+    <!-- Project 7: Discord Message Deleter -->
+    <div class="projeto-card project-hidden">
+      <a href="https://drive.google.com/uc?export=download&id=1_6M8-wDVyy3pJBY_QPmF-vL99zM5TkdY" download>
+        <img src="img/Discord-Message-Deleter.webp" alt="Discord Message Deleter" class="projeto-img">
+      </a>
+      <div class="projeto-overlay">
+        <h3 data-i18n="projects.discord_msg_deleter">Discord Message Deleter</h3>
+      </div>
+    </div>
+
+    <!-- Project 8: Discord Account Deleter -->
+    <div class="projeto-card project-hidden">
+      <a href="https://drive.google.com/uc?export=download&id=19FBuv6ASf0vzaH7Lck-yAbNWBikeER4l" download>
+        <img src="img/Discord-Account-Deleter.webp" alt="Discord-Account-Deleter" class="projeto-img">
+      </a>
+      <div class="projeto-overlay">
+        <h3 data-i18n="projects.discord_deleter">Discord Account Deleter</h3>
+      </div>
+    </div>
+
+    <!-- Project 9: AI Agent -->
+    <div class="projeto-card project-hidden">
+      <img src="img/AI-AGENT.webp" alt="AI Agent" class="projeto-img">
+      <div class="projeto-overlay">
+        <h3 data-i18n="projects.ai_agent">AI Agent-Database-WhatsAPI-Integrated</h3>
+      </div>
+    </div>
+
+    <!-- Project 10: Pulsar -->
+    <div class="projeto-card project-hidden">
+      <img src="img/pulsar.png" alt="Pulsar" class="projeto-img">
+      <div class="projeto-overlay">
+        <h3 data-i18n="projects.pulsar">Pulsar: Document Everything</h3>
+      </div>
+    </div>
+
+    <!-- Project 11: AI Podcast -->
+    <div class="projeto-card project-hidden">
+      <a href="https://github.com/MathSchumacher/lab-natty-or-not" target="_blank">
+        <img src="img/podcastia.png" alt="Podcastia" class="projeto-img">
+      </a>
+      <div class="projeto-overlay">
+        <h3 data-i18n="projects.ai_podcast">A.I. Podcast</h3>
+      </div>
+    </div>
+
+    <!-- Project 12: Softstarter -->
+    <div class="projeto-card project-hidden">
+      <a href="https://docs.google.com/document/d/1ITVaGNtgBF4VfM1NHD2KQcYtf6nExySNWHqVnppAMSQ/edit?usp=sharing" target="_blank">
+        <img src="img/softstarter.png" alt="Softstarter" class="projeto-img">
+      </a>
+      <div class="projeto-overlay">
+        <h3 data-i18n="projects.softstarter">Three-Phase Softstarter</h3>
+      </div>
+    </div>
+
+    <!-- Project 13: Intelligent Recruitment -->
+    <div class="projeto-card project-hidden">
+      <img src="img/recrutamentointeligente.png" alt="Recrutamento Inteligente" class="projeto-img">
+      <div class="projeto-overlay">
+        <h3 data-i18n="projects.intelligent_recruitment">Intelligent Recruitment</h3>
+      </div>
+    </div>
+
+    <!-- Project 14: Solar Tracker -->
+    <div class="projeto-card project-hidden">
+      <img src="img/solartracker.png" alt="Solar Tracker" class="projeto-img">
+      <div class="projeto-overlay">
+        <h3 data-i18n="projects.solar_tracker">Solar Tracker</h3>
+      </div>
+    </div>
+
+    <!-- Project 15: Wireless Transmission -->
+    <div class="projeto-card project-hidden">
+      <a href="https://docs.google.com/document/d/199Pod4dS-olqmlwB4puJ6CoCi9kKwoZTorV2IaG2TDs/edit?usp=sharing" target="_blank">
+        <img src="img/Transmissaoeletricasemfio.png" alt="Eletric Transmission" class="projeto-img">
+      </a>
+      <div class="projeto-overlay">
+        <h3 data-i18n="projects.wireless_transmission">Wireless Electricity Transmission</h3>
+      </div>
+    </div>
+
+    <!-- Project 16: Smart Traffic -->
+    <div class="projeto-card project-hidden">
+      <a href="https://docs.google.com/document/d/1VHP_fiuv8FyKaw4MvzUzE-ajXloyYxX6bDrlC456yps/edit?usp=sharing" target="_blank">
+        <img src="img/smarttraffic.png" alt="Smart Traffic" class="projeto-img">
+      </a>
+      <div class="projeto-overlay">
+        <h3 data-i18n="projects.smart_traffic">Smart Traffic</h3>
+      </div>
+    </div>
   </div>
-</div>
 
-
-  <div class="projeto-card">
-  <a href="https://docs.google.com/document/d/199Pod4dS-olqmlwB4puJ6CoCi9kKwoZTorV2IaG2TDs/edit?usp=sharing" target="_blank">
-    <img src="img/Transmissaoeletricasemfio.png" alt="Eletric Transmission" class="projeto-img">
-  </a>
-  <div class="projeto-overlay">
-    <h3 data-i18n="projects.wireless_transmission">Wireless Electricity Transmission</h3>
+  <!-- See More Button -->
+  <div class="see-more-container">
+    <button id="see-more-projects" class="btn primary see-more-btn" data-i18n="projects.see_more">
+      <i class="fa-solid fa-chevron-down"></i> See More Projects
+    </button>
   </div>
-</div>
-
-
-  <div class="projeto-card">
-    <img src="img/solartracker.png" alt="Solar Tracker" class="projeto-img">
-    <div class="projeto-overlay"><h3 data-i18n="projects.solar_tracker">Solar Tracker</h3></div>
-  </div>
-
-  <div class="projeto-card">
-    <img src="img/recrutamentointeligente.png" alt="Recrutamento Inteligente" class="projeto-img">
-    <div class="projeto-overlay"><h3 data-i18n="projects.intelligent_recruitment">Intelligent Recruitment</h3></div>
-  </div>
-
-  <div class="projeto-card">
-  <a href="https://docs.google.com/document/d/1ITVaGNtgBF4VfM1NHD2KQcYtf6nExySNWHqVnppAMSQ/edit?usp=sharing" target="_blank">
-    <img src="img/softstarter.png" alt="Softstarter" class="projeto-img">
-  </a>
-  <div class="projeto-overlay">
-    <h3 data-i18n="projects.softstarter">Three-Phase Softstarter</h3>
-  </div>
-</div>
-
-
-  <div class="projeto-card">
-  <a href="https://github.com/MathSchumacher/lab-natty-or-not" target="_blank">
-    <img src="img/podcastia.png" alt="Podcastia" class="projeto-img">
-  </a>
-  <div class="projeto-overlay">
-    <h3 data-i18n="projects.ai_podcast">A.I. Podcast</h3>
-  </div>
-</div>
-
-  <div class="projeto-card">
-    <img src="img/pulsar.png" alt="Solar Tracker" class="projeto-img">
-    <div class="projeto-overlay"><h3 data-i18n="projects.pulsar">Pulsar: Document Everything</h3></div>
-  </div>
-  <div class="projeto-card">
-    <img src="img/AI-AGENT.webp" alt="Solar Tracker" class="projeto-img">
-    <div class="projeto-overlay"><h3 data-i18n="projects.ai_agent">AI Agent-Database-WhatsAPI-Integrated</h3></div>
-  </div>
-
-  <div class="projeto-card">
-  <a href="https://drive.google.com/uc?export=download&id=19FBuv6ASf0vzaH7Lck-yAbNWBikeER4l" download>
-    <img src="img/Discord-Account-Deleter.webp" alt="Discord-Account-Deleter" class="projeto-img">
-  </a>
-  <div class="projeto-overlay">
-    <h3 data-i18n="projects.discord_deleter">Discord-Account-Deleter</h3>
-  </div>
-</div>
-
-<div class="projeto-card">
-  <a href="https://drive.google.com/uc?export=download&id=1_6M8-wDVyy3pJBY_QPmF-vL99zM5TkdY" download>
-    <img src="img/Discord-Message-Deleter.webp" alt="Discord Message Deleter" class="projeto-img">
-  </a>
-  <div class="projeto-overlay">
-    <h3 data-i18n="projects.discord_msg_deleter">Discord Message Deleter</h3>
-  </div>
-</div>
-
-<div class="projeto-card">
-  <a href="https://github.com/MathSchumacher/Announce-Discord-Bot" target="_blank">
-    <img src="img/Announce_Bot.webp" alt="Announce_Bot" class="projeto-img">
-  </a>
-  <div class="projeto-overlay">
-    <h3 data-i18n="projects.announce_bot">Announce Bot</h3>
-  </div>
-</div>
-
-<div class="projeto-card">
-  <a href="https://mathschumacher-discord-username-searchbyid-app-xlmg9n.streamlit.app/" target="_blank">
-    <img src="img/Discord_Username_SearchByID.webp" alt="Discord_Username_SearchByID" class="projeto-img">
-  </a>
-  <div class="projeto-overlay">
-    <h4 data-i18n="projects.discord_search">Discord_Username_SearchByID</h4>
-  </div>
-</div>
-
-<div class="projeto-card">
-  <a href="https://ativarecargas.com/" target="_blank">
-    <img src="img/ativarecargas.png" alt="Ativar Recargas" class="projeto-img">
-  </a>
-  <div class="projeto-overlay">
-    <h3 data-i18n="projects.ativarecargas">ativarecargas.com</h3>
-  </div>
-</div>
-
-<div class="projeto-card">
-  <a href="#" target="_blank">
-    <img src="img/UniTPlay.png" alt="UniT Play" class="projeto-img">
-  </a>
-  <div class="projeto-overlay">
-    <h3 data-i18n="projects.unitplay">UniT Play</h3>
-  </div>
-</div>
-
-<div class="projeto-card">
-  <a href="#" target="_blank">
-    <img src="img/axio.png" alt="AXIO" class="projeto-img">
-  </a>
-  <div class="projeto-overlay">
-    <h3 data-i18n="projects.axio">AXIO</h3>
-  </div>
-</div>
-
-<div class="projeto-card">
-  <a href="https://github.com/MathSchumacher/Arcade_Lunar" target="_blank">
-    <img src="img/arcadelunar.png" alt="Arcade Lunar" class="projeto-img">
-  </a>
-  <div class="projeto-overlay">
-    <h3 data-i18n="projects.arcadelunar">Arcade Lunar</h3>
-  </div>
-</div>
-
 </section>
 
   <section id="experiencia">
@@ -740,7 +857,7 @@
 
   <footer>
     <div class="container">
-      <p data-i18n="footer.rights">© 2025 Matheus Schumacher. All rights reserved.</p>
+      <p data-i18n="footer.rights">© 2026 Matheus Schumacher. All rights reserved.</p>
     </div>
   </footer>
 

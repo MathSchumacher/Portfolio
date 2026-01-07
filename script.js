@@ -199,6 +199,7 @@ document.addEventListener('DOMContentLoaded', () => {
       nav: true,
       dots: true,
       margin: 20,
+      autoHeight: true, // Make height flexible based on content
       responsive: {
         0: { items: 1 },
         768: { items: 1 },
@@ -815,24 +816,95 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================
-  // Scroll Reveal Logic
+  // SCROLL REVEAL ANIMATIONS
   // ==========================
-  const observerOptions = {
+  const revealOptions = {
     threshold: 0.15,
+    rootMargin: "0px 0px -80px 0px"
+  };
+
+  // Observer for reveal elements
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, revealOptions);
+
+  // Observe all reveal elements
+  document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(el => {
+    revealObserver.observe(el);
+  });
+
+  // Observer for sections (header animations)
+  const sectionOptions = {
+    threshold: 0.1,
     rootMargin: "0px 0px -50px 0px"
   };
 
-  const observer = new IntersectionObserver((entries) => {
+  const sectionObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
+        entry.target.classList.add('section-visible');
         entry.target.classList.add('show');
-        observer.unobserve(entry.target); 
+        sectionObserver.unobserve(entry.target);
       }
     });
-  }, observerOptions);
+  }, sectionOptions);
 
   document.querySelectorAll('section').forEach(section => {
     section.classList.add('hidden-section');
-    observer.observe(section);
+    sectionObserver.observe(section);
   });
+
+  // Auto-add reveal classes to project cards with stagger
+  document.querySelectorAll('.projeto-card').forEach((card, index) => {
+    card.classList.add('reveal-scale');
+    card.classList.add(`stagger-${Math.min(index % 6 + 1, 6)}`);
+    revealObserver.observe(card);
+  });
+
+  // Auto-add reveal classes to skill cards with stagger
+  document.querySelectorAll('.skill').forEach((skill, index) => {
+    skill.classList.add('reveal');
+    skill.classList.add(`stagger-${Math.min(index % 4 + 1, 4)}`);
+    revealObserver.observe(skill);
+  });
+
+  // ==========================
+  // See More Projects Toggle
+  // ==========================
+  const seeMoreBtn = document.getElementById('see-more-projects');
+  const projectsGrid = document.getElementById('projects-grid');
+  
+  if (seeMoreBtn && projectsGrid) {
+    let isExpanded = false;
+    
+    seeMoreBtn.addEventListener('click', () => {
+      isExpanded = !isExpanded;
+      
+      if (isExpanded) {
+        projectsGrid.classList.add('show-all');
+        seeMoreBtn.classList.add('expanded');
+        // Update button text
+        const btnText = seeMoreBtn.querySelector('i');
+        if (btnText) {
+          seeMoreBtn.innerHTML = '<i class="fa-solid fa-chevron-up"></i> Show Less';
+        }
+      } else {
+        projectsGrid.classList.remove('show-all');
+        seeMoreBtn.classList.remove('expanded');
+        // Restore button text
+        seeMoreBtn.innerHTML = '<i class="fa-solid fa-chevron-down"></i> See More Projects';
+        
+        // Scroll to projects section
+        const projectsSection = document.getElementById('projetos');
+        if (projectsSection) {
+          projectsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+    });
+  }
 });
