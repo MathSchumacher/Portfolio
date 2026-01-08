@@ -921,4 +921,39 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
+  // ==========================
+  // Level Guide Tooltip - Move to Body Level
+  // ==========================
+  const tooltipIcon = document.getElementById('habilidades-icone');
+  const levelGuideTooltip = document.getElementById('habilidades-tooltip');
+  const tooltipCloseBtn = document.getElementById('tooltip-close');
+  
+  if (tooltipIcon && levelGuideTooltip) {
+    // Move tooltip to body level to escape all stacking contexts
+    document.body.appendChild(levelGuideTooltip);
+    
+    // Toggle tooltip on icon click
+    tooltipIcon.addEventListener('click', (e) => {
+      e.stopPropagation();
+      levelGuideTooltip.classList.toggle('show');
+    });
+    
+    // Close button
+    if (tooltipCloseBtn) {
+      tooltipCloseBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        levelGuideTooltip.classList.remove('show');
+      });
+    }
+    
+    // Close when clicking outside
+    document.addEventListener('click', (e) => {
+      if (levelGuideTooltip.classList.contains('show') && 
+          !levelGuideTooltip.contains(e.target) && 
+          !tooltipIcon.contains(e.target)) {
+        levelGuideTooltip.classList.remove('show');
+      }
+    });
+  }
 });

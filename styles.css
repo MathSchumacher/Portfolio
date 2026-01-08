@@ -856,7 +856,8 @@ body.light .tts-seek::-moz-range-thumb {
   align-items: center;
   gap: 0.5rem;
   white-space: nowrap;
-  display: inline-flex;
+  display: flex; /* FIXED: was inline-flex */
+  width: 100%; /* ADDED: ensures full width clickability */
   color: #000000; /* dark mode */
   text-shadow: 0 0 1px #ffffff; /* camada fina branca */
   transition: background 0.2s, color 0.2s;
@@ -1669,8 +1670,6 @@ body.light .level {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  position: relative;
-  z-index: 100000; /* Higher than skill cards to ensure tooltip button is clickable */
 }
 
 /* Wrapper do ícone */
@@ -1678,7 +1677,6 @@ body.light .level {
   position: relative; /* necessário p/ posicionar tooltip */
   display: inline-block;
   cursor: pointer;
-  z-index: 100000; /* Ensure icon and tooltip are above cards */
 }
 
 /* Ícone (modo light) */
