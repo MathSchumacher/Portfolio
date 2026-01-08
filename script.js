@@ -87,14 +87,13 @@ document.addEventListener('DOMContentLoaded', () => {
         // Add flag icon if desired, e.g.: <img src="img/${langCode}.png" class="icon">
         link.innerHTML = supportedLanguages[langCode]; 
         
-        // Nuclear option: Direct onclick to avoid listener conflicts
-        link.onclick = (e) => {
+        link.addEventListener('click', (e) => {
           e.preventDefault();
-          e.stopPropagation();
           updateLanguage(langCode);
+          
+          // Close dropdown after selection
           optionsContainer.classList.remove('show');
-          return false;
-        };
+        });
 
         optionsContainer.appendChild(link);
       }

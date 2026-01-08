@@ -49,24 +49,36 @@
         <a href="#Weneedtotalk" data-i18n="nav.talk">We Need to Talk</a>
         
         <div class="dropdown">
-          <a><span class="menu-icon"><i class="fa-solid fa-bars"></i></span> <span data-i18n="nav.contact">Contact</span></a>
+          <a href="#contact" class="nav-btn btn-contact">
+            <span class="menu-icon"><i class="fa-solid fa-bars"></i></span> 
+            <span data-i18n="nav.contact">Contact</span>
+          </a>
           <div class="dropdown-content">
-            <a href="mailto:matheusmschumacher@gmail.com" target="_blank"><img src="img/message.png" alt="Email" class="icon">Email: Matheusmschumacher@gmail.com</a>
-            <a href="https://wa.me/5551981381793" target="_blank"><img src="img/whatsapp.png" alt="WhatsApp" class="icon">WhatsApp: +55 51 981381793</a>
-            <a href="https://www.instagram.com/schumacher3w/" target="_blank"><img src="img/instagram.png" alt="Instagram" class="icon">Instagram: Schumacher3w</a>
+            <a href="mailto:matheusmschumacher@gmail.com" target="_blank">
+              <img src="img/message.png" alt="Email" class="icon">Email: Matheusmschumacher@gmail.com
+            </a>
+            <a href="https://wa.me/5551981381793" target="_blank">
+              <img src="img/whatsapp.png" alt="WhatsApp" class="icon">WhatsApp: +55 51 981381793
+            </a>
+            <a href="https://www.instagram.com/schumacher3w/" target="_blank">
+              <img src="img/instagram.png" alt="Instagram" class="icon">Instagram: Schumacher3w
+            </a>
             <a href="https://discord.com/users/262745192195424256" target="_blank">
               <img src="img/discord.png" alt="Discord" class="icon">Discord: mathschumacher
             </a>
-            <p class="warning" data-i18n="nav.contact_warning">Conventional calls will not be answered,<br>contacts by Whatsapp are preferred.</p>
+            <p class="warning" data-i18n="nav.contact_warning">
+              Conventional calls will not be answered,<br>contacts by Whatsapp are preferred.
+            </p>
           </div>
         </div>
 
         <div class="dropdown language-selector">
-          <a class="translate-btn"href="#" onclick="return false;" aria-label="Select language">
-             <span class="menu-icon"><span class="material-symbols-outlined">translate</span></span>
+          <a href="#" class="translate-btn" onclick="return false;" aria-label="Select language">
+            <span class="menu-icon">
+              <span class="material-symbols-outlined">translate</span>
+            </span>
           </a>
-          <div class="dropdown-content" id="language-options">
-             </div>
+          <div class="dropdown-content" id="language-options"></div>
         </div>
 
         <button id="spotify-header-btn" class="spotify-header-btn" style="display:none;"><i class="fa-brands fa-spotify"></i></button>
