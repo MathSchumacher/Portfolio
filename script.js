@@ -122,14 +122,23 @@ document.addEventListener('DOMContentLoaded', () => {
         // Toggle current
         content.classList.toggle('show');
       });
+
+      // CRITICAL FIX: Stop propagation on dropdown content clicks
+      // This prevents the window click handler from closing the dropdown
+      content.addEventListener('click', (e) => {
+        e.stopPropagation();
+      });
     }
   });
 
-  // Close ANY dropdown when clicking outside
-  window.addEventListener('click', () => {
-    document.querySelectorAll('.dropdown-content').forEach(content => {
-      content.classList.remove('show');
-    });
+  // Close ANY dropdown when clicking outside (but NOT inside dropdown content)
+  window.addEventListener('click', (e) => {
+    // Only close if not clicking inside a dropdown
+    if (!e.target.closest('.dropdown')) {
+      document.querySelectorAll('.dropdown-content').forEach(content => {
+        content.classList.remove('show');
+      });
+    }
   });
 
 

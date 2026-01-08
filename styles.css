@@ -5,10 +5,14 @@
 html:focus-within {
   scroll-behavior: smooth;
 }
+html {
+  font-size: 18px; /* Increased from default 16px for better portfolio readability */
+}
 body {
   margin: 0;
   font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial, sans-serif;
-  line-height: 1.6;
+  line-height: 1.65; /* Slightly increased for better readability */
+  font-size: 1rem; /* 18px based on html root */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -810,61 +814,249 @@ body.light .tts-seek::-moz-range-thumb {
 }
 
 .nav-actions .dropdown {
-  position: relative; /* tracking do botão */
+  position: relative;
   display: inline-block;
 }
-/* ===== Dropdown Contato com efeito suave ===== */
+
+/* ===== MODERN DROPDOWN CONTAINER (Rebuilt from Scratch) ===== */
+/* DARK MODE: White container to contrast dark page */
 .nav-actions .dropdown .dropdown-content {
+  /* Layout */
   display: flex;
   flex-direction: column;
   position: absolute;
-  top: calc(100% + 0.5rem); /* leve espaçamento abaixo do link */
+  top: calc(100% + 8px);
   left: 0;
-  min-width: 180px;
-  width: max-content; /* largura ajusta ao conteúdo, mas respeita padding */
-  border-radius: 12px;
-  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  min-width: 280px;
+  
+  /* WHITE container for dark mode contrast */
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 
+    0 0 0 2px rgba(139, 92, 246, 0.5),   /* Purple inner glow */
+    0 0 0 4px rgba(236, 72, 153, 0.3),   /* Pink outer glow */
+    0 25px 50px rgba(0, 0, 0, 0.5),
+    0 0 80px rgba(139, 92, 246, 0.15);
+  
+  /* Padding for links */
+  padding: 8px 0;
+  
+  /* Animation */
+  opacity: 0;
+  transform: translateY(-10px) scale(0.95);
+  pointer-events: none;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1000;
   overflow: hidden;
-  background: #ffffff; /* dark mode */
-  border: 6px solid transparent; /* dark mode */
-  box-shadow: 0 0 0 0.3px #000; /* offset-x | offset-y | blur | espessura | cor */
-  background:
-    linear-gradient(#ffffff, #ffffff) padding-box,   /* fundo interno */
-    linear-gradient(45deg, rgb(255, 217, 0), rgb(195, 0, 255)) border-box; /* borda em gradiente */
-  opacity: 0;              /* inicial invisível */
-  transform: translateY(-10px); /* deslocado para cima */
-  pointer-events: none;    /* evita clique quando invisível */
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  z-index: 100;
 }
 
-/* Mostrar dropdown com efeito */
+/* Show state */
 .nav-actions .dropdown .dropdown-content.show {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(0) scale(1);
   pointer-events: auto;
 }
-.dropdown-content .icon{
+
+/* ===== DROPDOWN LINKS - Dark Mode (dark text on white bg) ===== */
+.nav-actions .dropdown .dropdown-content a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  
+  width: 100%;
+  padding: 12px 20px;
+  margin: 0;
+  box-sizing: border-box;
+  
+  /* Dark text on white background */
+  color: #1a1a2e;
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-decoration: none;
+  background: transparent;
+  border: none;
+  
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.nav-actions .dropdown .dropdown-content a:hover {
+  background: linear-gradient(90deg, rgba(139, 92, 246, 0.15), rgba(236, 72, 153, 0.1));
+  padding-left: 24px;
+}
+
+/* Icon styling - Clickable with hover effects */
+.dropdown-content .icon {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+/* Icon hover effect */
+.dropdown-content a:hover .icon,
+.dropdown-content .icon:hover {
+  transform: scale(1.15);
+  filter: drop-shadow(0 0 8px rgba(139, 92, 246, 0.6));
+}
+
+/* Warning text - Dark Mode */
+.dropdown-content .warning {
+  padding: 12px 20px;
+  margin: 0;
+  font-size: 0.8rem;
+  color: #666;
+  background: rgba(0, 0, 0, 0.03);
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/* ========================================================= */
+/* ===== LIGHT MODE DROPDOWN (Professional Rebuild) ===== */
+/* ========================================================= */
+
+/* Container - Premium dark glassmorphism on bright page */
+body.light .nav-actions .dropdown .dropdown-content {
+  /* Dark premium background */
+  background: linear-gradient(
+    165deg,
+    rgba(15, 15, 25, 0.98) 0%,
+    rgba(25, 25, 40, 0.95) 50%,
+    rgba(10, 10, 20, 0.98) 100%
+  );
+  
+  /* Subtle inner glass effect */
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  
+  /* Premium rounded corners */
+  border-radius: 20px;
+  
+  /* Vibrant animated gradient border using box-shadow layers */
+  box-shadow: 
+    /* Gradient glow border - inner warm */
+    0 0 0 2px rgba(251, 191, 36, 0.8),
+    /* Gradient glow border - middle transition */
+    0 0 0 4px rgba(52, 211, 153, 0.6),
+    /* Gradient glow border - outer cool */
+    0 0 0 6px rgba(34, 211, 238, 0.5),
+    /* Soft ambient glow */
+    0 0 40px rgba(251, 191, 36, 0.25),
+    0 0 80px rgba(52, 211, 153, 0.15),
+    /* Deep shadow for depth */
+    0 30px 60px rgba(0, 0, 0, 0.6),
+    /* Inner highlight */
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+  
+  /* Smooth padding */
+  padding: 12px 0;
+  
+  /* Ensure proper stacking */
+  z-index: 1000;
+}
+
+/* Links - Premium styling with smooth interactions */
+body.light .nav-actions .dropdown .dropdown-content a {
+  /* Layout */
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: 14px 24px;
+  margin: 0;
+  box-sizing: border-box;
+  
+  /* Premium text styling */
+  color: #f5f5f7;
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  
+  /* Clean background */
+  background: transparent;
+  border: none;
+  border-radius: 12px;
+  margin: 2px 8px;
+  width: calc(100% - 16px);
+  
+  /* Smooth transitions */
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Hover effect - Premium gradient reveal */
+body.light .nav-actions .dropdown .dropdown-content a:hover {
+  /* Warm gradient background */
+  background: linear-gradient(
+    135deg,
+    rgba(251, 191, 36, 0.2) 0%,
+    rgba(52, 211, 153, 0.15) 50%,
+    rgba(34, 211, 238, 0.1) 100%
+  );
+  
+  /* Subtle left border accent */
+  box-shadow: inset 4px 0 0 rgba(251, 191, 36, 0.9);
+  
+  /* Slight padding shift for animation */
+  padding-left: 28px;
+  
+  /* Brighter text */
+  color: #ffffff;
+  text-shadow: 0 0 10px rgba(251, 191, 36, 0.3);
+}
+
+/* Active/pressed state */
+body.light .nav-actions .dropdown .dropdown-content a:active {
+  background: linear-gradient(
+    135deg,
+    rgba(251, 191, 36, 0.3) 0%,
+    rgba(52, 211, 153, 0.2) 100%
+  );
+  transform: scale(0.98);
+}
+
+/* Icons - Vibrant with glow */
+body.light .dropdown-content .icon {
   width: 30px;
   height: 30px;
-  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+  transition: transform 0.3s ease, filter 0.3s ease;
 }
-/* Links dentro do dropdown */
-.nav-actions .dropdown .dropdown-content a {
-  padding: 0.75rem 1rem;
-  text-decoration: none;
-  align-items: center;
-  gap: 0.5rem;
-  white-space: nowrap;
-  display: flex; /* FIXED: was inline-flex */
-  width: 100%; /* ADDED: ensures full width clickability */
-  color: #000000; /* dark mode */
-  text-shadow: 0 0 1px #ffffff; /* camada fina branca */
-  transition: background 0.2s, color 0.2s;
+
+body.light .nav-actions .dropdown .dropdown-content a:hover .icon {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 8px rgba(251, 191, 36, 0.5));
 }
-.nav-actions .dropdown .dropdown-content a:last-child {
-  border-bottom: none;
+
+/* Warning text - Refined styling */
+body.light .dropdown-content .warning {
+  padding: 14px 24px;
+  margin: 8px 8px 4px 8px;
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: #9ca3af;
+  line-height: 1.5;
+  text-align: center;
+  
+  /* Subtle separator */
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.03) 0%,
+    transparent 100%
+  );
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0 0 12px 12px;
+  
+  /* Soft text shadow */
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
+
 .skill-header span {
   display: inline-flex;
   align-items: center; /* centraliza ícone e texto na linha */
@@ -3115,113 +3307,6 @@ p {
   .nav-actions { font-size: 0.6rem; }
 }
 
-/* ===== RESTORED DROPDOWN STYLES (User Provided) ===== */
-.nav-actions .dropdown {
-  position: relative; /* tracking do botão */
-  display: inline-block;
-}
-/* ===== Dropdown Contato com efeito suave ===== */
-.nav-actions .dropdown .dropdown-content {
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  top: calc(100% + 0.5rem); /* leve espaçamento abaixo do link */
-  left: 0;
-  min-width: 180px;
-  width: max-content; /* largura ajusta ao conteúdo, mas respeita padding */
-  border-radius: 12px;
-  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-  overflow: hidden;
-  background: #ffffff; /* dark mode */
-  border: 6px solid transparent; /* dark mode */
-  box-shadow: 0 0 0 0.3px #000; /* offset-x | offset-y | blur | espessura | cor */
-  background:
-    linear-gradient(#ffffff, #ffffff) padding-box,   /* fundo interno */
-    linear-gradient(45deg, rgb(255, 217, 0), rgb(195, 0, 255)) border-box; /* borda em gradiente */
-  opacity: 0;              /* inicial invisível */
-  transform: translateY(-10px); /* deslocado para cima */
-  pointer-events: none;    /* evita clique quando invisível */
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  z-index: 100;
-}
-
-/* Mostrar dropdown com efeito */
-.nav-actions .dropdown .dropdown-content.show {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
-}
-.dropdown-content .icon{
-  width: 30px;
-  height: 30px;
-  object-fit: contain;
-}
-/* Links dentro do dropdown */
-  /* ===== RESTORED CSS WITH USER FIXES ===== */
-  /* Fix 1: Make dropdown links full width */
-  .nav-actions .dropdown .dropdown-content a {
-    padding: 0.75rem 1rem;
-    text-decoration: none;
-    align-items: center;
-    gap: 0.5rem;
-    white-space: nowrap;
-    display: flex; /* CHANGED FROM inline-flex */
-    width: 100%; /* ADDED to force full width */
-    color: #000000; /* dark mode */
-    text-shadow: 0 0 1px #ffffff; /* camada fina branca */
-    transition: background 0.2s, color 0.2s;
-  }
-
-  /* Fix 2: Prevent icons from blocking clicks */
-  .dropdown-content img,
-  .dropdown-content .icon,
-  .dropdown-content .material-symbols-outlined {
-    pointer-events: none;
-  }
-.nav-actions .dropdown .dropdown-content a:last-child {
-  border-bottom: none;
-}
-
-/* Hover suave e mais perceptível */
-
-/* Modo dark */
-body:not(.light) .nav-actions .dropdown .dropdown-content a:hover {
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0.269), rgba(255, 103, 1, 0.275));
-  transition: all 0.3s ease-in-out;
-  border-radius: 12px;
-  transform: scale3d(1.03,1.03,1.01); /* escala o texto verticalmente */
-}
-/* Aplica o scale3d apenas no ícone */
-body:not(.light) .nav-actions .dropdown .dropdown-content a:hover .icon {
-  height: 36px!important;
-}
-/* Modo light */
-body.light .nav-actions .dropdown .dropdown-content a:hover {
-  background: linear-gradient(270deg, rgba(255, 183, 0, 0.587), rgba(0, 0, 0, 0.805));
-  transition: all 0.3s ease-in-out;
-  border-radius: 12px;
-  transform: scale3d(1.03,1.03,1.01); /* escala o texto verticalmente */
-}
-/* Aplica o scale3d apenas no ícone */
-body.light .nav-actions .dropdown .dropdown-content a:hover .icon {
-  height: 36px!important;
-}
-
-/* Modo light override */
-body.light .nav-actions .dropdown .dropdown-content {
-  background: #000000;
-  border-radius: 12px;
-  border: 6px solid transparent;
-  box-shadow: 0 0 0 0.3px #000; /* offset-x | offset-y | blur | espessura | cor */
-  background:
-    linear-gradient(#000, #000) padding-box,   /* fundo interno */
-    linear-gradient(45deg, rgb(255, 217, 0), rgb(0, 174, 255)) border-box; /* borda em gradiente */
-}
-body.light .nav-actions .dropdown .dropdown-content a {
-  color: #ffffff;
-  text-shadow: 0 0 1px #000000; /* camada fina preta */
-}
-
 /* ===== Botão de Tradução (User Provided) ===== */
 .translate-btn {
   display: flex;
@@ -3324,3 +3409,23 @@ header .nav-actions .btn-contact:hover {
   pointer-events: none; /* Icons won't block clicks */
 }
 
+/* ===== Responsive Font Size Scaling ===== */
+@media (max-width: 1024px) {
+  html {
+    font-size: 17px; /* Slightly smaller on tablets */
+  }
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 16px; /* Standard size on mobile */
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 15px; /* Compact size on small phones */
+  }
+}
+
+/* End of styles.css */
