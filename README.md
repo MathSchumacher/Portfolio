@@ -38,10 +38,6 @@
 
 A modern, responsive, and interactive personal portfolio showcasing my skills, projects, and professional experience. Built with a premium glassmorphism design, smooth animations, and full internationalization support.
 
-<p align="center">
-  <img src="img/backmeground2.png" alt="Portfolio Preview" width="600" style="border-radius: 16px;" />
-</p>
-
 ---
 
 ## 🎨 Features
