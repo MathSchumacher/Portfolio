@@ -367,40 +367,29 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ====================================================
-  // Skills Tooltip
+  // Skills Tooltip - Level Guide
   // ====================================================
   const icon = document.getElementById('habilidades-icone');
   const tooltip = document.getElementById('habilidades-tooltip');
   const closeBtn = document.getElementById('tooltip-close');
 
-  let isPermanent = false;
-
   if (icon && tooltip && closeBtn) {
-    icon.addEventListener('mouseenter', () => {
-      if (!isPermanent) tooltip.classList.add('show');
-    });
-
-    icon.addEventListener('mouseleave', () => {
-      if (!isPermanent) tooltip.classList.remove('show');
-    });
-
+    // Move tooltip to body level for proper z-index handling
+    document.body.appendChild(tooltip);
+    
+    // Toggle tooltip visibility on icon click
     icon.addEventListener('click', (e) => {
       e.stopPropagation();
-      if (isPermanent) {
-        isPermanent = false;
-        tooltip.classList.remove('show');
-      } else {
-        isPermanent = true;
-        tooltip.classList.add('show');
-      }
+      tooltip.classList.toggle('show');
     });
 
+    // Close button handler
     closeBtn.addEventListener('click', (e) => {
       e.stopPropagation();
-      isPermanent = false;
       tooltip.classList.remove('show');
     });
 
+    // Prevent clicks inside tooltip from closing it
     tooltip.addEventListener('click', (e) => {
       e.stopPropagation();
     });
@@ -931,38 +920,4 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ==========================
-  // Level Guide Tooltip - Move to Body Level
-  // ==========================
-  const tooltipIcon = document.getElementById('habilidades-icone');
-  const levelGuideTooltip = document.getElementById('habilidades-tooltip');
-  const tooltipCloseBtn = document.getElementById('tooltip-close');
-  
-  if (tooltipIcon && levelGuideTooltip) {
-    // Move tooltip to body level to escape all stacking contexts
-    document.body.appendChild(levelGuideTooltip);
-    
-    // Toggle tooltip on icon click
-    tooltipIcon.addEventListener('click', (e) => {
-      e.stopPropagation();
-      levelGuideTooltip.classList.toggle('show');
-    });
-    
-    // Close button
-    if (tooltipCloseBtn) {
-      tooltipCloseBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        levelGuideTooltip.classList.remove('show');
-      });
-    }
-    
-    // Close when clicking outside
-    document.addEventListener('click', (e) => {
-      if (levelGuideTooltip.classList.contains('show') && 
-          !levelGuideTooltip.contains(e.target) && 
-          !tooltipIcon.contains(e.target)) {
-        levelGuideTooltip.classList.remove('show');
-      }
-    });
-  }
 });
