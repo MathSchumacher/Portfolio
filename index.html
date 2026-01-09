@@ -48,6 +48,11 @@
         <a href="#experiencia" data-i18n="nav.experience">Experience</a>
         <a href="#Weneedtotalk" data-i18n="nav.talk">We Need to Talk</a>
         
+        <!-- Suno Music Button -->
+        <button class="suno-music-btn" id="suno-music-btn" aria-label="Open Music Player">
+          <img src="img/suno.jpeg" alt="Music">
+        </button>
+        
         <div class="dropdown">
           <a href="#contact" class="nav-btn btn-contact">
             <span class="menu-icon"><i class="fa-solid fa-bars"></i></span> 
@@ -656,7 +661,7 @@
     <!-- Hidden projects (shown on "See More") -->
     <!-- Project 7: Discord Message Deleter -->
     <div class="projeto-card project-hidden">
-      <a href="https://drive.google.com/uc?export=download&id=1_6M8-wDVyy3pJBY_QPmF-vL99zM5TkdY" download>
+      <a href="https://github.com/MathSchumacher/Discord-message-deleter" target="_blank">
         <img src="img/Discord-Message-Deleter.webp" alt="Discord Message Deleter" class="projeto-img">
       </a>
       <div class="projeto-overlay">
@@ -666,7 +671,7 @@
 
     <!-- Project 8: Discord Account Deleter -->
     <div class="projeto-card project-hidden">
-      <a href="https://drive.google.com/uc?export=download&id=19FBuv6ASf0vzaH7Lck-yAbNWBikeER4l" download>
+      <a href="https://github.com/MathSchumacher/Discord-account-deleter" target="_blank">
         <img src="img/Discord-Account-Deleter.webp" alt="Discord-Account-Deleter" class="projeto-img">
       </a>
       <div class="projeto-overlay">
@@ -682,25 +687,77 @@
       </div>
     </div>
 
-    <!-- Project 10: Pulsar -->
+    <!-- Project 10: YOLO Car Detection Network -->
     <div class="projeto-card project-hidden">
-      <img src="img/pulsar.png" alt="Pulsar" class="projeto-img">
+      <a href="https://github.com/MathSchumacher/Yolo-car-detection-network" target="_blank">
+        <img src="img/yolo-car-detection-network.png" alt="YOLO Car Detection Network" class="projeto-img">
+      </a>
+      <div class="projeto-overlay">
+        <h3 data-i18n="projects.yolo_car_detection">YOLO Car Detection Network</h3>
+      </div>
+    </div>
+
+    <!-- Project 11: Pulsar -->
+    <div class="projeto-card project-hidden">
+      <a href="https://github.com/MathSchumacher/Pulsar-Document-Everything" target="_blank">
+        <img src="img/pulsar.png" alt="Pulsar" class="projeto-img">
+      </a>
       <div class="projeto-overlay">
         <h3 data-i18n="projects.pulsar">Pulsar: Document Everything</h3>
       </div>
     </div>
 
-    <!-- Project 11: AI Podcast -->
+    <!-- Project 12: AI Podcast -->
     <div class="projeto-card project-hidden">
-      <a href="https://github.com/MathSchumacher/lab-natty-or-not" target="_blank">
-        <img src="img/podcastia.png" alt="Podcastia" class="projeto-img">
-      </a>
+      <img src="img/podcastia.png" alt="Podcastia" class="projeto-img">
       <div class="projeto-overlay">
         <h3 data-i18n="projects.ai_podcast">A.I. Podcast</h3>
+        
+        <!-- Custom Audio Player -->
+        <div class="custom-audio-player" data-src="audio/PODCAST_IA_GAMERS_DESCONECTADOS.mp3">
+          <button class="audio-play-btn" aria-label="Play/Pause">
+            <i class="fa-solid fa-play"></i>
+          </button>
+          <div class="audio-progress-container">
+            <div class="audio-progress-bar">
+              <div class="audio-progress-fill"></div>
+              <div class="audio-progress-thumb"></div>
+            </div>
+            <div class="audio-time">
+              <span class="audio-current">0:00</span>
+              <span class="audio-separator">/</span>
+              <span class="audio-duration">0:00</span>
+            </div>
+          </div>
+          <div class="audio-volume-container">
+            <button class="audio-volume-btn" aria-label="Mute/Unmute">
+              <i class="fa-solid fa-volume-high"></i>
+            </button>
+            <input type="range" class="audio-volume-slider" min="0" max="100" value="100">
+          </div>
+          <div class="audio-menu-container">
+            <button class="audio-menu-btn" aria-label="Options">
+              <i class="fa-solid fa-ellipsis-vertical"></i>
+            </button>
+            <div class="audio-menu">
+              <div class="audio-speed-control">
+                <span>Speed:</span>
+                <button class="speed-btn" data-speed="0.5">0.5x</button>
+                <button class="speed-btn" data-speed="0.75">0.75x</button>
+                <button class="speed-btn active" data-speed="1">1x</button>
+                <button class="speed-btn" data-speed="1.5">1.5x</button>
+                <button class="speed-btn" data-speed="2">2x</button>
+              </div>
+              <a class="audio-download-btn" href="audio/PODCAST_IA_GAMERS_DESCONECTADOS.mp3" download>
+                <i class="fa-solid fa-download"></i> Download
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- Project 12: Softstarter -->
+    <!-- Project 13: Softstarter -->
     <div class="projeto-card project-hidden">
       <a href="https://docs.google.com/document/d/1ITVaGNtgBF4VfM1NHD2KQcYtf6nExySNWHqVnppAMSQ/edit?usp=sharing" target="_blank">
         <img src="img/softstarter.png" alt="Softstarter" class="projeto-img">
@@ -710,7 +767,7 @@
       </div>
     </div>
 
-    <!-- Project 13: Intelligent Recruitment -->
+    <!-- Project 14: Intelligent Recruitment -->
     <div class="projeto-card project-hidden">
       <img src="img/recrutamentointeligente.png" alt="Recrutamento Inteligente" class="projeto-img">
       <div class="projeto-overlay">
@@ -718,7 +775,7 @@
       </div>
     </div>
 
-    <!-- Project 14: Solar Tracker -->
+    <!-- Project 15: Solar Tracker -->
     <div class="projeto-card project-hidden">
       <img src="img/solartracker.png" alt="Solar Tracker" class="projeto-img">
       <div class="projeto-overlay">
@@ -726,7 +783,7 @@
       </div>
     </div>
 
-    <!-- Project 15: Wireless Transmission -->
+    <!-- Project 16: Wireless Transmission -->
     <div class="projeto-card project-hidden">
       <a href="https://docs.google.com/document/d/199Pod4dS-olqmlwB4puJ6CoCi9kKwoZTorV2IaG2TDs/edit?usp=sharing" target="_blank">
         <img src="img/Transmissaoeletricasemfio.png" alt="Eletric Transmission" class="projeto-img">
@@ -736,7 +793,7 @@
       </div>
     </div>
 
-    <!-- Project 16: Smart Traffic -->
+    <!-- Project 17: Smart Traffic -->
     <div class="projeto-card project-hidden">
       <a href="https://docs.google.com/document/d/1VHP_fiuv8FyKaw4MvzUzE-ajXloyYxX6bDrlC456yps/edit?usp=sharing" target="_blank">
         <img src="img/smarttraffic.png" alt="Smart Traffic" class="projeto-img">
@@ -877,6 +934,148 @@
 </section>
 
   </main>
+
+  <!-- Music Modal Overlay -->
+  <div class="music-modal-overlay" id="music-modal-overlay"></div>
+  
+  <!-- Music Modal -->
+  <div class="music-modal" id="music-modal">
+    <!-- Playlist Sidebar (hidden by default) -->
+    <div class="music-playlist-sidebar" id="playlist-panel" style="display: none;">
+      <div class="playlist-sidebar-header">
+        <span class="playlist-sidebar-title">
+          <img src="img/playlist-icon.png" alt="Playlist" class="playlist-icon-img">
+          <span data-i18n="music.playlist">Playlist</span>
+        </span>
+        <div class="playlist-header-actions">
+          <button class="playlist-action-btn" id="play-playlist-btn" title="Play Playlist">
+            <i class="fa-solid fa-play"></i>
+          </button>
+          <button class="playlist-action-btn" id="export-playlist-btn" title="Export Playlist">
+            <i class="fa-solid fa-download"></i>
+          </button>
+          <button class="playlist-action-btn" id="playlist-clear-btn" title="Clear Playlist">
+            <i class="fa-solid fa-trash"></i>
+          </button>
+        </div>
+      </div>
+      <div class="playlist-mode-indicator" id="playlist-mode-indicator" style="display: none;">
+        <i class="fa-solid fa-compact-disc fa-spin"></i>
+        <span>Playing Playlist</span>
+      </div>
+      <div class="playlist-items" id="playlist-items">
+        <!-- Playlist items will be dynamically generated -->
+      </div>
+    </div>
+    
+    <!-- Main Content Wrapper -->
+    <div class="music-modal-content">
+      <div class="music-modal-header">
+        <div class="music-modal-title">
+          <i class="fa-solid fa-music"></i>
+          <span data-i18n="music.title">My Music Collection</span>
+          <span class="playlist-playing-badge" id="playlist-playing-badge" style="display: none;">
+            <i class="fa-solid fa-list-check"></i> Playlist
+          </span>
+        </div>
+        <div class="music-modal-controls">
+          <button class="music-modal-btn playlist-toggle-btn" id="playlist-toggle-btn" title="My Playlist">
+            <img src="img/playlist-icon.png" alt="Playlist" class="playlist-toggle-icon">
+          </button>
+          <button class="music-modal-btn minimize-btn" id="minimize-modal-btn" aria-label="Minimize">
+            <i class="fa-solid fa-minus"></i>
+          </button>
+          <button class="music-modal-btn close-btn" id="close-modal-btn" aria-label="Close">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+      </div>
+      
+      <div class="music-album-grid" id="music-album-grid">
+        <!-- Album cards will be dynamically generated -->
+      </div>
+      
+      <div class="music-player" id="music-player" style="display: none;">
+        <div class="music-player-info">
+          <img class="music-player-cover" id="player-cover" src="" alt="Album Cover">
+          <div class="music-player-details">
+            <div class="music-player-title" id="player-title">Select a song</div>
+          </div>
+        </div>
+        <div class="music-player-controls">
+          <button class="music-player-btn shuffle-btn" id="shuffle-btn" title="Shuffle" data-i18n-title="music.shuffle">
+            <i class="fa-solid fa-shuffle"></i>
+          </button>
+          <button class="music-player-btn" id="prev-btn" aria-label="Previous">
+            <i class="fa-solid fa-backward-step"></i>
+          </button>
+          <button class="music-player-btn play-btn" id="main-play-btn" aria-label="Play">
+            <i class="fa-solid fa-play"></i>
+          </button>
+          <button class="music-player-btn" id="next-btn" aria-label="Next">
+            <i class="fa-solid fa-forward-step"></i>
+          </button>
+          <div class="player-volume-container">
+            <button class="music-player-btn volume-btn" id="volume-btn" aria-label="Volume">
+              <i class="fa-solid fa-volume-high"></i>
+            </button>
+            <input type="range" class="player-volume-slider" id="player-volume-slider" min="0" max="100" value="100">
+          </div>
+        </div>
+        <div class="music-progress-container">
+          <span class="music-progress-time" id="current-time">0:00</span>
+          <div class="music-progress-bar" id="music-progress-bar">
+            <div class="music-progress-fill" id="music-progress-fill"></div>
+          </div>
+          <span class="music-progress-time" id="duration-time">0:00</span>
+        </div>
+        <div class="music-player-extras">
+          <div class="player-speed-control">
+            <button class="speed-btn active" data-speed="1">1x</button>
+            <button class="speed-btn" data-speed="1.25">1.25x</button>
+            <button class="speed-btn" data-speed="1.5">1.5x</button>
+            <button class="speed-btn" data-speed="2">2x</button>
+          </div>
+          <a class="player-download-btn" id="player-download-btn" href="" download title="Download" data-i18n-title="music.download">
+            <i class="fa-solid fa-download"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mini Music Player (shown when modal is minimized) -->
+  <div class="mini-music-player" id="mini-music-player">
+    <div class="mini-player-header">
+      <img class="mini-player-cover" id="mini-player-cover" src="" alt="Cover">
+      <div class="music-player-title" id="mini-player-title">Select a song</div>
+      <div class="mini-player-actions">
+        <button class="mini-player-expand" id="expand-player-btn" aria-label="Expand">
+          <i class="fa-solid fa-expand"></i>
+        </button>
+        <button class="mini-player-close" id="mini-close-btn" aria-label="Close">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+    </div>
+    <div class="music-player-controls">
+      <button class="music-player-btn" id="mini-prev-btn" aria-label="Previous">
+        <i class="fa-solid fa-backward-step"></i>
+      </button>
+      <button class="music-player-btn play-btn" id="mini-play-btn" aria-label="Play">
+        <i class="fa-solid fa-play"></i>
+      </button>
+      <button class="music-player-btn" id="mini-next-btn" aria-label="Next">
+        <i class="fa-solid fa-forward-step"></i>
+      </button>
+    </div>
+    <div class="mini-player-volume">
+      <button class="music-player-btn mini-volume-btn" id="mini-volume-btn" aria-label="Volume">
+        <i class="fa-solid fa-volume-high"></i>
+      </button>
+      <input type="range" class="mini-volume-slider" id="mini-volume-slider" min="0" max="100" value="100">
+    </div>
+  </div>
 
   <footer>
     <div class="container">

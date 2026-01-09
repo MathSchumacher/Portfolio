@@ -182,7 +182,19 @@
         "ativarecargas": "ativarecargas.com",
         "unitplay": "UniT Play",
         "axio": "AXIO",
-        "arcadelunar": "Arcade Lunar"
+        "arcadelunar": "Arcade Lunar",
+        "yolo_car_detection": "Rede YOLO de Detecção de Carros",
+        "export_html_pdf": "Export HTML PDF"
+    },
+    "music": {
+        "title": "Minha Coleção de Músicas",
+        "shuffle": "Aleatório",
+        "download": "Baixar",
+        "speed": "Velocidade",
+        "add_playlist": "Adicionar à Playlist",
+        "create_playlist": "Criar Playlist",
+        "playlist": "Playlist",
+        "clear_playlist": "Limpar Playlist"
     },
     "experience": {
         "title": "Experiência",
