@@ -4296,6 +4296,55 @@ body.light .mini-music-player {
   color: #ef4444;
 }
 
+/* Playlist Indicator in Mini Player */
+.mini-playlist-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(0, 255, 255, 0.15);
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  color: #0ff;
+  box-shadow: 0 0 12px rgba(0, 255, 255, 0.2);
+  animation: miniPulse 2s infinite;
+  margin-top: -8px; /* Slight adjust */
+}
+
+@keyframes miniPulse {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 255, 255, 0.4); }
+  70% { transform: scale(1.1); box-shadow: 0 0 0 6px rgba(0, 255, 255, 0); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 255, 255, 0); }
+}
+
+body.light .mini-playlist-indicator {
+  background: rgba(59, 130, 246, 0.15);
+  border-color: rgba(59, 130, 246, 0.3);
+  color: #3b82f6;
+  box-shadow: 0 0 12px rgba(59, 130, 246, 0.2);
+  animation: miniPulseLight 2s infinite;
+}
+
+@keyframes miniPulseLight {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4); }
+  70% { transform: scale(1.1); box-shadow: 0 0 0 6px rgba(59, 130, 246, 0); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+}
+
+/* Mini Shuffle Active State */
+.mini-music-player .shuffle-btn.active {
+  color: #0ff;
+  background: rgba(0, 255, 255, 0.1);
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+}
+
+body.light .mini-music-player .shuffle-btn.active {
+  color: #3b82f6;
+  background: rgba(59, 130, 246, 0.1);
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.2);
+}
+
 /* ===== Music Player Extra Features ===== */
 
 /* Music Modal Flex Layout */

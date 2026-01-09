@@ -1049,6 +1049,9 @@
     <div class="mini-player-header">
       <img class="mini-player-cover" id="mini-player-cover" src="" alt="Cover">
       <div class="music-player-title" id="mini-player-title">Select a song</div>
+      <div class="mini-playlist-indicator" id="mini-playlist-indicator" title="Playlist Active" style="display: none;">
+        <i class="fa-solid fa-list-ul"></i>
+      </div>
       <div class="mini-player-actions">
         <button class="mini-player-expand" id="expand-player-btn" aria-label="Expand">
           <i class="fa-solid fa-expand"></i>
@@ -1059,6 +1062,9 @@
       </div>
     </div>
     <div class="music-player-controls">
+      <button class="music-player-btn shuffle-btn" id="mini-shuffle-btn" title="Shuffle" data-i18n-title="music.shuffle">
+        <i class="fa-solid fa-shuffle"></i>
+      </button>
       <button class="music-player-btn" id="mini-prev-btn" aria-label="Previous">
         <i class="fa-solid fa-backward-step"></i>
       </button>

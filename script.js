@@ -1324,6 +1324,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Card click - play song
         card.addEventListener('click', (e) => {
           if (!e.target.closest('.album-card-star')) {
+            setPlaylistMode(false); // User requested: Disable playlist mode on manual selection
             playSong(index);
           }
         });
@@ -1375,6 +1376,15 @@ document.addEventListener('DOMContentLoaded', () => {
       const icon = isPlaying ? 'fa-pause' : 'fa-play';
       mainPlayBtn.querySelector('i').className = `fa-solid ${icon}`;
       miniPlayBtn.querySelector('i').className = `fa-solid ${icon}`;
+      
+      // Update Playlist Play Button if in playlist mode or just sync icon?
+      // User request: "when the playlist is already being played, it should become a Pause button"
+      // If we are playing (any song) AND playlist mode is active, show pause.
+      if (playPlaylistBtn) {
+        const playlistIcon = (playlistMode && isPlaying) ? 'fa-pause' : 'fa-play';
+        const iconEl = playPlaylistBtn.querySelector('i');
+        if (iconEl) iconEl.className = `fa-solid ${playlistIcon}`;
+      }
     }
     
     // Update active card visual
@@ -1730,6 +1740,11 @@ document.addEventListener('DOMContentLoaded', () => {
       if (playlistPlayingBadge) {
         playlistPlayingBadge.style.display = enabled ? 'inline-flex' : 'none';
       }
+      // Mini Player Indicator
+      const miniIndicator = document.getElementById('mini-playlist-indicator');
+      if (miniIndicator) {
+        miniIndicator.style.display = enabled ? 'flex' : 'none';
+      }
     }
     
     if (playlistToggleBtn) {
@@ -1751,8 +1766,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (playPlaylistBtn) {
       playPlaylistBtn.addEventListener('click', () => {
         if (userPlaylist.length > 0) {
-          setPlaylistMode(true);
-          playSong(userPlaylist[0]);
+          if (!playlistMode) {
+            setPlaylistMode(true);
+            playSong(userPlaylist[0]);
+          } else {
+            togglePlay();
+          }
         }
       });
     }
@@ -1802,6 +1821,40 @@ document.addEventListener('DOMContentLoaded', () => {
       return result;
     };
     
+    // Mini Player New Controls
+    const miniShuffleBtn = document.getElementById('mini-shuffle-btn');
+    // miniPrevBtn and miniNextBtn are already declared at the top scope
+
+    if (miniShuffleBtn) {
+      miniShuffleBtn.addEventListener('click', () => {
+        shuffleMode = !shuffleMode;
+        // Update both buttons
+        const iconClass = shuffleMode ? 'fa-shuffle active' : 'fa-shuffle'; // Need CSS for active
+        if (shuffleBtn) shuffleBtn.classList.toggle('active', shuffleMode);
+        miniShuffleBtn.classList.toggle('active', shuffleMode);
+      });
+    }
+
+    // Sync validation check for main shuffle button too (if not handled elsewhere)
+    if (shuffleBtn) {
+      shuffleBtn.addEventListener('click', () => {
+         // Existing listener toggles shuffleMode, just ensure validation syncs mini
+         if (miniShuffleBtn) miniShuffleBtn.classList.toggle('active', shuffleMode);
+      });
+    }
+
+    if (miniPrevBtn) {
+      miniPrevBtn.addEventListener('click', () => {
+        playSong(getPrevIndex());
+      });
+    }
+
+    if (miniNextBtn) {
+      miniNextBtn.addEventListener('click', () => {
+        playSong(getNextIndex());
+      });
+    }
+
     // Initialize
     renderAlbumGrid();
   })();
