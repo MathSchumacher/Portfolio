@@ -10,11 +10,35 @@ document.addEventListener('DOMContentLoaded', () => {
     'es': 'Español'
   };
 
-  // Determine initial language: LocalStorage -> Browser Preference -> Default 'en'
-  let currentLang = localStorage.getItem('lang') || (navigator.language.startsWith('pt') ? 'pt' : 'en');
+  // Helper function to get URL parameter
+  function getUrlLang() {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get('lang');
+  }
+
+  // Helper function to update URL with language parameter
+  function updateUrlLang(lang) {
+    const url = new URL(window.location);
+    url.searchParams.set('lang', lang);
+    window.history.replaceState({}, '', url);
+  }
+
+  // Determine initial language: URL Parameter -> LocalStorage -> Browser Preference -> Default 'en'
+  const urlLang = getUrlLang();
+  let currentLang = urlLang || localStorage.getItem('lang') || (navigator.language.startsWith('pt') ? 'pt' : 'en');
   
   // Ensure it's a supported language, otherwise fallback to 'en'
   if (!supportedLanguages[currentLang]) currentLang = 'en';
+
+  // If URL had a valid language, save it to localStorage
+  if (urlLang && supportedLanguages[urlLang]) {
+    localStorage.setItem('lang', urlLang);
+  }
+
+  // Update URL with current language if not already set
+  if (!urlLang) {
+    updateUrlLang(currentLang);
+  }
 
   // Initialize
   updateLanguage(currentLang);
@@ -54,9 +78,16 @@ document.addEventListener('DOMContentLoaded', () => {
       // 3. Update State
       currentLang = lang;
       localStorage.setItem('lang', lang);
+      updateUrlLang(lang); // Keep URL in sync with selected language
       document.documentElement.lang = lang; // Accessibility update
 
-      // 4. Re-render Language Dropdown Options
+      // 4. Update Resume link to include language parameter
+      const resumeLink = document.querySelector('a[href="Matheus-Schumacher-Resume.html"]');
+      if (resumeLink) {
+        resumeLink.href = `Matheus-Schumacher-Resume.html?lang=${lang}`;
+      }
+
+      // 5. Re-render Language Dropdown Options
       renderLanguageOptions();
 
     } catch (error) {

@@ -1385,10 +1385,35 @@
 <!-- i18n Translation Script -->
 <script>
 (function() {
-    // Read language from localStorage (same as main portfolio)
+    // Read language priority: URL Parameter -> localStorage -> browser preference
     const supportedLanguages = ['pt', 'en', 'es'];
-    let currentLang = localStorage.getItem('lang') || (navigator.language.startsWith('pt') ? 'pt' : 'en');
+    
+    // Get language from URL parameter
+    function getUrlLang() {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get('lang');
+    }
+    
+    // Update URL with language parameter
+    function updateUrlLang(lang) {
+        const url = new URL(window.location);
+        url.searchParams.set('lang', lang);
+        window.history.replaceState({}, '', url);
+    }
+    
+    const urlLang = getUrlLang();
+    let currentLang = urlLang || localStorage.getItem('lang') || (navigator.language.startsWith('pt') ? 'pt' : 'en');
     if (!supportedLanguages.includes(currentLang)) currentLang = 'en';
+    
+    // If URL had a valid language, save it to localStorage
+    if (urlLang && supportedLanguages.includes(urlLang)) {
+        localStorage.setItem('lang', urlLang);
+    }
+    
+    // Update URL with current language if not already set
+    if (!urlLang) {
+        updateUrlLang(currentLang);
+    }
 
     // Fetch translations and apply
     async function applyTranslations() {
@@ -1405,6 +1430,11 @@
             });
             
             document.documentElement.lang = currentLang;
+            
+            // Update "Back to Portfolio" links to include language parameter
+            document.querySelectorAll('a[href="index.html"]').forEach(link => {
+                link.href = `index.html?lang=${currentLang}`;
+            });
         } catch (e) {
             console.error('Translation error:', e);
         }
