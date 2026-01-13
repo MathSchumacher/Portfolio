@@ -1119,7 +1119,7 @@ document.addEventListener('DOMContentLoaded', () => {
       "B-Sides & Rarities", "Blue Noise in My Bones", "Brasil, Aqui Tudo É Normal",
       "Cassette Tape Summer", "Castelo de Areia (Antes da Maré)", "Celestial Whisper",
       "Chasing the Neon Gold", "Concrete & Ivy", "Confetti in the Dark",
-      "Dreamcatcher's Paradox", "Dust Mote Ballet",
+      "Dreamcatcher’s Paradox", "Dust Mote Ballet",
       "Echoes of the Rising", "Echoes of the West (Stone & Fire)", "ERROR 404_ YOUTH",
       "Even in Ash, The Heartsong Sings", "Exploding Hearts",
       "Fire from the Mountain (Prometheus Unbound)", "Furacão de All Star",
@@ -1127,7 +1127,7 @@ document.addEventListener('DOMContentLoaded', () => {
       "Gravity & Dust (The Weight of Us)", "Half-life Of You", "If you ever come back here",
       "Into the Eye", "Iron Boulevards", "JOMO (Joy of Missing Out)", "Kingdom of this Broken Girl",
       "Lantern of the Lost", "Laplace’s Demon (The Glitch in the Math)", "Luminous Threads",
-      "Meteoros Apaixonados", "Moonlight in my Bones", "O Astrounauta de Quintal",
+      "Meteoros Apaixonados", "Moonlight in My Bones", "O Astrounauta de Quintal",
       "O Céu Também Sorri", "O Mundo Ficou Pequeno Demais Para Mim", "Off the Scales",
       "Overclocked (Into the Zone)", "Pajama Couture", "Paper Hearts & Gasoline Vibe",
       "Paper Lanterns (The Echo of Us)", "Paper Satellites", "Por Acaso (Você Chegou)",
@@ -1184,7 +1184,7 @@ document.addEventListener('DOMContentLoaded', () => {
       "Gravity & Dust (The Weight of Us)", "Half-life Of You", "If you ever come back here",
       "Into the Eye", "Iron Boulevards", "JOMO (Joy Of Missing Out)", "Kingdom of this Broken Girl",
       "Lantern of the Lost", "Laplace's Demon (The Glitch in the Math)", "Luminous Threads",
-      "Meteoros Apaixonados", "Moonlight in my Bones", "O Astrounauta de Quintal",
+      "Meteoros Apaixonados", "Moonlight in My Bones", "O Astrounauta de Quintal",
       "O Céu Também Sorri", "O Mundo Ficou Pequeno Demais Para Mim", "Off the Scales",
       "Overclocked (Into the Zone)", "Pajama Couture", "Paper Hearts & Gasoline",
       "Paper Lanterns (The Echo of Us)", "Paper Satellites", "Por Acaso (Você Chegou)",
@@ -1206,7 +1206,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Manual mappings for tricky cases (Cover Name -> R2 Name)
     const matchMappings = {
-      "Running Forward": "Running Foward" // Typo in R2 file
+      "Running Forward": "Running Foward", // Typo in R2 file
+      "Moonlight in My Bones": "Moonlight in My Bones", // Ensure exact match
+      "Dreamcatcher’s Paradox": "Dreamcatcher’s Paradox" // Straight apostrophe to curly (U+2019)
     };
 
     // Find correct R2 filename (Smart Matching)
