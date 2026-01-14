@@ -80,6 +80,9 @@ document.addEventListener('DOMContentLoaded', () => {
       localStorage.setItem('lang', lang);
       updateUrlLang(lang); // Keep URL in sync with selected language
       document.documentElement.lang = lang; // Accessibility update
+      
+      // Expose translations globally for other components (e.g., toggle buttons)
+      window.currentTranslations = translations;
 
       // 4. Update Resume link to include language parameter
       const resumeLink = document.querySelector('a[href="Matheus-Schumacher-Resume.html"]');
@@ -1861,4 +1864,240 @@ document.addEventListener('DOMContentLoaded', () => {
     renderAlbumGrid();
   })();
 
+  // ==================================================
+  // LIGHTWEIGHT ANIMATION SYSTEM (Optimized)
+  // ==================================================
+  (function initAnimations() {
+    // Check if GSAP is loaded
+    if (typeof gsap === 'undefined') {
+      console.warn('GSAP not loaded. Animations disabled.');
+      return;
+    }
+
+    // Register ScrollTrigger if available
+    if (typeof ScrollTrigger !== 'undefined') {
+      gsap.registerPlugin(ScrollTrigger);
+    }
+
+    // --------------------------------------------------
+    // 1. HERO SECTION - NO ENTRANCE ANIMATIONS
+    // Above-the-fold content loads instantly for best UX
+    // --------------------------------------------------
+
+    // --------------------------------------------------
+    // 2. SCROLL-TRIGGERED ANIMATIONS (Below the fold only)
+    // --------------------------------------------------
+    // --------------------------------------------------
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px 0px -50px 0px',
+      threshold: 0.1
+    };
+
+    // Animate elements when they enter viewport
+    const animateOnScroll = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-in');
+          animateOnScroll.unobserve(entry.target); // Only animate once
+        }
+      });
+    }, observerOptions);
+
+    // Apply to project cards
+    document.querySelectorAll('.projeto-card').forEach((card, index) => {
+      card.style.transitionDelay = `${index * 0.04}s`;
+      animateOnScroll.observe(card);
+    });
+
+    // Apply to section headers
+    document.querySelectorAll('section h2').forEach(header => {
+      animateOnScroll.observe(header);
+    });
+
+    // Apply to skill items
+    document.querySelectorAll('.skill').forEach((skill, index) => {
+      skill.style.transitionDelay = `${index * 0.03}s`;
+      animateOnScroll.observe(skill);
+    });
+
+    // Apply to experience cards
+    document.querySelectorAll('.experience-card').forEach((card, index) => {
+      card.style.transitionDelay = `${index * 0.05}s`;
+      animateOnScroll.observe(card);
+    });
+
+    // --------------------------------------------------
+    // 4. XP BARS - Direct Width Assignment (Fixed)
+    // --------------------------------------------------
+    const xpObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const bar = entry.target;
+          // Apply width directly from dataset - NO variable needed
+          bar.style.width = bar.dataset.targetWidth;
+          xpObserver.unobserve(bar);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    document.querySelectorAll('.xp-progress').forEach(bar => {
+      // Store target width from the inline style (e.g., width: 90%)
+      // If width is empty, default to 0 to avoid errors
+      const currentWidth = bar.style.width || '0%';
+      bar.dataset.targetWidth = currentWidth;
+      
+      // Reset width to 0 for initial state
+      bar.style.width = '0%';
+      
+      // Ensure transition property is set for smoothness
+      bar.style.transition = 'width 1s ease-out';
+      
+      xpObserver.observe(bar);
+    });
+
+    // --------------------------------------------------
+    // 3. PROJECT CARDS - STAGGERED REVEAL
+    // --------------------------------------------------
+
+    // --------------------------------------------------
+    // 5. ABOUT SECTION EXPANSION (Fixed Listener)
+    // --------------------------------------------------
+    const toggleTrajetoriaBtn = document.getElementById('toggle-trajetoria');
+    const carouselContainerAbout = document.querySelector('.carousel-container');
+    const resumidaAbout = document.querySelector('.trajetoria-resumida');
+    
+    if (toggleTrajetoriaBtn && carouselContainerAbout && resumidaAbout) {
+      // Remove old listeners by cloning
+      const newBtn = toggleTrajetoriaBtn.cloneNode(true);
+      if (toggleTrajetoriaBtn.parentNode) {
+        toggleTrajetoriaBtn.parentNode.replaceChild(newBtn, toggleTrajetoriaBtn);
+      }
+      
+      carouselContainerAbout.style.height = '0';
+      carouselContainerAbout.style.opacity = '0';
+      carouselContainerAbout.style.overflow = 'hidden';
+      carouselContainerAbout.style.transition = 'all 0.5s ease-in-out';
+      
+      let isExpanded = false;
+      
+      newBtn.addEventListener('click', () => {
+        if (!isExpanded) {
+          // Expand
+          resumidaAbout.style.opacity = '0';
+          resumidaAbout.style.height = '0';
+          setTimeout(() => { resumidaAbout.style.display = 'none'; }, 300);
+          
+          carouselContainerAbout.style.display = 'block';
+          setTimeout(() => {
+             carouselContainerAbout.style.height = 'auto'; 
+             carouselContainerAbout.style.opacity = '1';
+          }, 10);
+          
+          // Update button text to "Less Details" (i18n aware)
+          const lessText = window.currentTranslations?.about?.btn_less || 'Less Details';
+          newBtn.textContent = lessText;
+          newBtn.setAttribute('data-i18n', 'about.btn_less');
+          
+          isExpanded = true;
+        } else {
+          // Collapse
+          carouselContainerAbout.style.height = '0';
+          carouselContainerAbout.style.opacity = '0';
+          carouselContainerAbout.style.overflow = 'hidden'; // Ensure content is clipped
+          
+          resumidaAbout.style.display = 'block';
+          setTimeout(() => {
+             resumidaAbout.style.height = 'auto';
+             resumidaAbout.style.opacity = '1';
+          }, 300);
+          
+          // Remove from layout after transition matches (0.5s)
+          setTimeout(() => {
+             if (!isExpanded) {
+               carouselContainerAbout.style.display = 'none';
+             }
+          }, 500);
+          
+          // Update button text to "More Details" (i18n aware)
+          const moreText = window.currentTranslations?.about?.btn_more || 'More Details';
+          newBtn.textContent = moreText;
+          newBtn.setAttribute('data-i18n', 'about.btn_more');
+          
+          isExpanded = false;
+        }
+      });
+    }
+
+    // --------------------------------------------------
+    // 6. PROJECTS EXPANSION (Fixed Listener)
+    // --------------------------------------------------
+    const toggleProjectsBtn = document.getElementById('see-more-projects');
+    // Select all cards that have the .project-hidden class
+    const hiddenProjects = document.querySelectorAll('.projeto-card.project-hidden');
+
+    if (toggleProjectsBtn && hiddenProjects.length > 0) {
+      // Remove old listeners by cloning
+      const newBtn = toggleProjectsBtn.cloneNode(true);
+      if (toggleProjectsBtn.parentNode) {
+        toggleProjectsBtn.parentNode.replaceChild(newBtn, toggleProjectsBtn);
+      }
+
+      // Initial state: ensure they are hidden if not already
+      // We check display style to respect current state if reloading
+      // But to be safe and match "Show More" text, we force hide initially or check state?
+      // Better to force hide to match the initial "See More" button state.
+      hiddenProjects.forEach(el => {
+        el.style.display = 'none';
+        el.style.opacity = '0'; 
+      });
+
+      let isProjectsExpanded = false;
+
+      newBtn.addEventListener('click', () => {
+        if (!isProjectsExpanded) {
+          // EXPANDE
+          hiddenProjects.forEach((el, index) => {
+            el.style.display = 'block';
+            // Stagger reveal
+            setTimeout(() => {
+              el.classList.add('animate-in');
+              el.style.opacity = '1';
+              el.style.transform = 'translateY(0)';
+            }, 50 + (index * 50)); 
+          });
+
+          // Update text (Show Less)
+          // i18n keys: projects.show_less
+          const showLessText = window.currentTranslations?.projects?.show_less || 'Show Less';
+          newBtn.innerHTML = `<i class="fa-solid fa-chevron-up"></i> ${showLessText}`;
+          newBtn.setAttribute('data-i18n', 'projects.show_less'); // Persist for language switch
+
+          isProjectsExpanded = true;
+        } else {
+          // COLAPSA
+          hiddenProjects.forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            setTimeout(() => {
+              el.style.display = 'none';
+              el.classList.remove('animate-in');
+            }, 300);
+          });
+
+          // Update text (See More)
+          // i18n keys: projects.see_more
+          const seeMoreText = window.currentTranslations?.projects?.see_more || 'See More Projects';
+          newBtn.innerHTML = `<i class="fa-solid fa-chevron-down"></i> ${seeMoreText}`;
+          newBtn.setAttribute('data-i18n', 'projects.see_more'); // Persist for language switch
+
+          isProjectsExpanded = false;
+        }
+      });
+    }
+
+    console.log('✨ Lightweight animations initialized');
+  })();
+
 });
+

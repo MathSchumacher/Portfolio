@@ -77,6 +77,7 @@
         "hobbies_p4": "Outside the universe of reading, movies, and games, I like to cook and experiment with new dishes, improving recipes and creating my own versions. This passion for cooking combines creativity, patience, and attention to details — qualities that I also apply in software development and design projects.",
         "hobbies_p5": "I have a versatile musical style and like to explore different genres. To make it easier, you can check my playlist on Spotify:",
         "btn_more": "More Details",
+        "btn_less": "Less Details",
         "btn_summary": "Show Summary Version"
     },
     "skills": {
@@ -232,7 +233,7 @@
         }
     },
     "footer": {
-        "rights": "&copy; 2025 Matheus Schumacher. All rights reserved."
+        "rights": "&copy; 2026 Matheus Schumacher. All rights reserved."
     },
     "resume": {
         "nav_back": "Back to Portfolio",
