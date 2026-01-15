@@ -19,7 +19,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="styles.css" />
+  <!-- Desktop Only (>768px) -->
+  <link rel="stylesheet" href="styles.css" media="(min-width: 769px)" />
+  <!-- Mobile Only (<=768px) -->
+  <link rel="stylesheet" href="mobile.css?v=2" media="(max-width: 768px)" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
@@ -35,6 +38,26 @@
 
 
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=translate" />
+  
+  <!-- Mobile Dropdown Centering Fix (Inline for maximum priority) -->
+  <style>
+    @media (max-width: 768px) {
+      .dropdown-content.show,
+      #contact-dropdown.show,
+      #language-options.show {
+        display: flex !important;
+        position: fixed !important;
+        top: 50% !important;
+        left: 50% !important;
+        right: auto !important;
+        bottom: auto !important;
+        transform: translate(-50%, -50%) !important;
+        width: 90% !important;
+        max-width: 340px !important;
+        margin: 0 !important;
+      }
+    }
+  </style>
 </head>
 <body>
   <!-- Animated Background Orbs -->
@@ -47,7 +70,10 @@
 
   <header>
     <div class="container nav" role="navigation" aria-label="Principal">
-      <div class="brand">Matheus Muccillo Schumacher</div>
+      <div class="brand">
+        <span class="brand-desktop">Matheus Muccillo Schumacher</span>
+        <span class="brand-mobile">Matheus M.<br>Schumacher</span>
+      </div>
       <nav class="nav-actions" aria-label="Sections">
         <a href="#sobre" data-i18n="nav.about">About</a>
         <a href="#habilidades" data-i18n="nav.skills">Skills</a>
@@ -65,7 +91,8 @@
             <span class="menu-icon"><i class="fa-solid fa-bars"></i></span> 
             <span data-i18n="nav.contact">Contact</span>
           </a>
-          <div class="dropdown-content">
+          <div class="dropdown-content" id="contact-dropdown">
+            <button class="mobile-close-btn" aria-label="Close menu"><i class="fa-solid fa-xmark"></i></button>
             <a href="mailto:matheusmschumacher@gmail.com" target="_blank">
               <img src="img/message.png" alt="Email" class="icon">Email: Matheusmschumacher@gmail.com
             </a>
@@ -1099,18 +1126,189 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jsrsasign/10.5.27/jsrsasign-all-min.js"></script>
   <script src="https://apis.google.com/js/api.js"></script>
   <script src="script.js"></script>
+  
+  <!-- Mobile-specific dropdown and close button handlers -->
+  <script>
+    (function() {
+      // Check if mobile viewport
+      var isMobile = window.matchMedia('(max-width: 768px)').matches;
+      console.log('Viewport check - isMobile:', isMobile);
+      if (!isMobile) return;
+      
+      console.log('Mobile mode detected - initializing mobile dropdowns');
+      
+      function initMobileUI() {
+        // Get specific dropdown elements
+        var contactTrigger = document.querySelector('.btn-contact');
+        var contactDropdown = document.getElementById('contact-dropdown');
+        var langTrigger = document.querySelector('.translate-btn');
+        var langDropdown = document.getElementById('language-options');
+        
+        console.log('Elements found:', {
+          contactTrigger: !!contactTrigger,
+          contactDropdown: !!contactDropdown,
+          langTrigger: !!langTrigger,
+          langDropdown: !!langDropdown
+        });
+        
+        // Remove default Bootstrap data attributes if present to prevent interference
+        if (contactTrigger) {
+          contactTrigger.removeAttribute('data-bs-toggle');
+          contactTrigger.removeAttribute('data-toggle');
+        }
+        if (langTrigger) {
+          langTrigger.removeAttribute('data-bs-toggle');
+          langTrigger.removeAttribute('data-toggle');
+        }
+        
+        // Store original parent references for restoring later
+        var contactDropdownParent = contactDropdown ? contactDropdown.parentElement : null;
+        var langDropdownParent = langDropdown ? langDropdown.parentElement : null;
+        
+        // Force center dropdown by moving to body (escapes backdrop-filter containing block)
+        function forceCenterDropdown(dropdown) {
+          if (!dropdown) return;
+          // Move to body to escape header's backdrop-filter containing block
+          document.body.appendChild(dropdown);
+          var s = dropdown.style;
+          s.setProperty('display', 'flex', 'important');
+          s.setProperty('position', 'fixed', 'important');
+          s.setProperty('top', '50%', 'important');
+          s.setProperty('left', '50%', 'important');
+          s.setProperty('right', 'auto', 'important');
+          s.setProperty('bottom', 'auto', 'important');
+          s.setProperty('transform', 'translate(-50%, -50%)', 'important');
+          s.setProperty('width', '90%', 'important');
+          s.setProperty('max-width', '340px', 'important');
+          s.setProperty('margin', '0', 'important');
+          s.setProperty('z-index', '10002', 'important');
+        }
+        
+        function resetDropdownStyles(dropdown, originalParent) {
+          if (!dropdown) return;
+          dropdown.removeAttribute('style');
+          // Move back to original parent
+          if (originalParent) {
+            originalParent.appendChild(dropdown);
+          }
+        }
+        
+        // Contact dropdown toggle
+        if (contactTrigger && contactDropdown) {
+          contactTrigger.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('Contact trigger clicked');
+            // Close language dropdown if open
+            if (langDropdown) {
+              langDropdown.classList.remove('show');
+              resetDropdownStyles(langDropdown, langDropdownParent);
+            }
+            contactDropdown.classList.toggle('show');
+            if (contactDropdown.classList.contains('show')) {
+              forceCenterDropdown(contactDropdown);
+            } else {
+              resetDropdownStyles(contactDropdown, contactDropdownParent);
+            }
+            console.log('Contact dropdown show class:', contactDropdown.classList.contains('show'));
+          }, true); // Use capture phase
+        }
+        
+        // Language dropdown toggle
+        if (langTrigger && langDropdown) {
+          langTrigger.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('Language trigger clicked');
+            // Close contact dropdown if open
+            if (contactDropdown) {
+              contactDropdown.classList.remove('show');
+              resetDropdownStyles(contactDropdown, contactDropdownParent);
+            }
+            langDropdown.classList.toggle('show');
+            if (langDropdown.classList.contains('show')) {
+              forceCenterDropdown(langDropdown);
+            } else {
+              resetDropdownStyles(langDropdown, langDropdownParent);
+            }
+            console.log('Language dropdown show class:', langDropdown.classList.contains('show'));
+          }, true); // Use capture phase
+        }
+        
+        // Close button handler (using event delegation)
+        document.addEventListener('click', function(e) {
+          if (e.target.closest('.mobile-close-btn')) {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('Close button clicked');
+            var dropdown = e.target.closest('.dropdown-content');
+            if (dropdown) {
+              dropdown.classList.remove('show');
+              // Determine correct parent
+              var parent = (dropdown === contactDropdown) ? contactDropdownParent : langDropdownParent;
+              resetDropdownStyles(dropdown, parent);
+            }
+          }
+        }, true);
+        
+        // Click outside to close
+        document.addEventListener('click', function(e) {
+          // If clicking outside any dropdown and outside triggers
+          if (!e.target.closest('.dropdown-content') && 
+              !e.target.closest('.btn-contact') && 
+              !e.target.closest('.translate-btn')) {
+            // Close all open dropdowns
+            if (contactDropdown && contactDropdown.classList.contains('show')) {
+              contactDropdown.classList.remove('show');
+              resetDropdownStyles(contactDropdown, contactDropdownParent);
+            }
+            if (langDropdown && langDropdown.classList.contains('show')) {
+              langDropdown.classList.remove('show');
+              resetDropdownStyles(langDropdown, langDropdownParent);
+            }
+          }
+        });
+        
+        // Inject close button into language options when populated
+        function addLangCloseButton() {
+          if (langDropdown && langDropdown.children.length > 0 && !langDropdown.querySelector('.mobile-close-btn')) {
+            var closeBtn = document.createElement('button');
+            closeBtn.className = 'mobile-close-btn';
+            closeBtn.setAttribute('aria-label', 'Close menu');
+            closeBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+            langDropdown.insertBefore(closeBtn, langDropdown.firstChild);
+            console.log('Added close button to language dropdown');
+          }
+        }
+        
+        // Initial check
+        addLangCloseButton();
+        
+        // Observe for dynamic language options
+        if (langDropdown) {
+          var observer = new MutationObserver(addLangCloseButton);
+          observer.observe(langDropdown, { childList: true });
+        }
+        
+        console.log('Mobile UI initialization complete');
+      }
+      
+      // Execute when DOM is ready
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initMobileUI);
+      } else {
+        initMobileUI();
+      }
+    })();
+  </script>
+  
   <div id="spotify-player" class="spotify-player">
-  <iframe style="border-radius:12px"
-    src="https://open.spotify.com/embed/playlist/2JOIjqFF4YfSw5Wg8eLDjK?utm_source=generator"
-    width="300" height="152" frameborder="0"
-    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy">
-  </iframe>
-  <button id="close-spotify" class="close-spotify">×</button>
-</div>
-</body>
-</html>
-  </iframe>
-  <button id="close-spotify" class="close-spotify">×</button>
-</div>
+    <iframe style="border-radius:12px"
+      src="https://open.spotify.com/embed/playlist/2JOIjqFF4YfSw5Wg8eLDjK?utm_source=generator"
+      width="300" height="152" frameborder="0"
+      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy">
+    </iframe>
+    <button id="close-spotify" class="close-spotify">×</button>
+  </div>
 </body>
 </html>

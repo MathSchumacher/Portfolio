@@ -2,6 +2,12 @@
 *, *::before, *::after {
   box-sizing: border-box;
 }
+
+/* Hide mobile-only elements on desktop */
+.mobile-close-btn,
+.brand-mobile {
+  display: none !important;
+}
 html:focus-within {
   scroll-behavior: smooth;
 }
@@ -3646,9 +3652,10 @@ p {
     opacity: 0.8;
   }
 
-  /* Dropdown becomes a Bottom Sheet */
+  /* Dropdown becomes a Bottom Sheet - DISABLED: Now handled by mobile.css */
+  /*
   .nav-actions .dropdown .dropdown-content {
-    bottom: 70px; /* Above nav bar */
+    bottom: 70px;
     top: auto;
     left: 0;
     width: 100%;
@@ -3657,12 +3664,13 @@ p {
     border-radius: 20px 20px 0 0;
     background: var(--bg);
     border-top: 1px solid var(--border);
-    padding: 2rem 1rem 4rem; /* Extra padding bottom */
+    padding: 2rem 1rem 4rem;
   }
   
   .nav-actions .dropdown .dropdown-content.show {
     transform: translateY(0);
   }
+  */
 
   /* Hide Spotify to declutter */
   .spotify-player { display: none !important; }

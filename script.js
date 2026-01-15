@@ -1298,6 +1298,29 @@ document.addEventListener('DOMContentLoaded', () => {
     let playedIndices = [];
     let userPlaylist = []; // Session-based playlist
     
+    // Load playlist from localStorage
+    try {
+      const savedPlaylist = localStorage.getItem('sunoUserPlaylist');
+      if (savedPlaylist) {
+        userPlaylist = JSON.parse(savedPlaylist);
+      }
+    } catch (e) {
+      console.warn('Failed to load playlist', e);
+    }
+    
+    // Mobile View Management
+    function setMobileView(view) {
+      if (view === 'list') {
+        document.body.classList.add('mobile-view-list');
+        document.body.classList.remove('mobile-view-player');
+      } else if (view === 'player') {
+        document.body.classList.add('mobile-view-player');
+        document.body.classList.remove('mobile-view-list');
+      } else {
+        document.body.classList.remove('mobile-view-player', 'mobile-view-list');
+      }
+    }
+    
     // Generate album grid with star button for playlist
     function renderAlbumGrid() {
       albumGrid.innerHTML = '';
@@ -1329,7 +1352,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Card click - play song
         card.addEventListener('click', (e) => {
           if (!e.target.closest('.album-card-star')) {
-            setPlaylistMode(false); // User requested: Disable playlist mode on manual selection
+            // setPlaylistMode(false); // Removed as requested or not needed
             playSong(index);
           }
         });
@@ -1346,8 +1369,11 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
         userPlaylist.splice(pos, 1);
       }
+      // Save to localStorage
+      localStorage.setItem('sunoUserPlaylist', JSON.stringify(userPlaylist));
+      
       updateStarButtons();
-      renderPlaylist();
+      // renderPlaylist(); // If using separate playlist view
     }
     
     // Update star buttons to reflect playlist state
@@ -1381,15 +1407,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const icon = isPlaying ? 'fa-pause' : 'fa-play';
       mainPlayBtn.querySelector('i').className = `fa-solid ${icon}`;
       miniPlayBtn.querySelector('i').className = `fa-solid ${icon}`;
-      
-      // Update Playlist Play Button if in playlist mode or just sync icon?
-      // User request: "when the playlist is already being played, it should become a Pause button"
-      // If we are playing (any song) AND playlist mode is active, show pause.
-      if (playPlaylistBtn) {
-        const playlistIcon = (playlistMode && isPlaying) ? 'fa-pause' : 'fa-play';
-        const iconEl = playPlaylistBtn.querySelector('i');
-        if (iconEl) iconEl.className = `fa-solid ${playlistIcon}`;
-      }
     }
     
     // Update active card visual
@@ -1425,6 +1442,9 @@ document.addEventListener('DOMContentLoaded', () => {
       playerTitle.textContent = song.title;
       miniPlayerTitle.textContent = song.title;
       musicPlayer.style.display = '';
+      
+      // Switch to player view on mobile
+      setMobileView('player');
       
       // Track played songs for shuffle
       if (!playedIndices.includes(index)) {
