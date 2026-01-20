@@ -2062,3 +2062,175 @@ body.light #projetos > p {
     color: #000;
   }
 }
+
+/* ===== Experience Section Redesign & Polish (Mobile) ===== */
+#experiencia { 
+  padding: 60px 20px; 
+}
+
+#experiencia h2 { 
+  font-size: 2rem; 
+  margin-bottom: 2rem; 
+  text-align: center; 
+}
+
+/* Disable Owl Carousel Layout */
+#experiencia .owl-carousel { 
+  display: flex !important; 
+  flex-direction: column !important; 
+  gap: 24px !important; 
+}
+
+#experiencia .owl-stage-outer { 
+  overflow: visible !important; 
+}
+
+#experiencia .owl-stage { 
+  display: flex !important; 
+  flex-direction: column !important; 
+  width: 100% !important; 
+  transform: none !important; 
+}
+
+#experiencia .owl-item { 
+  width: 100% !important; 
+  margin-bottom: 0 !important; 
+}
+
+/* Redesign Cards (No Flip, Stacked) & Polish */
+#experiencia .card { 
+  height: auto !important; 
+  perspective: none !important; 
+  background: transparent !important; 
+  margin: 0 !important; 
+  width: 100% !important; 
+}
+
+#experiencia .card-inner { 
+  position: relative !important; 
+  width: 100% !important; 
+  height: auto !important; 
+  transform: none !important; 
+  transition: none !important; 
+  display: flex !important; 
+  flex-direction: column !important; 
+  overflow: hidden; 
+  
+  /* Polish Styles */
+  background: rgba(255, 255, 255, 0.03) !important; 
+  border: 1px solid rgba(255, 255, 255, 0.08) !important; 
+  backdrop-filter: blur(10px); 
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1); 
+  border-radius: var(--radius-lg);
+}
+
+/* Front - Becomes Header */
+#experiencia .card-front { 
+  position: relative !important; 
+  transform: none !important; 
+  backface-visibility: visible !important; 
+  height: auto !important; 
+  display: flex !important; 
+  flex-direction: row !important; 
+  align-items: center !important; 
+  justify-content: flex-start !important; 
+  gap: 16px; 
+  padding: 24px 20px !important; 
+  border-radius: 0 !important; 
+  
+  /* Polish Styles */
+  background: transparent !important; 
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05); 
+}
+
+#experiencia .card-front .frente { 
+  display: none !important; 
+}
+
+#experiencia .card-front .card-content { 
+  position: static !important; 
+  transform: none !important; 
+  display: flex !important; 
+  flex-direction: row !important; 
+  align-items: center !important; 
+  gap: 16px; 
+  width: 100%; 
+}
+
+#experiencia .logo { 
+  width: 56px !important; 
+  height: 56px !important; 
+  margin-bottom: 0 !important; 
+  object-fit: contain; 
+  
+  /* Polish Styles */
+  border-radius: 12px; 
+  background: rgba(255,255,255,0.05); 
+  padding: 8px; 
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2); 
+}
+
+#experiencia .empresa { 
+  font-weight: 700 !important; 
+  color: var(--text); 
+  
+  /* Polish Styles */
+  font-size: 1.4rem !important; 
+  background: linear-gradient(to right, #fff, #aaa); 
+  -webkit-background-clip: text; 
+  -webkit-text-fill-color: transparent; 
+  letter-spacing: 0.5px; 
+}
+
+/* Back - Becomes Body */
+#experiencia .card-back { 
+  position: relative !important; 
+  transform: none !important; 
+  backface-visibility: visible !important; 
+  height: auto !important; 
+  opacity: 1 !important; 
+  background: transparent !important; 
+  padding: 24px 20px !important; 
+  display: block !important; 
+}
+
+#experiencia .card-back-bg { 
+  display: none !important; 
+}
+
+#experiencia .card-back-content { 
+  transform: none !important; 
+  padding: 0 !important; 
+}
+
+#experiencia .card-back h3 { 
+  margin-bottom: 8px !important; 
+  color: var(--accent) !important; 
+  text-align: left !important; 
+  
+  /* Polish Styles */
+  font-size: 1.15rem !important; 
+  color: #fff !important; 
+  margin-top: 5px; 
+  margin-bottom: 5px !important; 
+  font-weight: 600; 
+}
+
+#experiencia .card-back p { 
+  text-align: left !important; 
+  margin-bottom: 10px; 
+  
+  /* Polish Styles */
+  font-size: 0.95rem !important; 
+  color: rgba(255,255,255,0.7) !important; 
+  line-height: 1.7; 
+}
+
+#experiencia .card-back p strong { 
+  color: #fff; 
+  font-weight: 600; 
+}
+
+#experiencia .card:hover .card-inner { 
+  transform: none !important; 
+}
