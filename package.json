@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "dev": "npx -y live-server --port=3000"
+  },
   "devDependencies": {
     "autoprefixer": "^10.4.21",
     "postcss": "^8.5.6",
