@@ -2001,6 +2001,18 @@
                 if (value) el.innerHTML = value;
             });
             
+            // Update PDF download links based on current language
+            let pdfFilename = 'Matheus-Schumacher-Resume.pdf'; // Default to EN
+            if (currentLang === 'pt') {
+                pdfFilename = 'Matheus-Schumacher-Resume-PT-BR.pdf';
+            } else if (currentLang === 'es') {
+                pdfFilename = 'Matheus-Schumacher-Resume-ES.pdf';
+            }
+            
+            document.querySelectorAll('.nav-btn-download').forEach(btn => {
+                btn.href = pdfFilename;
+            });
+            
             document.documentElement.lang = currentLang;
         } catch (e) {
             console.error('Translation error:', e);

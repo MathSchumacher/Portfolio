@@ -85,9 +85,17 @@ document.addEventListener('DOMContentLoaded', () => {
       window.currentTranslations = translations;
 
       // 4. Update Resume link to include language parameter
-      const resumeLink = document.querySelector('a[href="Matheus-Schumacher-Resume.html"]');
+      // Update PDF download links based on current language
+      const resumeLink = document.getElementById('resume-link');
       if (resumeLink) {
-        resumeLink.href = `Matheus-Schumacher-Resume.html?lang=${lang}`;
+        let pdfFilename = 'Matheus-Schumacher-Resume.pdf'; // Default (en)
+        if (lang === 'pt') {
+          pdfFilename = 'Matheus-Schumacher-Resume-PT-BR.pdf';
+        } else if (lang === 'es') {
+          pdfFilename = 'Matheus-Schumacher-Resume-ES.pdf';
+        }
+        resumeLink.href = pdfFilename;
+        resumeLink.download = pdfFilename;
       }
 
       // 5. Re-render Language Dropdown Options
