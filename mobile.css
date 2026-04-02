@@ -597,7 +597,13 @@ body.mobile-view-list #music-player {
 
 .album-card:active {
   background: var(--glass-border-strong);
-  transform: scale(0.98);
+  transform: scale(0.98); /* Less aggressive than desktop 1.08 */
+}
+
+/* Explicitly disable desktop hover scaling that causes row overlap */
+.album-card:hover {
+  transform: none;
+  box-shadow: none;
 }
 
 .album-card.playing {
@@ -644,6 +650,15 @@ body.mobile-view-list #music-player {
   color: #fff;
   font-size: 0.9rem;
   flex-shrink: 0;
+  /* Reset absolute centering from desktop */
+  position: static;
+  transform: none;
+  opacity: 1;
+}
+
+/* Hide desktop-specific overlay on mobile to prevent text overlapping */
+.album-card-overlay {
+  display: none;
 }
 
 /* Music Player Controls at bottom */

@@ -4124,10 +4124,11 @@ body.light .suno-music-btn:hover {
   z-index: 9999;
   opacity: 0;
   visibility: hidden;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
   flex-direction: row;
   overflow: hidden;
+  isolation: isolate; /* Prevent child z-index leaking out of modal */
 }
 
 /* When playlist is open, extend modal width - don't shrink content */
@@ -4238,12 +4239,13 @@ body.light .music-modal-btn.close-btn:hover {
 
 /* Album Grid */
 .music-album-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(128px, 1fr));
-  gap: 16px;
-  padding: 20px;
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)) !important;
+  gap: 20px !important;
+  padding: 24px !important;
   overflow-y: auto;
   max-height: calc(80vh - 180px);
+  isolation: isolate;
 }
 
 .music-modal.minimized .music-album-grid {
@@ -4259,6 +4261,7 @@ body.light .music-modal-btn.close-btn:hover {
   cursor: pointer;
   transition: all 0.3s ease;
   background: rgba(255, 255, 255, 0.05);
+  backface-visibility: hidden; /* Prevent flickering and ensure clean layer */
 }
 
 .album-card.playing {
@@ -4274,27 +4277,32 @@ body.light .music-modal-btn.close-btn:hover {
 }
 
 .album-card:hover {
-  z-index: 10;
-  transform: translateY(-8px) scale(1.08);
+  z-index: 20; /* Ensure hovered item is purely on top */
+  transform: translateY(-8px) scale(1.05); /* Slightly less aggressive to prevent bleed */
   box-shadow: 
-    0 16px 40px rgba(0, 0, 0, 0.6),
-    0 0 30px rgba(0, 255, 255, 0.3);
+    0 20px 45px rgba(0, 0, 0, 0.7),
+    0 0 30px rgba(0, 255, 255, 0.25);
+}
+
+.album-card:focus-within {
+  z-index: 20;
 }
 
 .album-card:hover img {
-  transform: scale(1.02);
+  transform: scale(1.03);
 }
 
 .album-card-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, transparent 40%);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, transparent 50%);
   opacity: 0;
   transition: opacity 0.3s ease;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: 12px;
+  padding: 14px;
+  pointer-events: none; /* Let clicks pass to the card if needed */
 }
 
 .album-card:hover .album-card-overlay {
