@@ -188,7 +188,9 @@
         "export_html_pdf": "Export HTML PDF",
         "lbsolutions": "LBSolutions",
         "lbtracking": "LBTracking",
-        "lbinboxflow": "lbinboxflow",
+        "lbinboxflow": "LB Inbox Flow",
+        "diskgelo": "Disk Gelo",
+        "autofortegestao": "AutoForte Gestão",
         "openhouse": "openhouse",
         "ornato": "ornato",
         "synespark": "synespark",
@@ -202,10 +204,16 @@
         "add_playlist": "Adicionar à Playlist",
         "create_playlist": "Criar Playlist",
         "playlist": "Playlist",
+        "playlistEmpty": "Marque músicas com estrela para criar sua playlist",
         "clear_playlist": "Limpar Playlist"
     },
     "experience": {
         "title": "Experiência",
+        "synespark": {
+            "role": "Fundador & CEO",
+            "duration": "2026 — Presente",
+            "desc": "Fundou a Syne Spark e construiu uma plataforma de procurement com IA, com agentes autônomos de cotação, análise XML, inventário inteligente e portal de fornecedores — reduzindo trabalho manual em 87% e operando 3x mais rápido que processos tradicionais."
+        },
         "freelance_ai": {
             "role": "Engenheiro Full-Stack & IA",
             "duration": "Duração: Jun 2023 — Presente",

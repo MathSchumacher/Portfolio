@@ -20,7 +20,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- Desktop Only (>768px) -->
-  <link rel="stylesheet" href="styles.css?v=3" media="(min-width: 769px)" />
+  <link rel="stylesheet" href="styles.css?v=11" media="(min-width: 769px)" />
   <!-- Mobile Only (<=768px) -->
   <link rel="stylesheet" href="mobile.css?v=2" media="(max-width: 768px)" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
@@ -210,7 +210,7 @@
       </div>
       <div class="actions">
         <a class="btn primary" href="#projetos" data-i18n="hero.btn_projects">View projects</a>
-        <a id="resume-link" class="btn primary" href="Matheus-Schumacher-Resume.pdf" download data-i18n="hero.btn_resume">Resume</a>
+        <a id="resume-link" class="btn primary" href="Matheus-Schumacher-Resume.html" target="_blank" data-i18n="hero.btn_resume">Resume</a>
         <a class="btn primary" href="https://github.com/MathSchumacher" target="_blank" rel="noopener">
            GitHub
            <img src="img/github.png" alt="GitHub" class="icon">
@@ -651,13 +651,33 @@
       </div>
     </div>
 
-    <!-- Project: lbinboxflow -->
+    <!-- Project: LB Inbox Flow -->
     <div class="projeto-card">
       <a href="https://originals-manage.web.app/" target="_blank">
-        <img src="img/projects/lbinboxflow.png" alt="lbinboxflow" class="projeto-img">
+        <img src="img/projects/lbinboxflow.png" alt="LB Inbox Flow" class="projeto-img">
       </a>
       <div class="projeto-overlay">
-        <h3 data-i18n="projects.lbinboxflow">lbinboxflow</h3>
+        <h3 data-i18n="projects.lbinboxflow">LB Inbox Flow</h3>
+      </div>
+    </div>
+
+    <!-- Project: Disk Gelo -->
+    <div class="projeto-card">
+      <a href="https://diskgelo.online/" target="_blank">
+        <img src="img/projects/diskgelo.png" alt="Disk Gelo" class="projeto-img">
+      </a>
+      <div class="projeto-overlay">
+        <h3 data-i18n="projects.diskgelo">Disk Gelo</h3>
+      </div>
+    </div>
+
+    <!-- Project: AutoForte Gestão -->
+    <div class="projeto-card">
+      <a href="https://autofortegestao.web.app/" target="_blank">
+        <img src="img/projects/autofortegestao.png" alt="AutoForte Gestão" class="projeto-img">
+      </a>
+      <div class="projeto-overlay">
+        <h3 data-i18n="projects.autofortegestao">AutoForte Gestão</h3>
       </div>
     </div>
 
@@ -910,6 +930,23 @@
   <h2 data-i18n="experience.title">Experience</h2>
   <div class="modern-timeline-container">
     
+    <!-- Exp 0: Syne Spark -->
+    <div class="modern-timeline-item">
+      <div class="timeline-dot-glow"></div>
+      <div class="timeline-content glass-card hover-lift">
+        <div class="exp-header-row">
+          <div class="exp-title-group">
+            <h3 data-i18n="experience.synespark.role">Founder & CEO</h3>
+            <span class="exp-company badge-accent">Syne Spark</span>
+          </div>
+          <span class="exp-date" data-i18n="experience.synespark.duration">2026 — Present</span>
+        </div>
+        <div class="exp-body" data-i18n="experience.synespark.desc">
+          <p>Founded Syne Spark and built an AI-powered procurement platform with autonomous quoting agents, XML analysis, smart inventory, and supplier portal — reducing manual work by 87% and running 3x faster than traditional processes.</p>
+        </div>
+      </div>
+    </div>
+
     <!-- Exp 1: Freelance/Contract -->
     <div class="modern-timeline-item">
       <div class="timeline-dot-glow"></div>
@@ -1043,22 +1080,23 @@
   <div class="music-modal-overlay" id="music-modal-overlay"></div>
   
   <!-- Music Modal -->
-  <div class="music-modal" id="music-modal">
-    <!-- Playlist Sidebar (hidden by default) -->
-    <div class="music-playlist-sidebar" id="playlist-panel" style="display: none;">
+  <div class="music-modal" id="music-modal" role="dialog" aria-modal="true" aria-label="Music Player">
+    <!-- Playlist Sidebar -->
+    <div class="music-playlist-sidebar" id="playlist-panel" aria-label="Song playlist">
       <div class="playlist-sidebar-header">
         <span class="playlist-sidebar-title">
-          <img src="img/playlist-icon.png" alt="Playlist" class="playlist-icon-img">
+          <img src="img/playlist-icon.png" alt="" class="playlist-icon-img">
           <span data-i18n="music.playlist">Playlist</span>
+          <span class="playlist-count-badge" id="playlist-count">0</span>
         </span>
         <div class="playlist-header-actions">
-          <button class="playlist-action-btn" id="play-playlist-btn" title="Play Playlist">
+          <button class="playlist-action-btn" id="play-playlist-btn" title="Play Playlist" aria-label="Play Playlist">
             <i class="fa-solid fa-play"></i>
           </button>
-          <button class="playlist-action-btn" id="export-playlist-btn" title="Export Playlist">
+          <button class="playlist-action-btn" id="export-playlist-btn" title="Export Playlist" aria-label="Export Playlist">
             <i class="fa-solid fa-download"></i>
           </button>
-          <button class="playlist-action-btn" id="playlist-clear-btn" title="Clear Playlist">
+          <button class="playlist-action-btn" id="playlist-clear-btn" title="Clear Playlist" aria-label="Clear Playlist">
             <i class="fa-solid fa-trash"></i>
           </button>
         </div>
@@ -1067,7 +1105,11 @@
         <i class="fa-solid fa-compact-disc fa-spin"></i>
         <span>Playing Playlist</span>
       </div>
-      <div class="playlist-items" id="playlist-items">
+      <div class="playlist-empty-state" id="playlist-empty">
+        <i class="fa-regular fa-star"></i>
+        <p data-i18n="music.playlistEmpty">Star songs to build your playlist</p>
+      </div>
+      <div class="playlist-items" id="playlist-items" role="list">
         <!-- Playlist items will be dynamically generated -->
       </div>
     </div>
@@ -1099,7 +1141,7 @@
         <!-- Album cards will be dynamically generated -->
       </div>
       
-      <div class="music-player" id="music-player" style="display: none;">
+      <div class="music-player" id="music-player" style="display: none;" role="region" aria-label="Now Playing">
         <div class="music-player-info">
           <img class="music-player-cover" id="player-cover" src="" alt="Album Cover">
           <div class="music-player-details">

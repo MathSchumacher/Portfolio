@@ -985,6 +985,80 @@
             fill: currentColor;
         }
 
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .lang-switcher {
+            position: relative;
+        }
+
+        .lang-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+            color: var(--text-secondary);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .lang-btn:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--primary);
+            color: var(--text-primary);
+        }
+
+        .lang-dropdown {
+            display: none;
+            position: absolute;
+            top: calc(100% + 6px);
+            right: 0;
+            min-width: 130px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 6px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+            z-index: 1001;
+        }
+
+        .lang-dropdown.show {
+            display: block;
+        }
+
+        .lang-option {
+            display: block;
+            width: 100%;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 6px;
+            background: transparent;
+            color: var(--text-secondary);
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.15s ease;
+        }
+
+        .lang-option:hover {
+            background: rgba(99, 102, 241, 0.15);
+            color: var(--primary);
+        }
+
+        .lang-option.active {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
         /* Adjust container to account for fixed navbar */
         .container {
             padding-top: 120px;
@@ -1341,10 +1415,19 @@
             <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
             <span data-i18n="resume.nav_back">Back to Portfolio</span>
         </a>
-        <a href="Matheus-Schumacher-Resume.pdf" download class="nav-btn nav-btn-download">
-            <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
-            <span data-i18n="resume.nav_download">Download PDF</span>
-        </a>
+        <div class="nav-right">
+            <div class="lang-switcher" id="lang-switcher">
+                <button class="lang-btn" id="lang-current" aria-label="Change language">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12.87 15.07l-2.54-2.51.03-.03A17.52 17.52 0 0014.07 6H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"/></svg>
+                    <span id="lang-label">EN</span>
+                </button>
+                <div class="lang-dropdown" id="lang-dropdown"></div>
+            </div>
+            <a href="Matheus-Schumacher-Resume.pdf" download class="nav-btn nav-btn-download">
+                <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                <span data-i18n="resume.nav_download">Download PDF</span>
+            </a>
+        </div>
     </nav>
 
     <!-- ATS Hidden Keywords - Invisible to humans but readable by ATS -->
@@ -1982,48 +2065,79 @@
 <!-- i18n Translation Script -->
 <script>
 (function() {
-    // Read language from localStorage (same as main portfolio)
-    const supportedLanguages = ['pt', 'en', 'es'];
+    const languages = {
+        'pt': 'Português',
+        'en': 'English',
+        'es': 'Español'
+    };
+    const langLabels = { 'pt': 'PT', 'en': 'EN', 'es': 'ES' };
     let currentLang = localStorage.getItem('lang') || (navigator.language.startsWith('pt') ? 'pt' : 'en');
-    if (!supportedLanguages.includes(currentLang)) currentLang = 'en';
+    if (!languages[currentLang]) currentLang = 'en';
 
-    // Fetch translations and apply
     async function applyTranslations() {
         try {
             const response = await fetch(`locale/locale.${currentLang}.json`);
             if (!response.ok) return;
-            
             const translations = await response.json();
-            
+
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
                 const value = key.split('.').reduce((obj, k) => obj && obj[k], translations);
                 if (value) el.innerHTML = value;
             });
-            
-            // Update PDF download links based on current language
-            let pdfFilename = 'Matheus-Schumacher-Resume.pdf'; // Default to EN
-            if (currentLang === 'pt') {
-                pdfFilename = 'Matheus-Schumacher-Resume-PT-BR.pdf';
-            } else if (currentLang === 'es') {
-                pdfFilename = 'Matheus-Schumacher-Resume-ES.pdf';
-            }
-            
-            document.querySelectorAll('.nav-btn-download').forEach(btn => {
-                btn.href = pdfFilename;
-            });
-            
+
+            // Update PDF download links
+            let pdfFilename = 'Matheus-Schumacher-Resume.pdf';
+            if (currentLang === 'pt') pdfFilename = 'Matheus-Schumacher-Resume-PT-BR.pdf';
+            else if (currentLang === 'es') pdfFilename = 'Matheus-Schumacher-Resume-ES.pdf';
+            document.querySelectorAll('.nav-btn-download').forEach(btn => { btn.href = pdfFilename; });
+
             document.documentElement.lang = currentLang;
+            localStorage.setItem('lang', currentLang);
         } catch (e) {
             console.error('Translation error:', e);
         }
     }
 
-    // Apply translations when DOM is ready
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', applyTranslations);
-    } else {
+    function renderLangSwitcher() {
+        const label = document.getElementById('lang-label');
+        const dropdown = document.getElementById('lang-dropdown');
+        const btn = document.getElementById('lang-current');
+        if (!label || !dropdown || !btn) return;
+
+        label.textContent = langLabels[currentLang];
+        dropdown.innerHTML = '';
+
+        Object.entries(languages).forEach(([code, name]) => {
+            const option = document.createElement('button');
+            option.className = 'lang-option' + (code === currentLang ? ' active' : '');
+            option.textContent = name;
+            option.addEventListener('click', () => {
+                currentLang = code;
+                applyTranslations();
+                renderLangSwitcher();
+                dropdown.classList.remove('show');
+            });
+            dropdown.appendChild(option);
+        });
+
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            dropdown.classList.toggle('show');
+        });
+
+        document.addEventListener('click', () => dropdown.classList.remove('show'));
+    }
+
+    function init() {
         applyTranslations();
+        renderLangSwitcher();
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
     }
 })();
 </script>

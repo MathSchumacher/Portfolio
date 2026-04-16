@@ -1,0 +1,403 @@
+[
+  {
+    "id": "a-garota-de-neon-e-nuvem",
+    "title": "A Garota de Neon e Nuvem"
+  },
+  {
+    "id": "a-saga-do-ze-bodim",
+    "title": "A Saga do Zé Bodim"
+  },
+  {
+    "id": "a-teoria-do-chao",
+    "title": "A Teoria do Chão"
+  },
+  {
+    "id": "a-vida-e-ou-nao-e-o-que-e",
+    "title": "A vida é ou não é o que é"
+  },
+  {
+    "id": "abyssborne",
+    "title": "Abyssborne"
+  },
+  {
+    "id": "aftershock",
+    "title": "Aftershock"
+  },
+  {
+    "id": "almost-is-not-a-game",
+    "title": "Almost Is Not a Game"
+  },
+  {
+    "id": "amanha-eu-salvo-o-mundo",
+    "title": "Amanhã Eu Salvo o Mundo"
+  },
+  {
+    "id": "aquario-de-estrelas",
+    "title": "Aquário de Estrelas"
+  },
+  {
+    "id": "b-sides-rarities",
+    "title": "B-Sides & Rarities"
+  },
+  {
+    "id": "blue-noise-in-my-bones",
+    "title": "Blue Noise in My Bones"
+  },
+  {
+    "id": "brasil-aqui-tudo-e-normal",
+    "title": "Brasil, Aqui Tudo É Normal"
+  },
+  {
+    "id": "cassette-tape-summer",
+    "title": "Cassette Tape Summer"
+  },
+  {
+    "id": "castelo-de-areia-antes-da-mare",
+    "title": "Castelo de Areia (Antes da Maré)"
+  },
+  {
+    "id": "celestial-whisper",
+    "title": "Celestial Whisper"
+  },
+  {
+    "id": "chasing-the-neon-gold",
+    "title": "Chasing the Neon Gold"
+  },
+  {
+    "id": "concrete-ivy",
+    "title": "Concrete & Ivy"
+  },
+  {
+    "id": "confetti-in-the-dark",
+    "title": "Confetti in the Dark"
+  },
+  {
+    "id": "dreamcatcher-s-paradox",
+    "title": "Dreamcatcher's Paradox",
+    "r2File": "Dreamcatcher’s Paradox",
+    "cover": "Dreamcatcher’s Paradox"
+  },
+  {
+    "id": "dust-mote-ballet",
+    "title": "Dust Mote Ballet"
+  },
+  {
+    "id": "error-404-youth",
+    "title": "ERROR 404_ YOUTH"
+  },
+  {
+    "id": "echoes-of-the-rising",
+    "title": "Echoes of the Rising"
+  },
+  {
+    "id": "echoes-of-the-west-stone-fire",
+    "title": "Echoes of the West (Stone & Fire)"
+  },
+  {
+    "id": "even-if-world-falls-i-wont-stop-gaming",
+    "title": "Even if world falls i wont stop Gaming"
+  },
+  {
+    "id": "even-in-ash-the-heartsong-sings",
+    "title": "Even in Ash, The Heartsong Sings"
+  },
+  {
+    "id": "exploding-hearts",
+    "title": "Exploding Hearts"
+  },
+  {
+    "id": "fire-from-the-mountain-prometheus-unbound",
+    "title": "Fire from the Mountain (Prometheus Unbound)"
+  },
+  {
+    "id": "furacao-de-all-star",
+    "title": "Furacão de All Star"
+  },
+  {
+    "id": "garota-sonhadora",
+    "title": "Garota Sonhadora"
+  },
+  {
+    "id": "glitch-in-the-gold",
+    "title": "Glitch in the Gold"
+  },
+  {
+    "id": "golden-resonance",
+    "title": "Golden Resonance"
+  },
+  {
+    "id": "gravity-dust-the-weight-of-us",
+    "title": "Gravity & Dust (The Weight of Us)"
+  },
+  {
+    "id": "half-life-of-you",
+    "title": "Half-life Of You"
+  },
+  {
+    "id": "horizon-in-a-dewdrop",
+    "title": "Horizon in a Dewdrop"
+  },
+  {
+    "id": "if-you-ever-come-back-here",
+    "title": "If you ever come back here"
+  },
+  {
+    "id": "into-the-eye",
+    "title": "Into the Eye"
+  },
+  {
+    "id": "iron-boulevards",
+    "title": "Iron Boulevards"
+  },
+  {
+    "id": "jomo-joy-of-missing-out",
+    "title": "JOMO (Joy of Missing Out)"
+  },
+  {
+    "id": "kingdom-of-this-broken-girl",
+    "title": "Kingdom of this Broken Girl"
+  },
+  {
+    "id": "lantern-of-the-lost",
+    "title": "Lantern of the Lost"
+  },
+  {
+    "id": "laplace-s-demon-the-glitch-in-the-math",
+    "title": "Laplace's Demon (The Glitch in the Math)",
+    "cover": "Laplace’s Demon (The Glitch in the Math)"
+  },
+  {
+    "id": "luminous-threads",
+    "title": "Luminous Threads"
+  },
+  {
+    "id": "meteoros-apaixonados",
+    "title": "Meteoros Apaixonados"
+  },
+  {
+    "id": "midnight-espresso",
+    "title": "Midnight Espresso"
+  },
+  {
+    "id": "moonlight-in-my-bones",
+    "title": "Moonlight in My Bones"
+  },
+  {
+    "id": "neon-honey",
+    "title": "Neon Honey"
+  },
+  {
+    "id": "o-astrounauta-de-quintal",
+    "title": "O Astrounauta de Quintal"
+  },
+  {
+    "id": "o-ceu-tambem-sorri",
+    "title": "O Céu Também Sorri"
+  },
+  {
+    "id": "o-mundo-ficou-pequeno-demais-para-mim",
+    "title": "O Mundo Ficou Pequeno Demais Para Mim"
+  },
+  {
+    "id": "off-the-scales",
+    "title": "Off the Scales"
+  },
+  {
+    "id": "overclocked-into-the-zone",
+    "title": "Overclocked (Into the Zone)"
+  },
+  {
+    "id": "pajama-couture",
+    "title": "Pajama Couture"
+  },
+  {
+    "id": "paper-hearts-gasoline-vibe",
+    "title": "Paper Hearts & Gasoline Vibe"
+  },
+  {
+    "id": "paper-lanterns-the-echo-of-us",
+    "title": "Paper Lanterns (The Echo of Us)"
+  },
+  {
+    "id": "paper-satellites",
+    "title": "Paper Satellites"
+  },
+  {
+    "id": "por-acaso-voce-chegou",
+    "title": "Por Acaso (Você Chegou)"
+  },
+  {
+    "id": "prism-of-the-rain-niji-no-kakera",
+    "title": "Prism of the Rain (Niji no Kakera)"
+  },
+  {
+    "id": "recalculating-my-soul",
+    "title": "Recalculating My Soul"
+  },
+  {
+    "id": "requiem-for-a-lier",
+    "title": "Requiem For A Lier"
+  },
+  {
+    "id": "running-forward",
+    "title": "Running Forward",
+    "r2File": "Running Foward"
+  },
+  {
+    "id": "saturated",
+    "title": "Saturated"
+  },
+  {
+    "id": "scriptless-the-misfit-musical",
+    "title": "Scriptless (The Misfit Musical)"
+  },
+  {
+    "id": "starve-the-dark-feed-the-fire",
+    "title": "Starve the Dark, Feed the Fire"
+  },
+  {
+    "id": "static-gold",
+    "title": "Static & Gold"
+  },
+  {
+    "id": "static-blue",
+    "title": "Static Blue"
+  },
+  {
+    "id": "stitched-in-the-quiet",
+    "title": "Stitched in the Quiet"
+  },
+  {
+    "id": "sunlight-staircase",
+    "title": "Sunlight Staircase"
+  },
+  {
+    "id": "the-alchemist-s-pulse",
+    "title": "The Alchemist's Pulse",
+    "cover": "The Alchemist’s Pulse"
+  },
+  {
+    "id": "the-architect-of-zero",
+    "title": "The Architect of Zero"
+  },
+  {
+    "id": "the-armor-i-built",
+    "title": "The Armor I Built"
+  },
+  {
+    "id": "the-art-of-falling-up",
+    "title": "The Art of Falling Up"
+  },
+  {
+    "id": "the-choir-inside-the-black-hole",
+    "title": "The Choir Inside the Black Hole"
+  },
+  {
+    "id": "the-clockwork-galaxy",
+    "title": "The Clockwork Galaxy"
+  },
+  {
+    "id": "the-clockwork-renegade",
+    "title": "The Clockwork Renegade"
+  },
+  {
+    "id": "the-demons-wearing-my-name",
+    "title": "The Demons Wearing my Name"
+  },
+  {
+    "id": "the-eternal-game",
+    "title": "The Eternal Game"
+  },
+  {
+    "id": "the-ghost-of-the-midnight-rail",
+    "title": "The Ghost of the Midnight Rail"
+  },
+  {
+    "id": "the-girl-who-rewrote-the-moon-legend-of-the-ink",
+    "title": "The Girl Who Rewrote the Moon (Legend of the Ink)"
+  },
+  {
+    "id": "the-gravity-of-sparks",
+    "title": "The Gravity of Sparks"
+  },
+  {
+    "id": "the-ink-of-goodbye-sayonara-no-ink",
+    "title": "The Ink of Goodbye (Sayonara no Ink)"
+  },
+  {
+    "id": "the-last-analog-heart",
+    "title": "The Last Analog Heart"
+  },
+  {
+    "id": "the-lost-found-department-vibe",
+    "title": "The Lost & Found Department Vibe"
+  },
+  {
+    "id": "the-midnight-carousel",
+    "title": "The Midnight Carousel"
+  },
+  {
+    "id": "the-person-i-d-be-if-no-one-was-watching",
+    "title": "The Person I'd Be If No One Was Watching"
+  },
+  {
+    "id": "the-pixels-are-growing-up",
+    "title": "The Pixels are Growing Up"
+  },
+  {
+    "id": "the-prism-thief-painting-the-grey",
+    "title": "The Prism Thief (Painting the Grey)"
+  },
+  {
+    "id": "the-river-that-remembered",
+    "title": "The River That Remembered"
+  },
+  {
+    "id": "the-shape-of-falling-light",
+    "title": "The Shape of Falling Light"
+  },
+  {
+    "id": "the-single-stitch-society",
+    "title": "The Single Stitch Society"
+  },
+  {
+    "id": "the-unmapped-shore",
+    "title": "The Unmapped Shore"
+  },
+  {
+    "id": "the-zero-effort-hero",
+    "title": "The Zero-Effort Hero"
+  },
+  {
+    "id": "theseus-in-my-skin",
+    "title": "Theseus in My Skin"
+  },
+  {
+    "id": "velocity-of-light",
+    "title": "Velocity of Light"
+  },
+  {
+    "id": "velvet-voltage",
+    "title": "Velvet & Voltage"
+  },
+  {
+    "id": "voce-deveria-largar-o-league-of-legends",
+    "title": "Você deveria largar o League of Legends"
+  },
+  {
+    "id": "what-happened-to-gen-z",
+    "title": "What Happened to Gen Z"
+  },
+  {
+    "id": "wild-electric",
+    "title": "Wild Electric"
+  },
+  {
+    "id": "world-in-slow-motion",
+    "title": "World in Slow Motion"
+  },
+  {
+    "id": "noizu-no-umi-sanso-no-hana",
+    "title": "ノイズの海、酸素の花 (Noizu no Umi, Sanso no Hana)"
+  }
+]

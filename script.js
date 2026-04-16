@@ -84,21 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // Expose translations globally for other components (e.g., toggle buttons)
       window.currentTranslations = translations;
 
-      // 4. Update Resume link to include language parameter
-      // Update PDF download links based on current language
-      const resumeLink = document.getElementById('resume-link');
-      if (resumeLink) {
-        let pdfFilename = 'Matheus-Schumacher-Resume.pdf'; // Default (en)
-        if (lang === 'pt') {
-          pdfFilename = 'Matheus-Schumacher-Resume-PT-BR.pdf';
-        } else if (lang === 'es') {
-          pdfFilename = 'Matheus-Schumacher-Resume-ES.pdf';
-        }
-        resumeLink.href = pdfFilename;
-        resumeLink.download = pdfFilename;
-      }
-
-      // 5. Re-render Language Dropdown Options
+      // 4. Re-render Language Dropdown Options
       renderLanguageOptions();
 
     } catch (error) {
@@ -1004,160 +990,27 @@ document.addEventListener('DOMContentLoaded', () => {
   (function initMusicPlayer() {
     // Cloudflare R2 base URL for songs
     const R2_BASE_URL = 'https://pub-e178ae989afa4f2dab400c0b6d9d708f.r2.dev/';
-    
-    // Album covers data - MUST match exact webp filenames in img/songs-cover/
-    // These are also used as R2 mp3 filenames (ensure R2 files match these names)
-    const albumCovers = [
-      "A Garota de Neon e Nuvem", "A Saga do Zé Bodim", "A Teoria do Chão",
-      "A vida é ou não é o que é", "Abyssborne", "Aftershock",
-      "Almost Is Not a Game", "Amanhã Eu Salvo o Mundo", "Aquário de Estrelas",
-      "B-Sides & Rarities", "Blue Noise in My Bones", "Brasil, Aqui Tudo É Normal",
-      "Cassette Tape Summer", "Castelo de Areia (Antes da Maré)", "Celestial Whisper",
-      "Chasing the Neon Gold", "Concrete & Ivy", "Confetti in the Dark",
-      "Dreamcatcher’s Paradox", "Dust Mote Ballet",
-      "ERROR 404_ YOUTH", "Echoes of the Rising", "Echoes of the West (Stone & Fire)",
-      "Even if world falls i wont stop Gaming", "Even in Ash, The Heartsong Sings",
-      "Exploding Hearts", "Fire from the Mountain (Prometheus Unbound)",
-      "Furacão de All Star", "Garota Sonhadora", "Glitch in the Gold",
-      "Golden Resonance", "Gravity & Dust (The Weight of Us)", "Half-life Of You",
-      "Horizon in a Dewdrop", "If you ever come back here", "Into the Eye",
-      "Iron Boulevards", "JOMO (Joy of Missing Out)", "Kingdom of this Broken Girl",
-      "Lantern of the Lost", "Laplace’s Demon (The Glitch in the Math)",
-      "Luminous Threads", "Meteoros Apaixonados", "Midnight Espresso",
-      "Moonlight in My Bones", "Neon Honey", "O Astrounauta de Quintal",
-      "O Céu Também Sorri", "O Mundo Ficou Pequeno Demais Para Mim",
-      "Off the Scales", "Overclocked (Into the Zone)", "Pajama Couture",
-      "Paper Hearts & Gasoline Vibe", "Paper Lanterns (The Echo of Us)",
-      "Paper Satellites", "Por Acaso (Você Chegou)",
-      "Prism of the Rain (Niji no Kakera)", "Recalculating My Soul",
-      "Requiem For A Lier", "Running Forward", "Saturated",
-      "Scriptless (The Misfit Musical)", "Starve the Dark, Feed the Fire",
-      "Static & Gold", "Static Blue", "Stitched in the Quiet", "Sunlight Staircase",
-      "The Alchemist’s Pulse", "The Architect of Zero", "The Armor I Built",
-      "The Art of Falling Up", "The Choir Inside the Black Hole",
-      "The Clockwork Galaxy", "The Clockwork Renegade", "The Demons Wearing my Name",
-      "The Eternal Game", "The Ghost of the Midnight Rail",
-      "The Girl Who Rewrote the Moon (Legend of the Ink)", "The Gravity of Sparks",
-      "The Ink of Goodbye (Sayonara no Ink)", "The Last Analog Heart",
-      "The Lost & Found Department Vibe", "The Midnight Carousel",
-      "The Person I'd Be If No One Was Watching", "The Pixels are Growing Up",
-      "The Prism Thief (Painting the Grey)", "The River That Remembered",
-      "The Shape of Falling Light", "The Single Stitch Society",
-      "The Unmapped Shore", "The Zero-Effort Hero", "Theseus in My Skin",
-      "Velocity of Light", "Velvet & Voltage",
-      "Você deveria largar o League of Legends", "What Happened to Gen Z",
-      "Wild Electric", "World in Slow Motion",
-      "ノイズの海、酸素の花 (Noizu no Umi, Sanso no Hana)"
-    ];
-    
-    // Normalize string - for display purposes only
-    function normalizeForMatch(str) {
-      return str.toLowerCase()
-        .replace(/\.(mp3|wav|webp|jpg|png|jpeg)$/i, '')
-        .replace(/[''`´]/g, "'")
-        .replace(/[_-]/g, ' ')
-        .replace(/\s+/g, ' ')
-        .trim();
-    }
-    
-    // Format title for display
-    function formatTitle(str) {
-      return str
-        .replace(/\.(webp|jpg|png|jpeg|mp3)$/i, '')
-        .replace(/[_-]/g, ' ')
-        .replace(/\s+/g, ' ')
-        .trim();
-    }
-    
-    // R2 audio filenames (Exact names on Cloudflare R2 server - SOURCE OF TRUTH for audio)
-    // Do NOT rename these unless you changed the actual files on Cloudflare
-    const r2AudioFiles = [
-      "A Garota de Neon e Nuvem", "A Saga do Zé Bodim", "A Teoria do Chão",
-      "A vida é ou não é o que é", "Abyssborne", "Aftershock",
-      "Almost Is Not a Game", "Amanhã Eu Salvo o Mundo", "Aquário de Estrelas",
-      "B-Sides & Rarities", "Blue Noise in My Bones", "Brasil, Aqui Tudo É Normal",
-      "Cassette Tape Summer", "Castelo de Areia (Antes da Maré)", "Celestial Whisper",
-      "Chasing the Neon Gold", "Concrete & Ivy", "Confetti in the Dark",
-      "Dreamcatcher’s Paradox", "Dust Mote Ballet",
-      "ERROR 404_ YOUTH", "Echoes of the Rising", "Echoes of the West (Stone & Fire)",
-      "Even if world falls i wont stop Gaming", "Even in Ash, The Heartsong Sings",
-      "Exploding Hearts", "Fire from the Mountain (Prometheus Unbound)",
-      "Furacão de All Star", "Garota Sonhadora", "Glitch in the Gold",
-      "Golden Resonance", "Gravity & Dust (The Weight of Us)", "Half-life Of You",
-      "Horizon in a Dewdrop", "If you ever come back here", "Into the Eye",
-      "Iron Boulevards", "JOMO (Joy of Missing Out)", "Kingdom of this Broken Girl",
-      "Lantern of the Lost", "Laplace’s Demon (The Glitch in the Math)",
-      "Luminous Threads", "Meteoros Apaixonados", "Midnight Espresso",
-      "Moonlight in My Bones", "Neon Honey", "O Astrounauta de Quintal",
-      "O Céu Também Sorri", "O Mundo Ficou Pequeno Demais Para Mim",
-      "Off the Scales", "Overclocked (Into the Zone)", "Pajama Couture",
-      "Paper Hearts & Gasoline Vibe", "Paper Lanterns (The Echo of Us)",
-      "Paper Satellites", "Por Acaso (Você Chegou)",
-      "Prism of the Rain (Niji no Kakera)", "Recalculating My Soul",
-      "Requiem For A Lier", "Running Forward", "Saturated",
-      "Scriptless (The Misfit Musical)", "Starve the Dark, Feed the Fire",
-      "Static & Gold", "Static Blue", "Stitched in the Quiet", "Sunlight Staircase",
-      "The Alchemist’s Pulse", "The Architect of Zero", "The Armor I Built",
-      "The Art of Falling Up", "The Choir Inside the Black Hole",
-      "The Clockwork Galaxy", "The Clockwork Renegade", "The Demons Wearing my Name",
-      "The Eternal Game", "The Ghost of the Midnight Rail",
-      "The Girl Who Rewrote the Moon (Legend of the Ink)", "The Gravity of Sparks",
-      "The Ink of Goodbye (Sayonara no Ink)", "The Last Analog Heart",
-      "The Lost & Found Department Vibe", "The Midnight Carousel",
-      "The Person I'd Be If No One Was Watching", "The Pixels are Growing Up",
-      "The Prism Thief (Painting the Grey)", "The River That Remembered",
-      "The Shape of Falling Light", "The Single Stitch Society",
-      "The Unmapped Shore", "The Zero-Effort Hero", "Theseus in My Skin",
-      "Velocity of Light", "Velvet & Voltage",
-      "Você deveria largar o League of Legends", "What Happened to Gen Z",
-      "Wild Electric", "World in Slow Motion",
-      "ノイズの海、酸素の花 (Noizu no Umi, Sanso no Hana)"
-    ];
+    const COVER_BASE_PATH = 'img/songs-cover/';
 
-    // Manual mappings for tricky cases (Cover Name -> R2 Name)
-    const matchMappings = {
-      "Running Forward": "Running Foward", // Typo in R2 file
-      "Moonlight in My Bones": "Moonlight in My Bones", // Ensure exact match
-      "Dreamcatcher’s Paradox": "Dreamcatcher’s Paradox" // Straight apostrophe to curly (U+2019)
-    };
+    // Song catalog loaded from songs.json
+    let songs = [];
+    const songIdMap = new Map(); // id -> index for O(1) lookup
 
-    // Find correct R2 filename (Smart Matching)
-    function findR2Filename(coverName) {
-      if (matchMappings[coverName]) return matchMappings[coverName];
-      
-      const normalizedCover = normalizeForMatch(coverName);
-      
-      // 1. Try exact normalized match
-      for (const r2Name of r2AudioFiles) {
-        if (normalizeForMatch(r2Name) === normalizedCover) {
-          return r2Name;
-        }
-      }
-      
-      // 2. Try substring match (if R2 name is inside cover name or vice versa)
-      // Solves: "Paper Hearts & Gasoline Vibe" (Cover) vs "Paper Hearts & Gasoline" (R2)
-      for (const r2Name of r2AudioFiles) {
-        const normR2 = normalizeForMatch(r2Name);
-        if (normalizedCover.includes(normR2) || normR2.includes(normalizedCover)) {
-          return r2Name; // Return the R2 filename immediately on match
-        }
-      }
-      
-      // Fallback: use the cover name if no match found (might 404)
-      console.warn('No R2 match found for:', coverName);
-      return coverName;
+    async function loadSongCatalog() {
+      const res = await fetch('songs.json');
+      const catalog = await res.json();
+      songs = catalog.map((entry, i) => {
+        const obj = {
+          id: entry.id,
+          title: entry.title,
+          coverPath: `${COVER_BASE_PATH}${entry.cover || entry.title}.webp`,
+          audioUrl: `${R2_BASE_URL}${encodeURIComponent(entry.r2File || entry.title)}.mp3`
+        };
+        songIdMap.set(entry.id, i);
+        return obj;
+      });
     }
-    
-    // Build song list - Connects Local Cover -> R2 Audio
-    const songs = albumCovers.map(coverName => {
-      const r2Filename = findR2Filename(coverName);
-      return {
-        title: formatTitle(coverName),
-        coverPath: `img/songs-cover/${coverName}.webp`,
-        audioUrl: `${R2_BASE_URL}${encodeURIComponent(r2Filename)}.mp3`
-      };
-    });
-    
+
     // DOM Elements
     const sunoBtn = document.getElementById('suno-music-btn');
     const modalOverlay = document.getElementById('music-modal-overlay');
@@ -1183,8 +1036,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const miniNextBtn = document.getElementById('mini-next-btn');
     const expandPlayerBtn = document.getElementById('expand-player-btn');
     const spotifyPlayer = document.getElementById('spotify-player');
-    
-    // New elements for enhanced features
+    const miniPlayerCover = document.getElementById('mini-player-cover');
     const volumeBtn = document.getElementById('volume-btn');
     const volumeSlider = document.getElementById('player-volume-slider');
     const downloadBtn = document.getElementById('player-download-btn');
@@ -1194,27 +1046,59 @@ document.addEventListener('DOMContentLoaded', () => {
     const playlistClearBtn = document.getElementById('playlist-clear-btn');
     const addPlaylistBtn = document.getElementById('add-playlist-btn');
     const speedBtns = document.querySelectorAll('.player-speed-control .speed-btn');
-    
+    const miniVolumeSlider = document.getElementById('mini-volume-slider');
+    const miniVolumeBtn = document.getElementById('mini-volume-btn');
+    const miniShuffleBtn = document.getElementById('mini-shuffle-btn');
+    const miniCloseBtn = document.getElementById('mini-close-btn');
+    const playlistModeIndicator = document.getElementById('playlist-mode-indicator');
+    const playlistPlayingBadge = document.getElementById('playlist-playing-badge');
+    const playPlaylistBtn = document.getElementById('play-playlist-btn');
+    const exportPlaylistBtn = document.getElementById('export-playlist-btn');
+    const playlistEmptyState = document.getElementById('playlist-empty');
+
     if (!sunoBtn || !modal) return;
-    
+
     // State
     let audio = new Audio();
     let currentSongIndex = -1;
     let isPlaying = false;
     let shuffleMode = false;
     let playedIndices = [];
-    let userPlaylist = []; // Session-based playlist
-    
-    // Load playlist from localStorage
-    try {
-      const savedPlaylist = localStorage.getItem('sunoUserPlaylist');
-      if (savedPlaylist) {
-        userPlaylist = JSON.parse(savedPlaylist);
-      }
-    } catch (e) {
-      console.warn('Failed to load playlist', e);
+    let userPlaylist = []; // Array of song IDs (strings)
+    let playlistMode = false;
+
+    // Playlist persistence with stable IDs
+    function savePlaylist() {
+      localStorage.setItem('sunoUserPlaylist', JSON.stringify(userPlaylist));
     }
-    
+
+    function loadPlaylist() {
+      try {
+        const saved = localStorage.getItem('sunoUserPlaylist');
+        if (!saved) return;
+        const parsed = JSON.parse(saved);
+        if (!Array.isArray(parsed) || parsed.length === 0) return;
+        // Migration: old format stored integer indices
+        if (typeof parsed[0] === 'number') {
+          userPlaylist = parsed.map(i => songs[i]?.id).filter(Boolean);
+          savePlaylist();
+        } else {
+          userPlaylist = parsed.filter(id => songIdMap.has(id));
+        }
+      } catch (e) {
+        console.warn('Failed to load playlist', e);
+      }
+    }
+
+    // Resolve playlist IDs to current indices
+    function getPlaylistIndices() {
+      return userPlaylist.map(id => songIdMap.get(id)).filter(i => i !== undefined);
+    }
+
+    function isInPlaylist(index) {
+      return userPlaylist.includes(songs[index]?.id);
+    }
+
     // Mobile View Management
     function setMobileView(view) {
       if (view === 'list') {
@@ -1227,19 +1111,19 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.classList.remove('mobile-view-player', 'mobile-view-list');
       }
     }
-    
-    // Generate album grid with star button for playlist
+
+    // Generate album grid
     function renderAlbumGrid() {
       albumGrid.innerHTML = '';
       songs.forEach((song, index) => {
-        const isInPlaylist = userPlaylist.includes(index);
+        const inPlaylist = isInPlaylist(index);
         const card = document.createElement('div');
         card.className = 'album-card';
         card.dataset.index = index;
         card.innerHTML = `
           <img src="${song.coverPath}" alt="${song.title}" loading="lazy">
-          <button class="album-card-star ${isInPlaylist ? 'added' : ''}" data-index="${index}" title="${isInPlaylist ? 'Remove from Playlist' : 'Add to Playlist'}">
-            <i class="fa-${isInPlaylist ? 'solid' : 'regular'} fa-star"></i>
+          <button class="album-card-star ${inPlaylist ? 'added' : ''}" data-index="${index}" title="${inPlaylist ? 'Remove from Playlist' : 'Add to Playlist'}">
+            <i class="fa-${inPlaylist ? 'solid' : 'regular'} fa-star"></i>
           </button>
           <div class="album-card-overlay">
             <div class="album-card-title">${song.title}</div>
@@ -1248,52 +1132,48 @@ document.addEventListener('DOMContentLoaded', () => {
             <i class="fa-solid fa-play"></i>
           </div>
         `;
-        
-        // Star button click - add/remove from playlist
-        const starBtn = card.querySelector('.album-card-star');
-        starBtn.addEventListener('click', (e) => {
+        card.querySelector('.album-card-star').addEventListener('click', (e) => {
           e.stopPropagation();
           togglePlaylistItem(index);
         });
-        
-        // Card click - play song
         card.addEventListener('click', (e) => {
-          if (!e.target.closest('.album-card-star')) {
-            // setPlaylistMode(false); // Removed as requested or not needed
-            playSong(index);
-          }
+          if (!e.target.closest('.album-card-star')) playSong(index);
         });
-        
         albumGrid.appendChild(card);
       });
     }
-    
-    // Toggle song in playlist
+
+    // Toggle song in playlist using stable ID
     function togglePlaylistItem(index) {
-      const pos = userPlaylist.indexOf(index);
+      const songId = songs[index]?.id;
+      if (!songId) return;
+      const pos = userPlaylist.indexOf(songId);
       if (pos === -1) {
-        userPlaylist.push(index);
+        userPlaylist.push(songId);
       } else {
         userPlaylist.splice(pos, 1);
       }
-      // Save to localStorage
-      localStorage.setItem('sunoUserPlaylist', JSON.stringify(userPlaylist));
-      
+      savePlaylist();
       updateStarButtons();
-      // renderPlaylist(); // If using separate playlist view
+      renderPlaylist();
+      updatePlaylistCount();
     }
-    
-    // Update star buttons to reflect playlist state
+
     function updateStarButtons() {
       document.querySelectorAll('.album-card-star').forEach(btn => {
         const index = parseInt(btn.dataset.index);
-        const isInPlaylist = userPlaylist.includes(index);
-        btn.className = `album-card-star ${isInPlaylist ? 'added' : ''}`;
-        btn.title = isInPlaylist ? 'Remove from Playlist' : 'Add to Playlist';
-        btn.innerHTML = `<i class="fa-${isInPlaylist ? 'solid' : 'regular'} fa-star"></i>`;
+        const inPlaylist = isInPlaylist(index);
+        btn.className = `album-card-star ${inPlaylist ? 'added' : ''}`;
+        btn.title = inPlaylist ? 'Remove from Playlist' : 'Add to Playlist';
+        btn.innerHTML = `<i class="fa-${inPlaylist ? 'solid' : 'regular'} fa-star"></i>`;
       });
     }
-    
+
+    function updatePlaylistCount() {
+      const countEl = document.getElementById('playlist-count');
+      if (countEl) countEl.textContent = userPlaylist.length;
+    }
+
     // Format time
     function formatTime(seconds) {
       if (isNaN(seconds)) return '0:00';
@@ -1301,94 +1181,75 @@ document.addEventListener('DOMContentLoaded', () => {
       const secs = Math.floor(seconds % 60);
       return `${mins}:${secs.toString().padStart(2, '0')}`;
     }
-    
-    // Update progress
+
     function updateProgress() {
       const percent = (audio.currentTime / audio.duration) * 100 || 0;
       progressFill.style.width = percent + '%';
       currentTimeEl.textContent = formatTime(audio.currentTime);
     }
-    
-    // Update play button icons
+
     function updatePlayButtons() {
       const icon = isPlaying ? 'fa-pause' : 'fa-play';
       mainPlayBtn.querySelector('i').className = `fa-solid ${icon}`;
       miniPlayBtn.querySelector('i').className = `fa-solid ${icon}`;
     }
-    
-    // Update active card visual
+
     function updateActiveCard() {
       document.querySelectorAll('.album-card').forEach((card, i) => {
         card.classList.toggle('playing', i === currentSongIndex);
       });
     }
-    
-    // Hide Spotify embed
+
     function hideSpotify() {
-      if (spotifyPlayer) {
-        spotifyPlayer.style.display = 'none';
-      }
+      if (spotifyPlayer) spotifyPlayer.style.display = 'none';
     }
-    
-    // Show Spotify embed
+
     function showSpotify() {
-      if (spotifyPlayer && !isPlaying) {
-        spotifyPlayer.style.display = '';
-      }
+      if (spotifyPlayer && !isPlaying) spotifyPlayer.style.display = '';
     }
-    
-    // Play song by index
+
+    // Consolidated playSong - single function, no monkey-patching
     function playSong(index) {
       if (index < 0 || index >= songs.length) return;
-      
       const song = songs[index];
       currentSongIndex = index;
-      
-      // Update UI
+
+      // Update all UI in one place
       playerCover.src = song.coverPath;
       playerTitle.textContent = song.title;
       miniPlayerTitle.textContent = song.title;
+      if (miniPlayerCover) miniPlayerCover.src = song.coverPath;
+      if (downloadBtn) downloadBtn.href = song.audioUrl;
       musicPlayer.style.display = '';
-      
-      // Switch to player view on mobile
+
       setMobileView('player');
-      
+
       // Track played songs for shuffle
       if (!playedIndices.includes(index)) {
         playedIndices.push(index);
-        if (playedIndices.length >= songs.length) {
-          playedIndices = [];
-        }
+        if (playedIndices.length >= songs.length) playedIndices = [];
       }
-      
-      // Hide Spotify
+
       hideSpotify();
-      
-      // Load and play
+      renderPlaylist();
+      updateActiveCard();
+
       audio.src = song.audioUrl;
       audio.load();
       audio.play().then(() => {
         isPlaying = true;
         updatePlayButtons();
         updateActiveCard();
-      }).catch(err => {
-        console.error('Playback error:', err);
-      });
+      }).catch(err => console.error('Playback error:', err));
     }
-    
-    // Get next index (respects shuffle and playlist mode)
+
+    // Navigation - uses playlist IDs resolved to indices
     function getNextIndex() {
-      // Playlist mode - navigate through playlist
       if (playlistMode && userPlaylist.length > 0) {
-        const currentPlaylistPos = userPlaylist.indexOf(currentSongIndex);
-        if (currentPlaylistPos !== -1 && currentPlaylistPos < userPlaylist.length - 1) {
-          return userPlaylist[currentPlaylistPos + 1];
-        }
-        // End of playlist - loop to start
-        return userPlaylist[0];
+        const indices = getPlaylistIndices();
+        const pos = indices.indexOf(currentSongIndex);
+        return indices[(pos + 1) % indices.length];
       }
-      
-      // Shuffle mode
       if (shuffleMode) {
         const unplayed = songs.map((_, i) => i).filter(i => !playedIndices.includes(i) && i !== currentSongIndex);
         if (unplayed.length === 0) {
@@ -1397,57 +1258,35 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         return unplayed[Math.floor(Math.random() * unplayed.length)];
       }
-      
-      // Normal mode
       return (currentSongIndex + 1) % songs.length;
     }
-    
-    // Get prev index (respects playlist mode)
+
     function getPrevIndex() {
-      // Playlist mode - navigate through playlist
       if (playlistMode && userPlaylist.length > 0) {
-        const currentPlaylistPos = userPlaylist.indexOf(currentSongIndex);
-        if (currentPlaylistPos > 0) {
-          return userPlaylist[currentPlaylistPos - 1];
-        }
-        // Start of playlist - loop to end
-        return userPlaylist[userPlaylist.length - 1];
+        const indices = getPlaylistIndices();
+        const pos = indices.indexOf(currentSongIndex);
+        return indices[(pos - 1 + indices.length) % indices.length];
       }
-      
-      // Shuffle mode
-      if (shuffleMode) {
-        return Math.floor(Math.random() * songs.length);
-      }
-      
-      // Normal mode
+      if (shuffleMode) return Math.floor(Math.random() * songs.length);
       return (currentSongIndex - 1 + songs.length) % songs.length;
     }
-    
+
     // Audio events
     audio.addEventListener('loadedmetadata', () => {
       durationTimeEl.textContent = formatTime(audio.duration);
     });
-    
     audio.addEventListener('timeupdate', updateProgress);
-    
-    audio.addEventListener('ended', () => {
-      playSong(getNextIndex());
-    });
-    
+    audio.addEventListener('ended', () => playSong(getNextIndex()));
+
     // Progress bar seek
     progressBar.addEventListener('click', (e) => {
       const rect = progressBar.getBoundingClientRect();
-      const percent = (e.clientX - rect.left) / rect.width;
-      audio.currentTime = percent * audio.duration;
+      audio.currentTime = ((e.clientX - rect.left) / rect.width) * audio.duration;
     });
-    
+
     // Play/Pause toggle
     function togglePlay() {
-      if (currentSongIndex === -1 && songs.length > 0) {
-        playSong(0);
-        return;
-      }
-      
+      if (currentSongIndex === -1 && songs.length > 0) { playSong(0); return; }
       if (isPlaying) {
         audio.pause();
         isPlaying = false;
@@ -1459,22 +1298,27 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       updatePlayButtons();
     }
-    
-    // Event listeners
+
+    // Controls
     mainPlayBtn.addEventListener('click', togglePlay);
     miniPlayBtn.addEventListener('click', togglePlay);
-    
     prevBtn.addEventListener('click', () => playSong(getPrevIndex()));
     nextBtn.addEventListener('click', () => playSong(getNextIndex()));
-    miniPrevBtn.addEventListener('click', () => playSong(getPrevIndex()));
-    miniNextBtn.addEventListener('click', () => playSong(getNextIndex()));
-    
-    shuffleBtn.addEventListener('click', () => {
+    if (miniPrevBtn) miniPrevBtn.addEventListener('click', () => playSong(getPrevIndex()));
+    if (miniNextBtn) miniNextBtn.addEventListener('click', () => playSong(getNextIndex()));
+
+    // Shuffle sync between main and mini
+    function toggleShuffle() {
       shuffleMode = !shuffleMode;
-      shuffleBtn.classList.toggle('active', shuffleMode);
-      shuffleBtn.style.color = shuffleMode ? 'var(--accent)' : '';
-    });
-    
+      if (shuffleBtn) {
+        shuffleBtn.classList.toggle('active', shuffleMode);
+        shuffleBtn.style.color = shuffleMode ? 'var(--accent)' : '';
+      }
+      if (miniShuffleBtn) miniShuffleBtn.classList.toggle('active', shuffleMode);
+    }
+    if (shuffleBtn) shuffleBtn.addEventListener('click', toggleShuffle);
+    if (miniShuffleBtn) miniShuffleBtn.addEventListener('click', toggleShuffle);
+
     // Modal controls
     function openModal() {
       modal.classList.add('show');
@@ -1482,313 +1326,201 @@ document.addEventListener('DOMContentLoaded', () => {
       miniPlayer.classList.remove('show');
       hideSpotify();
     }
-    
+
     function closeModal() {
       modal.classList.remove('show');
       modalOverlay.classList.remove('show');
-      // Close button = stop playback, no mini player
-      if (isPlaying) {
-        audio.pause();
-        isPlaying = false;
-        updatePlayButtons();
-      }
+      if (isPlaying) { audio.pause(); isPlaying = false; updatePlayButtons(); }
       miniPlayer.classList.remove('show');
       showSpotify();
     }
-    
+
     function minimizeModal() {
       modal.classList.remove('show');
       modalOverlay.classList.remove('show');
-      // Minimize = show mini player with current song
-      if (currentSongIndex !== -1) {
-        miniPlayer.classList.add('show');
-      }
+      if (currentSongIndex !== -1) miniPlayer.classList.add('show');
     }
-    
-    // Close mini player and stop playback
+
     function closeMiniPlayer() {
       miniPlayer.classList.remove('show');
-      if (isPlaying) {
-        audio.pause();
-        isPlaying = false;
-        updatePlayButtons();
-      }
+      if (isPlaying) { audio.pause(); isPlaying = false; updatePlayButtons(); }
       showSpotify();
     }
-    
+
     sunoBtn.addEventListener('click', () => {
-      if (modal.classList.contains('show')) {
-        minimizeModal(); // Suno button minimizes (toggle), doesn't close
-      } else {
-        openModal();
-      }
+      modal.classList.contains('show') ? minimizeModal() : openModal();
     });
-    
     closeBtn.addEventListener('click', closeModal);
     minimizeBtn.addEventListener('click', minimizeModal);
-    modalOverlay.addEventListener('click', minimizeModal); // Clicking overlay minimizes, not closes
-    
+    modalOverlay.addEventListener('click', minimizeModal);
     expandPlayerBtn.addEventListener('click', openModal);
-    
-    // Close button on mini player
-    const miniCloseBtn = document.getElementById('mini-close-btn');
-    if (miniCloseBtn) {
-      miniCloseBtn.addEventListener('click', closeMiniPlayer);
-    }
-    
-    // Update mini player cover when song changes
-    const miniPlayerCover = document.getElementById('mini-player-cover');
-    function updateMiniPlayerCover() {
-      if (miniPlayerCover && currentSongIndex !== -1) {
-        miniPlayerCover.src = songs[currentSongIndex].coverPath;
-      }
-    }
-    
-    // Patch playSong to update mini player cover
-    const originalPlaySongBase = playSong;
-    playSong = function(index) {
-      const result = originalPlaySongBase.call(this, index);
-      updateMiniPlayerCover();
-      return result;
-    };
-    
+    if (miniCloseBtn) miniCloseBtn.addEventListener('click', closeMiniPlayer);
+
     // ==========================
     // Volume Control
     // ==========================
-    const miniVolumeSlider = document.getElementById('mini-volume-slider');
-    const miniVolumeBtn = document.getElementById('mini-volume-btn');
-    
     function syncVolumeSliders(value) {
       if (volumeSlider) volumeSlider.value = value * 100;
       if (miniVolumeSlider) miniVolumeSlider.value = value * 100;
     }
-    
-    if (volumeSlider) {
-      volumeSlider.addEventListener('input', (e) => {
-        const value = e.target.value / 100;
-        audio.volume = value;
-        syncVolumeSliders(value);
-        updateVolumeIcon(value);
-      });
-    }
-    
-    if (miniVolumeSlider) {
-      miniVolumeSlider.addEventListener('input', (e) => {
-        const value = e.target.value / 100;
-        audio.volume = value;
-        syncVolumeSliders(value);
-        updateVolumeIcon(value);
-      });
-    }
-    
+
     function updateVolumeIcon(volume) {
-      const iconClass = (volume === 0 || audio.muted) ? 'fa-volume-xmark' 
+      const iconClass = (volume === 0 || audio.muted) ? 'fa-volume-xmark'
         : (volume < 0.5 ? 'fa-volume-low' : 'fa-volume-high');
-      
-      if (volumeBtn) {
-        volumeBtn.querySelector('i').className = `fa-solid ${iconClass}`;
-      }
-      if (miniVolumeBtn) {
-        miniVolumeBtn.querySelector('i').className = `fa-solid ${iconClass}`;
-      }
+      if (volumeBtn) volumeBtn.querySelector('i').className = `fa-solid ${iconClass}`;
+      if (miniVolumeBtn) miniVolumeBtn.querySelector('i').className = `fa-solid ${iconClass}`;
     }
-    
-    if (volumeBtn) {
-      volumeBtn.addEventListener('click', () => {
-        audio.muted = !audio.muted;
-        updateVolumeIcon(audio.muted ? 0 : audio.volume);
-      });
+
+    function handleVolumeInput(e) {
+      const value = e.target.value / 100;
+      audio.volume = value;
+      syncVolumeSliders(value);
+      updateVolumeIcon(value);
     }
-    
-    if (miniVolumeBtn) {
-      miniVolumeBtn.addEventListener('click', () => {
-        audio.muted = !audio.muted;
-        updateVolumeIcon(audio.muted ? 0 : audio.volume);
-      });
+
+    function handleVolumeMute() {
+      audio.muted = !audio.muted;
+      updateVolumeIcon(audio.muted ? 0 : audio.volume);
     }
-    
+
+    if (volumeSlider) volumeSlider.addEventListener('input', handleVolumeInput);
+    if (miniVolumeSlider) miniVolumeSlider.addEventListener('input', handleVolumeInput);
+    if (volumeBtn) volumeBtn.addEventListener('click', handleVolumeMute);
+    if (miniVolumeBtn) miniVolumeBtn.addEventListener('click', handleVolumeMute);
+
     // ==========================
     // Speed Control
     // ==========================
     speedBtns.forEach(btn => {
       btn.addEventListener('click', () => {
-        const speed = parseFloat(btn.dataset.speed);
-        audio.playbackRate = speed;
+        audio.playbackRate = parseFloat(btn.dataset.speed);
         speedBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
       });
     });
-    
+
     // ==========================
     // Playlist Features
     // ==========================
+    function setPlaylistMode(enabled) {
+      playlistMode = enabled;
+      if (playlistModeIndicator) playlistModeIndicator.style.display = enabled ? 'flex' : 'none';
+      if (playlistPlayingBadge) playlistPlayingBadge.style.display = enabled ? 'inline-flex' : 'none';
+      const miniIndicator = document.getElementById('mini-playlist-indicator');
+      if (miniIndicator) miniIndicator.style.display = enabled ? 'flex' : 'none';
+    }
+
     function renderPlaylist() {
       if (!playlistItems) return;
       playlistItems.innerHTML = '';
-      
-      if (userPlaylist.length === 0) {
-        playlistItems.innerHTML = '<p style="color: rgba(255,255,255,0.4); font-size: 0.8rem; text-align: center;">No songs in playlist</p>';
-        return;
+
+      // Show/hide empty state
+      if (playlistEmptyState) {
+        playlistEmptyState.style.display = userPlaylist.length === 0 ? 'flex' : 'none';
       }
-      
-      userPlaylist.forEach((songIndex, i) => {
+
+      userPlaylist.forEach((songId, i) => {
+        const songIndex = songIdMap.get(songId);
+        if (songIndex === undefined) return;
         const song = songs[songIndex];
         const item = document.createElement('div');
         item.className = 'playlist-item' + (songIndex === currentSongIndex ? ' active' : '');
+        item.setAttribute('role', 'listitem');
         item.innerHTML = `
-          <img class="playlist-item-cover" src="${song.coverPath}" alt="${song.title}">
-          <span class="playlist-item-title">${song.title}</span>
-          <button class="playlist-item-remove" data-index="${i}">
+          <span class="playlist-item-number">${i + 1}</span>
+          <img class="playlist-item-cover" src="${song.coverPath}" alt="${song.title}" loading="lazy">
+          <div class="playlist-item-info">
+            <span class="playlist-item-title">${song.title}</span>
+            ${songIndex === currentSongIndex && isPlaying ? '<span class="playlist-item-playing"><i class="fa-solid fa-volume-high fa-beat-fade"></i></span>' : ''}
+          </div>
+          <button class="playlist-item-remove" title="Remove" aria-label="Remove ${song.title}">
             <i class="fa-solid fa-xmark"></i>
           </button>
         `;
         item.addEventListener('click', (e) => {
           if (!e.target.closest('.playlist-item-remove')) {
+            setPlaylistMode(true);
             playSong(songIndex);
           }
         });
         item.querySelector('.playlist-item-remove').addEventListener('click', (e) => {
           e.stopPropagation();
           userPlaylist.splice(i, 1);
+          savePlaylist();
           renderPlaylist();
+          updateStarButtons();
+          updatePlaylistCount();
         });
         playlistItems.appendChild(item);
       });
     }
-    
-    // Playlist mode state
-    let playlistMode = false;
-    const playlistModeIndicator = document.getElementById('playlist-mode-indicator');
-    const playlistPlayingBadge = document.getElementById('playlist-playing-badge');
-    const playPlaylistBtn = document.getElementById('play-playlist-btn');
-    const exportPlaylistBtn = document.getElementById('export-playlist-btn');
-    
-    // Update playlist mode UI
-    function setPlaylistMode(enabled) {
-      playlistMode = enabled;
-      if (playlistModeIndicator) {
-        playlistModeIndicator.style.display = enabled ? 'flex' : 'none';
-      }
-      if (playlistPlayingBadge) {
-        playlistPlayingBadge.style.display = enabled ? 'inline-flex' : 'none';
-      }
-      // Mini Player Indicator
-      const miniIndicator = document.getElementById('mini-playlist-indicator');
-      if (miniIndicator) {
-        miniIndicator.style.display = enabled ? 'flex' : 'none';
+
+    // Playlist panel toggle - CSS class based
+    function togglePlaylistPanel() {
+      const isOpen = modal.classList.contains('playlist-open');
+      if (isOpen) {
+        modal.classList.remove('playlist-open');
+        if (playlistToggleBtn) playlistToggleBtn.classList.remove('active');
+      } else {
+        modal.classList.add('playlist-open');
+        if (playlistToggleBtn) playlistToggleBtn.classList.add('active');
+        renderPlaylist();
       }
     }
-    
-    if (playlistToggleBtn) {
-      playlistToggleBtn.addEventListener('click', () => {
-        if (playlistPanel.style.display === 'none') {
-          playlistPanel.style.display = '';
-          playlistToggleBtn.classList.add('active');
-          modal.classList.add('playlist-open');
-          renderPlaylist();
-        } else {
-          playlistPanel.style.display = 'none';
-          playlistToggleBtn.classList.remove('active');
-          modal.classList.remove('playlist-open');
-        }
-      });
-    }
-    
-    // Play playlist button - starts playlist from first song
+
+    if (playlistToggleBtn) playlistToggleBtn.addEventListener('click', togglePlaylistPanel);
+
     if (playPlaylistBtn) {
       playPlaylistBtn.addEventListener('click', () => {
-        if (userPlaylist.length > 0) {
-          if (!playlistMode) {
-            setPlaylistMode(true);
-            playSong(userPlaylist[0]);
-          } else {
-            togglePlay();
-          }
+        if (userPlaylist.length === 0) return;
+        if (!playlistMode) {
+          setPlaylistMode(true);
+          const firstIndex = songIdMap.get(userPlaylist[0]);
+          if (firstIndex !== undefined) playSong(firstIndex);
+        } else {
+          togglePlay();
         }
       });
     }
-    
-    // Export playlist button - downloads as JSON
+
     if (exportPlaylistBtn) {
       exportPlaylistBtn.addEventListener('click', () => {
-        if (userPlaylist.length > 0) {
-          const playlistData = userPlaylist.map(index => ({
-            title: songs[index].title,
-            coverPath: songs[index].coverPath,
-            audioUrl: songs[index].audioUrl
-          }));
-          const blob = new Blob([JSON.stringify(playlistData, null, 2)], { type: 'application/json' });
-          const url = URL.createObjectURL(blob);
-          const a = document.createElement('a');
-          a.href = url;
-          a.download = 'my-playlist.json';
-          a.click();
-          URL.revokeObjectURL(url);
-        }
+        if (userPlaylist.length === 0) return;
+        const data = userPlaylist.map(id => {
+          const idx = songIdMap.get(id);
+          if (idx === undefined) return null;
+          return { id, title: songs[idx].title, audioUrl: songs[idx].audioUrl };
+        }).filter(Boolean);
+        const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'my-playlist.json';
+        a.click();
+        URL.revokeObjectURL(url);
       });
     }
-    
+
     if (playlistClearBtn) {
       playlistClearBtn.addEventListener('click', () => {
         userPlaylist = [];
+        savePlaylist();
         setPlaylistMode(false);
         renderPlaylist();
         updateStarButtons();
-      });
-    }
-    
-    // Update download button when song changes
-    function updateDownloadBtn() {
-      if (downloadBtn && currentSongIndex !== -1) {
-        downloadBtn.href = songs[currentSongIndex].audioUrl;
-      }
-    }
-    
-    // Override playSong to update download button
-    const originalPlaySong = playSong;
-    playSong = function(index) {
-      const result = originalPlaySong.call(this, index);
-      updateDownloadBtn();
-      renderPlaylist();
-      return result;
-    };
-    
-    // Mini Player New Controls
-    const miniShuffleBtn = document.getElementById('mini-shuffle-btn');
-    // miniPrevBtn and miniNextBtn are already declared at the top scope
-
-    if (miniShuffleBtn) {
-      miniShuffleBtn.addEventListener('click', () => {
-        shuffleMode = !shuffleMode;
-        // Update both buttons
-        const iconClass = shuffleMode ? 'fa-shuffle active' : 'fa-shuffle'; // Need CSS for active
-        if (shuffleBtn) shuffleBtn.classList.toggle('active', shuffleMode);
-        miniShuffleBtn.classList.toggle('active', shuffleMode);
+        updatePlaylistCount();
       });
     }
 
-    // Sync validation check for main shuffle button too (if not handled elsewhere)
-    if (shuffleBtn) {
-      shuffleBtn.addEventListener('click', () => {
-         // Existing listener toggles shuffleMode, just ensure validation syncs mini
-         if (miniShuffleBtn) miniShuffleBtn.classList.toggle('active', shuffleMode);
-      });
-    }
-
-    if (miniPrevBtn) {
-      miniPrevBtn.addEventListener('click', () => {
-        playSong(getPrevIndex());
-      });
-    }
-
-    if (miniNextBtn) {
-      miniNextBtn.addEventListener('click', () => {
-        playSong(getNextIndex());
-      });
-    }
-
-    // Initialize
-    renderAlbumGrid();
+    // Initialize: load catalog then render
+    loadSongCatalog().then(() => {
+      loadPlaylist();
+      renderAlbumGrid();
+      updatePlaylistCount();
+    }).catch(err => {
+      console.error('Failed to load song catalog:', err);
+      albumGrid.innerHTML = '<p style="color: rgba(255,255,255,0.5); text-align: center; padding: 40px;">Failed to load music catalog</p>';
+    });
   })();
 
   // ==================================================
