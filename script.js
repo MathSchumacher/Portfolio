@@ -23,10 +23,31 @@ document.addEventListener('DOMContentLoaded', () => {
     window.history.replaceState({}, '', url);
   }
 
-  // Determine initial language: URL Parameter -> LocalStorage -> Browser Preference -> Default 'en'
+  // Detect initial language from browser preferences and region (timezone).
+  // Priority: URL param -> localStorage -> browser languages -> timezone region -> 'en'.
+  function detectInitialLang(supported) {
+    const langs = (navigator.languages && navigator.languages.length)
+      ? navigator.languages
+      : [navigator.language || 'en'];
+    for (const raw of langs) {
+      const code = (raw || '').toLowerCase().split('-')[0];
+      if (supported[code]) return code;
+    }
+    // Timezone-based region (catches PT/ES regions on English browsers).
+    try {
+      const tz = (Intl.DateTimeFormat().resolvedOptions().timeZone || '').toLowerCase();
+      const PT_ZONES = ['america/sao_paulo','america/bahia','america/belem','america/fortaleza','america/manaus','america/recife','america/maceio','america/cuiaba','america/campo_grande','america/boa_vista','america/porto_velho','america/rio_branco','america/eirunepe','america/araguaina','america/santarem','america/noronha','europe/lisbon','atlantic/azores','atlantic/madeira'];
+      const ES_ZONES = ['europe/madrid','atlantic/canary','africa/ceuta','america/mexico_city','america/tijuana','america/hermosillo','america/mazatlan','america/chihuahua','america/monterrey','america/matamoros','america/ojinaga','america/bahia_banderas','america/cancun','america/merida','america/bogota','america/lima','america/caracas','america/santiago','america/asuncion','america/montevideo','america/la_paz','america/guayaquil','america/havana','america/panama','america/tegucigalpa','america/managua','america/costa_rica','america/el_salvador','america/guatemala','america/punta_arenas','america/buenos_aires'];
+      if (supported.pt && PT_ZONES.includes(tz)) return 'pt';
+      if (supported.es && (ES_ZONES.includes(tz) || tz.startsWith('america/argentina/'))) return 'es';
+    } catch (_) {}
+    return 'en';
+  }
+
+  // Determine initial language: URL Parameter -> LocalStorage -> Region detection -> Default 'en'
   const urlLang = getUrlLang();
-  let currentLang = urlLang || localStorage.getItem('lang') || (navigator.language.startsWith('pt') ? 'pt' : 'en');
-  
+  let currentLang = urlLang || localStorage.getItem('lang') || detectInitialLang(supportedLanguages);
+
   // Ensure it's a supported language, otherwise fallback to 'en'
   if (!supportedLanguages[currentLang]) currentLang = 'en';
 
